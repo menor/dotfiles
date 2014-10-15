@@ -1,0 +1,24 @@
+[user]
+	name = menor
+	email = josemenor@gmail.com
+[credential]
+	helper = osxkeychain
+[push]
+	default = simple
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[core]
+	editor = vi --wait
+[alias]
+	co = checkout
+	ma = checkout master
+	st = status
+	df = diff
+	br = branch
+  
+  # Commit all changes
+	ca = !git add -A && git commit -av
+
+	# Switch to a branch, creating it if necessary
+	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
