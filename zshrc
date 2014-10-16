@@ -11,6 +11,7 @@ ZSH_THEME="doubleend"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias -g vim='/Users/menor/Applications/MacVim.app/Contents/MacOS/Vim'
+alias -g vi='/Users/menor/Applications/MacVim.app/Contents/MacOS/Vim'
 alias -g subl=subl
 
 # Set to this to use case-sensitive completion

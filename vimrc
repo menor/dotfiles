@@ -21,13 +21,16 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" plugins
+" Plugins
 Plugin 'marijnh/tern_for_vim'   
   " Provides tern based JS editing support
   " Tern needs node & npm for it to work
   " cd ~/.vim/bundle/tern_for_vim && npm install
 
 Plugin 'pangloss/vim-javascript' " JS syntax and indent plugins
+
+" Color Schemes
+Plugin 'morhetz/gruvbox'
 
 " All of your plugins must be added before this line
 call vundle#end()
@@ -63,3 +66,5 @@ set hidden
 set expandtab
 set shiftwidth=2
 set shiftwidth=2
+
+colorscheme gruvbox
