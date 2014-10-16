@@ -22,7 +22,11 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " plugins
-Plugin 'marijnh/tern_for_vim'    " Provides tern based JS editing support
+Plugin 'marijnh/tern_for_vim'   
+  " Provides tern based JS editing support
+  " Tern needs node & npm for it to work
+  " cd ~/.vim/bundle/tern_for_vim && npm install
+
 Plugin 'pangloss/vim-javascript' " JS syntax and indent plugins
 
 " All of your plugins must be added before this line
@@ -49,9 +53,13 @@ filetype plugin indent on
 " Switch syntax highlighting on
 syntax on
 
-
 " Show line numbers
 set number
 
 " Allow hidden buffers, don't limit to 1 file per window/split
 set hidden
+
+" Configure indentation
+set expandtab
+set shiftwidth=2
+set shiftwidth=2
