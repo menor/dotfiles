@@ -22,7 +22,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Plugins
-Plugin 'marijnh/tern_for_vim'   
+Plugin 'marijnh/tern_for_vim'
   " Provides tern based JS editing support
   " Tern needs node & npm for it to work
   " cd ~/.vim/bundle/tern_for_vim && npm install
@@ -46,7 +46,7 @@ filetype plugin indent on
 " :PluginInstall     - append ! to update or just :PluginUpdate.
 " :PluginSearch foo  - searches for foo; append ! to refresh local cache.
 " :PluginClean       - confirms removal of unused plugins; ! to auto aprov.
- 
+
 " see :h vundle for more help.
 
 " ----------------------------------------------------------------------
@@ -68,3 +68,5 @@ set shiftwidth=2
 set shiftwidth=2
 
 colorscheme gruvbox
+" enable italics
+highlight Comment cterm=italic
