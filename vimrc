@@ -22,7 +22,8 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " plugins
-Plugin 'marinjh/tern_for_vim'    " Provides tern based JS editing support
+Plugin 'marijnh/tern_for_vim'    " Provides tern based JS editing support
+Plugin 'pangloss/vim-javascript' " JS syntax and indent plugins
 
 " All of your plugins must be added before this line
 call vundle#end()
