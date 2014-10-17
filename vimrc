@@ -7,6 +7,9 @@ set nocompatible
 " Make backspace behave in a sane manner.
 set backspace=indent,eol,start
 
+" Remap leader key
+let mapleader=" "
+
 " ----------------------------------------------------------------------
 "                            Vundle Stuff
 " ----------------------------------------------------------------------
@@ -28,6 +31,7 @@ Plugin 'marijnh/tern_for_vim'
   " cd ~/.vim/bundle/tern_for_vim && npm install
 
 Plugin 'pangloss/vim-javascript' " JS syntax and indent plugins
+Plugin 'kien/ctrlp.vim'
 
 " Color Schemes
 Plugin 'morhetz/gruvbox'
@@ -70,3 +74,18 @@ set shiftwidth=2
 colorscheme gruvbox
 " enable italics
 highlight Comment cterm=italic
+
+" ----------------------------------------------------------------------
+"                         Shortcuts
+" ----------------------------------------------------------------------
+
+" Make handling Vim windows easier
+map <leader>w- <C-W>- " smaller
+map <leader>w+ <C-W>+ " larger
+map <leader>w[ <C-W>= " equal
+map <leader>w] <C-W>_ " fill screen
+
+" Make splitting Vim windows easier
+map <leader>; <C-W>s
+map <leader>` <C-W>v
+
