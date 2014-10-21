@@ -63,3 +63,5 @@ export PATH="$(brew --prefix sqlite)/bin:$PATH"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
+# Activate Node Version Manager
+source ~/.nvm/nvm.sh
