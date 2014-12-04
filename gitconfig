@@ -9,7 +9,7 @@
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
 [core]
-	editor = vi --wait
+	editor = /usr/bin/vim
 [alias]
 	co = checkout
 	ma = checkout master
