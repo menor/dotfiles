@@ -33,6 +33,8 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'pangloss/vim-javascript' " JS syntax and indent plugins
 Plugin 'kien/ctrlp.vim'
 
+Plugin 'scrooloose/nerdtree' " File tree
+
 " Color Schemes
 Plugin 'morhetz/gruvbox'
 
