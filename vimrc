@@ -70,10 +70,6 @@ set autoread
 set encoding=utf-8
 set fileencoding=utf-8
 
-" by default, in insert mode backspace won't delete over line breaks, or 
-" automatically-inserted indentation, let's change that
-set backspace=indent,eol,start
-
 " dont't unload buffers when they are abandoned, instead stay in the
 " background
 set hidden
