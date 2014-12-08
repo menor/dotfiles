@@ -63,6 +63,18 @@ syntax on
 " Show line numbers
 set number
 
+" make vim try to detect file types and load plugins for them
+filetype on
+filetype plugin on
+filetype indent on
+
+" reload files changed outside vim
+set autoread 
+
+" encoding is utf 8
+set encoding=utf-8
+set fileencoding=utf-8
+
 " Allow hidden buffers, don't limit to 1 file per window/split
 set hidden
 
