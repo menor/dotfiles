@@ -39,11 +39,6 @@ Plugin 'morhetz/gruvbox'
 " All of your plugins must be added before this line
 call vundle#end()
 
-" Enable file type detection and do language-dependent indenting.
-filetype plugin indent on
-" To ignore plugin indent changes, instead use
-" filetype plugin on
-
 " Brief Vundle Help
 " -----------------------------------------------------------------------
 " :PluginList        - lists configured plugins.
@@ -74,6 +69,14 @@ set autoread
 " encoding is utf 8
 set encoding=utf-8
 set fileencoding=utf-8
+
+" by default, in insert mode backspace won't delete over line breaks, or 
+" automatically-inserted indentation, let's change that
+set backspace=indent,eol,start
+
+" dont't unload buffers when they are abandoned, instead stay in the
+" background
+set hidden
 
 " Allow hidden buffers, don't limit to 1 file per window/split
 set hidden
