@@ -106,3 +106,5 @@ map <leader>w] <C-W>_ " fill screen
 map <leader>; <C-W>s
 map <leader>` <C-W>v
 
+" Give a shortcut key to NERD Tree
+map <F2> :NERDTreeToggle<CR>
