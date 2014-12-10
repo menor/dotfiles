@@ -79,6 +79,10 @@ set hidden
 " Allow hidden buffers, don't limit to 1 file per window/split
 set hidden
 
+" autosave on loosing focus
+" see http://vim.wikia.com/wiki/Auto_save_files_when_focus_is_lost
+:au FocusLost * :wa
+
 " Configure indentation
 set expandtab
 set shiftwidth=2
