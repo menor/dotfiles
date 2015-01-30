@@ -34,6 +34,7 @@ Plugin 'pangloss/vim-javascript' " JS syntax and indent plugins
 Plugin 'kien/ctrlp.vim'
 
 Plugin 'scrooloose/nerdtree' " File tree
+Plugin 'bling/vim-airline' " Status bar
 
 " Color Schemes
 Plugin 'morhetz/gruvbox'
