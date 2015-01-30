@@ -14,6 +14,8 @@ alias -g subl=subl
 # Node alias
 alias -g n='node'
 alias -g nh='node --harmony'
+# Alias to use project gulp instead of local one
+alias gulpl='node_modules/.bin/gulp'
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
