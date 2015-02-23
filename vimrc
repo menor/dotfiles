@@ -36,6 +36,9 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree' " File tree
 Plugin 'bling/vim-airline' " Status bar
 
+" Used to integrate tmux and vim navigation.
+Bundle 'christoomey/vim-tmux-navigator'
+
 " Color Schemes
 Plugin 'morhetz/gruvbox'
 
