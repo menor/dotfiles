@@ -1,3 +1,6 @@
+"  TODO
+"  https://github.com/geekjuice/vim-mocha
+
 "  If you don't understand a setting in here, just type ':h setting'.
 
 " Use Vim settings, rather than Vi settings (much better!).
