@@ -39,6 +39,9 @@ Plugin 'bling/vim-airline' " Status bar
 " Used to integrate tmux and vim navigation.
 Bundle 'christoomey/vim-tmux-navigator'
 
+" Vim Tmux runner, to launch programs from vim.
+Bundle 'christoomey/vim-tmux-runner'
+
 " Color Schemes
 Plugin 'morhetz/gruvbox'
 
