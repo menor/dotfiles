@@ -34,6 +34,7 @@ Plugin 'marijnh/tern_for_vim'
   " cd ~/.vim/bundle/tern_for_vim && npm install
 
 Plugin 'pangloss/vim-javascript' " JS syntax and indent plugins
+Plugin 'wookiehangover/jshint' " Javascript Hint
 Plugin 'kien/ctrlp.vim'
 
 Plugin 'scrooloose/nerdtree' " File tree
