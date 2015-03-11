@@ -99,7 +99,10 @@ set expandtab
 set shiftwidth=2
 set shiftwidth=2
 
+" Configure Gruvbox color scheme
 colorscheme gruvbox
+set background=dark    " Setting dark mode
+
 " enable italics
 highlight Comment cterm=italic
 
