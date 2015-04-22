@@ -97,7 +97,7 @@ set hidden
 " Configure indentation
 set expandtab
 set shiftwidth=2
-set shiftwidth=2
+set tabstop=2
 
 " Configure Gruvbox color scheme
 colorscheme gruvbox
