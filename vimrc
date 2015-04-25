@@ -7,63 +7,11 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" Make backspace behave in a sane manner.
-set backspace=indent,eol,start
-
 " Remap leader key
 let mapleader=" "
 
-" ----------------------------------------------------------------------
-"                            Vundle Stuff
-" ----------------------------------------------------------------------
-
-" required for Vundle to work
-filetype off
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" Plugins
-Plugin 'marijnh/tern_for_vim'
-  " Provides tern based JS editing support
-  " Tern needs node & npm for it to work
-  " cd ~/.vim/bundle/tern_for_vim && npm install
-
-Plugin 'pangloss/vim-javascript' " JS syntax and indent plugins
-Plugin 'wookiehangover/jshint' " Javascript Hint
-Plugin 'kien/ctrlp.vim'
-
-Plugin 'scrooloose/nerdtree' " File tree
-Plugin 'bling/vim-airline' " Status bar
-
-" Used to integrate tmux and vim navigation.
-Bundle 'christoomey/vim-tmux-navigator'
-
-" Vim Tmux runner, to launch programs from vim.
-Bundle 'christoomey/vim-tmux-runner'
-
-" Color Schemes
-Plugin 'morhetz/gruvbox'
-
-" All of your plugins must be added before this line
-call vundle#end()
-
-" Brief Vundle Help
-" -----------------------------------------------------------------------
-" :PluginList        - lists configured plugins.
-" :PluginInstall     - append ! to update or just :PluginUpdate.
-" :PluginSearch foo  - searches for foo; append ! to refresh local cache.
-" :PluginClean       - confirms removal of unused plugins; ! to auto aprov.
-
-" see :h vundle for more help.
-
-" ----------------------------------------------------------------------
-"                         Vundle Stuff Ends
-" ----------------------------------------------------------------------
+" Make backspace behave in a sane manner.
+set backspace=indent,eol,start
 
 " Switch syntax highlighting on
 syntax on
@@ -71,6 +19,11 @@ syntax on
 " Show line numbers
 set number
 
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endif
+
+  filetype plugin indent on
 " make vim try to detect file types and load plugins for them
 filetype on
 filetype plugin on
@@ -89,10 +42,6 @@ set hidden
 
 " Allow hidden buffers, don't limit to 1 file per window/split
 set hidden
-
-" autosave on loosing focus
-" see http://vim.wikia.com/wiki/Auto_save_files_when_focus_is_lost
-:au FocusLost * :wa
 
 " Configure indentation
 set expandtab

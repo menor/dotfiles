@@ -10,7 +10,7 @@
 	smudge = git-media-smudge %f
 [core]
 	editor = /usr/bin/vim
-	excludesfile = /Users/menor/.gitignore_global
+	excludesfile = /Users/menor/.gitignore
 [alias]
 	co = checkout
 	ma = checkout master
