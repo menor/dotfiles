@@ -22,6 +22,7 @@ Plugin 'geekjuice/vim-mocha' " Run mocha tests from vim
 Plugin 'pangloss/vim-javascript' " JS syntax and indent plugins
 Plugin 'wookiehangover/jshint' " Javascript Hint
 Plugin 'kien/ctrlp.vim'
+Plugin 'kchmck/vim-coffee-script'
 
 Plugin 'scrooloose/nerdtree' " File tree
 Plugin 'bling/vim-airline' " Status bar

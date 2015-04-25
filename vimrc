@@ -1,6 +1,3 @@
-"  TODO
-"  https://github.com/geekjuice/vim-mocha
-
 "  If you don't understand a setting in here, just type ':h setting'.
 
 " Use Vim settings, rather than Vi settings (much better!).
@@ -10,14 +7,21 @@ set nocompatible
 " Remap leader key
 let mapleader=" "
 
-" Make backspace behave in a sane manner.
-set backspace=indent,eol,start
+set backspace=2     " Make backspace behave in a sane manner.
+set nobackup
+set nowritebackup
+set noswapfile      " We don't need no stinking backups
+set autowrite       " But we autosave when we change buffers
+set ruler           " Display line and column numbers on the lower right
+set laststatus=2    " Display always the status line
+set showcmd         " Display incomplete commands
+set visualbell
+set noerrorbells    " Disable annoying ping
+set incsearch
+set number          " Show line numbers
 
 " Switch syntax highlighting on
 syntax on
-
-" Show line numbers
-set number
 
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
@@ -36,11 +40,7 @@ set autoread
 set encoding=utf-8
 set fileencoding=utf-8
 
-" dont't unload buffers when they are abandoned, instead stay in the
-" background
-set hidden
-
-" Allow hidden buffers, don't limit to 1 file per window/split
+" Don't unload buffers when they are abandoned, instead stay in the background
 set hidden
 
 " Configure indentation
@@ -55,16 +55,20 @@ set background=dark    " Setting dark mode
 " enable italics
 highlight Comment cterm=italic
 
+" Make it obvious where 80 characters is
+set textwidth=80
+set colorcolumn=+1
+
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
-
-" zoom a vim pane, <C-w>= to re-balance
-nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
-nnoremap <leader>= :wincmd =<cr>
 
 " ----------------------------------------------------------------------
 "                         Shortcuts
 " ----------------------------------------------------------------------
+
+" Zoom a vim pane, <C-w>= to re-balance
+nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>= :wincmd =<cr>
 
 " Make handling Vim windows easier
 map <leader>w- <C-W>- " smaller
@@ -77,4 +81,4 @@ map <leader>; <C-W>s
 map <leader>` <C-W>v
 
 " Give a shortcut key to NERD Tree
-map <F2> :NERDTreeToggle<CR>
+map <leader>kb :NERDTreeToggle<CR>
