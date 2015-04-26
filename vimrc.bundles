@@ -18,17 +18,15 @@ Plugin 'marijnh/tern_for_vim'
   " Tern needs node & npm for it to work
   " cd ~/.vim/bundle/tern_for_vim && npm install
 
-Plugin 'geekjuice/vim-mocha' " Run mocha tests from vim
-Plugin 'pangloss/vim-javascript' " JS syntax and indent plugins
-Plugin 'wookiehangover/jshint' " Javascript Hint
-Plugin 'kien/ctrlp.vim'
+Plugin 'geekjuice/vim-mocha'             " Run mocha tests from vim
+Plugin 'pangloss/vim-javascript'         " JS syntax and indent plugins
+Plugin 'wookiehangover/jshint.vim'       " Javascript Hint
+Plugin 'ctrlpvim/ctrlp.vim'              " Actively developed fork of ctrlpvim
 Plugin 'kchmck/vim-coffee-script'
-
-Plugin 'scrooloose/nerdtree' " File tree
-Plugin 'bling/vim-airline' " Status bar
-
-" Used to integrate tmux and vim navigation.
-Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'scrooloose/nerdtree'             " File tree
+Plugin 'bling/vim-airline'               " Status bar
+Plugin 'tpope/vim-fugitive'              " Git integration
+Plugin 'christoomey/vim-tmux-navigator'  " integrates tmux and vim navigation
 
 " Vim Tmux runner, to launch programs from vim.
 Plugin 'christoomey/vim-tmux-runner'

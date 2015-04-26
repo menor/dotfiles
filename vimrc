@@ -10,7 +10,7 @@ let mapleader=" "
 set backspace=2     " Make backspace behave in a sane manner.
 set nobackup
 set nowritebackup
-set noswapfile      " We don't need no stinking backups
+set noswapfile      " We don't need no stinkin backups
 set autowrite       " But we autosave when we change buffers
 set ruler           " Display line and column numbers on the lower right
 set laststatus=2    " Display always the status line
@@ -20,9 +20,13 @@ set noerrorbells    " Disable annoying ping
 set incsearch
 set number          " Show line numbers
 
+" display extra whitespace
+set list listchars=tab:»·,trail:·,nbsp:·
+
 " Switch syntax highlighting on
 syntax on
 
+" Load plugins fom external file
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
@@ -80,5 +84,5 @@ map <leader>w] <C-W>_ " fill screen
 map <leader>; <C-W>s
 map <leader>` <C-W>v
 
-" Give a shortcut key to NERD Tree
+" Plugins shortcuts 
 map <leader>kb :NERDTreeToggle<CR>
