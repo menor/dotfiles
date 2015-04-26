@@ -31,7 +31,8 @@ if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
 
-  filetype plugin indent on
+filetype plugin indent on
+
 " make vim try to detect file types and load plugins for them
 filetype on
 filetype plugin on
@@ -66,6 +67,20 @@ set colorcolumn=+1
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects  .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+
+endif
+
 " ----------------------------------------------------------------------
 "                         Shortcuts
 " ----------------------------------------------------------------------
@@ -86,3 +101,8 @@ map <leader>` <C-W>v
 
 " Plugins shortcuts 
 map <leader>kb :NERDTreeToggle<CR>
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" Remap arrows to silver searcher
+nmap <silent> <RIGHT> :cnext<CR>
+nmap <silent> <LEFT> :cprev<CR>
