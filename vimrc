@@ -106,3 +106,5 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " Remap arrows to silver searcher
 nmap <silent> <RIGHT> :cnext<CR>
 nmap <silent> <LEFT> :cprev<CR>
+" Index ctags from any project
+map <Leader>ct :!ctags -R .<CR>
