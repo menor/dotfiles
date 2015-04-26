@@ -107,4 +107,4 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 nmap <silent> <RIGHT> :cnext<CR>
 nmap <silent> <LEFT> :cprev<CR>
 " Index ctags from any project
-map <Leader>ct :!ctags -R .<CR>
+map <Leader>ct :!ctags -R --exclude=node_modules --exclude='*\.min\.*' --exclude=bower_components .<CR>

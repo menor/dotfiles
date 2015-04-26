@@ -2,7 +2,7 @@
 *.swp 
 # Ignores swap files from vim
 # https://robots.thoughtbot.com/global-gitignore
-*.tags
+tags
 
 # Compiled source #
 ###################
