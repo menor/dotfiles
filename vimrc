@@ -81,6 +81,12 @@ if executable('ag')
 
 endif
 
+" Make airline show the open buffers
+let g:airline#extensions#tabline#enabled = 1
+
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
 " ----------------------------------------------------------------------
 "                         Shortcuts
 " ----------------------------------------------------------------------
@@ -98,6 +104,12 @@ map <leader>w] <C-W>_ " fill screen
 " Make splitting Vim windows easier
 map <leader>; <C-W>s
 map <leader>` <C-W>v
+
+" Moving through buffers, inspired by unimpaired.vim plugin
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
 
 " Plugins shortcuts 
 map <leader>kb :NERDTreeToggle<CR>
