@@ -25,6 +25,7 @@ Plugin 'ctrlpvim/ctrlp.vim'              " Actively developed fork of ctrlpvim
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'scrooloose/nerdtree'             " File tree
 Plugin 'bling/vim-airline'               " Status bar
+Plugin 'tpope/vim-surround'   " Mappings to change surroundings
 Plugin 'tpope/vim-fugitive'              " Git integration
 Plugin 'christoomey/vim-tmux-navigator'  " integrates tmux and vim navigation
 Plugin 'mattn/emmet-vim'
