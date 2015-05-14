@@ -120,3 +120,7 @@ nmap <silent> <RIGHT> :cnext<CR>
 nmap <silent> <LEFT> :cprev<CR>
 " Index ctags from any project
 map <Leader>ct :!ctags -R --exclude=node_modules --exclude='*\.min\.*' --exclude=bower_components .<CR>
+
+" Remap emmet-vim to tab
+" see https://coderwall.com/p/_uhrxw/using-tab-key-as-abbreviation-expander-on-emmet-vim
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")

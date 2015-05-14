@@ -27,6 +27,7 @@ Plugin 'scrooloose/nerdtree'             " File tree
 Plugin 'bling/vim-airline'               " Status bar
 Plugin 'tpope/vim-fugitive'              " Git integration
 Plugin 'christoomey/vim-tmux-navigator'  " integrates tmux and vim navigation
+Plugin 'mattn/emmet-vim'
 
 " Vim Tmux runner, to launch programs from vim.
 Plugin 'christoomey/vim-tmux-runner'
