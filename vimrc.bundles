@@ -27,8 +27,10 @@ Plugin 'scrooloose/nerdtree'             " File tree
 Plugin 'bling/vim-airline'               " Status bar
 Plugin 'tpope/vim-surround'   " Mappings to change surroundings
 Plugin 'tpope/vim-fugitive'              " Git integration
+Plugin 'tpope/vim-commentary'            " Comment/uncomment lines
 Plugin 'christoomey/vim-tmux-navigator'  " integrates tmux and vim navigation
 Plugin 'mattn/emmet-vim'
+Plugin 'Raimondi/delimitMate'            " Auto close quotes, parens, brackets
 
 " Vim Tmux runner, to launch programs from vim.
 Plugin 'christoomey/vim-tmux-runner'

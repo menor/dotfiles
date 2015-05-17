@@ -19,6 +19,7 @@ set visualbell
 set noerrorbells    " Disable annoying ping
 set incsearch
 set number          " Show line numbers
+set nrformats=      " Treat all numbers as decimals
 
 " display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
