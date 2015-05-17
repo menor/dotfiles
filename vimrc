@@ -81,6 +81,10 @@ if executable('ag')
 
 endif
 
+" CtrlP includes untracked files and honours the .gitignore
+unlet g:ctrlp_user_command
+let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
+
 " Configure Airine
 " Make airline show the open buffers
 let g:airline#extensions#tabline#enabled = 1
