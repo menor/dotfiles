@@ -81,11 +81,15 @@ if executable('ag')
 
 endif
 
+" Configure Airine
 " Make airline show the open buffers
 let g:airline#extensions#tabline#enabled = 1
 
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
+
+" Use powerline fonts
+let g:airline_powerline_fonts = 1
 
 " ----------------------------------------------------------------------
 "                         Shortcuts
