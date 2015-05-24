@@ -31,6 +31,7 @@ Plugin 'tpope/vim-commentary'            " Comment/uncomment lines
 Plugin 'christoomey/vim-tmux-navigator'  " integrates tmux and vim navigation
 Plugin 'mattn/emmet-vim'
 Plugin 'Raimondi/delimitMate'            " Auto close quotes, parens, brackets
+Plugin 'rust-lang/rust.vim'              " Rust syntax highlighting
 
 " Vim Tmux runner, to launch programs from vim.
 Plugin 'christoomey/vim-tmux-runner'
