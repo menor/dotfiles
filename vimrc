@@ -7,6 +7,7 @@ set nocompatible
 " Remap leader key
 let mapleader=" "
 
+set autoread        " Updates file on external changes
 set backspace=2     " Make backspace behave in a sane manner.
 set nobackup
 set nowritebackup
