@@ -58,7 +58,7 @@ set shiftwidth=2
 set tabstop=2
 
 " Configure Gotham color scheme
-colorscheme gotham256
+colorscheme gruvbox
 set background=dark    " Setting dark mode
 
 " enable italics
