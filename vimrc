@@ -22,6 +22,8 @@ set incsearch
 set number          " Show line numbers
 set nrformats=      " Treat all numbers as decimals
 
+:au FocusLost * :wa " Autosave on focus lost
+
 " display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
 
@@ -55,7 +57,7 @@ set expandtab
 set shiftwidth=2
 set tabstop=2
 
-" Configure Gruvbox color scheme
+" Configure Gotham color scheme
 colorscheme gruvbox
 set background=dark    " Setting dark mode
 

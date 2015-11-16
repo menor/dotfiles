@@ -1,3 +1,19 @@
+# Source Prezto.
+#if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+#   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+#fi
+
+# Run nvm
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+~/.nvm/nvm.sh
+
+# Alias for running local npm modules
+alias npm-local='PATH=$(npm bin):$PATH'
+
+# Resmio alias
+alias vagrantdock='vagrant up --provider=docker --no-parallel'
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -16,6 +32,7 @@ alias -g n='node'
 alias -g nh='node --harmony'
 # Alias to use project gulp instead of local one
 alias gulpl='node_modules/.bin/gulp'
+
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -54,7 +71,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:
 
 #This fixes the Homebrew Node Bug
-export PATH=/usr/local/share/npm/bin:$PATH
+# export PATH=/usr/local/share/npm/bin:$PATH
 
 # Added for Autojump
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
@@ -70,3 +87,5 @@ source ~/.nvm/nvm.sh
 
 # export dotfiles bin path
 export PATH=/users/menor/dotfiles/bin:$PATH
+
+
