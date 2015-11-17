@@ -20,6 +20,7 @@ Plugin 'marijnh/tern_for_vim'
 
 Plugin 'geekjuice/vim-mocha'             " Run mocha tests from vim
 Plugin 'pangloss/vim-javascript'         " JS syntax and indent plugins
+Plugin 'mxw/vim-jsx'                     " JSX Syntax highlighting
 Plugin 'wookiehangover/jshint.vim'       " Javascript Hint
 Plugin 'ctrlpvim/ctrlp.vim'              " Actively developed fork of ctrlpvim
 Plugin 'kchmck/vim-coffee-script'
@@ -40,7 +41,7 @@ Plugin 'christoomey/vim-tmux-runner'
 
 " Color Schemes
 Plugin 'morhetz/gruvbox'
-Plugin 'whatyouhide/vim-gotham'
+" Plugin 'whatyouhide/vim-gotham'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
