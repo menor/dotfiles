@@ -99,6 +99,8 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " Use powerline fonts
 let g:airline_powerline_fonts = 1
 
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+
 " ----------------------------------------------------------------------
 "                         Shortcuts
 " ----------------------------------------------------------------------
