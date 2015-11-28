@@ -5,56 +5,45 @@ if &compatible
     set nocompatible
 end
 
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
+" Automatically installs the plugins when it finds a new one
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
 
-" Let Vundle manage Vundle
-Plugin 'gmarik/Vundle.vim'
+call plug#begin('~/.vim/bundle')
 
-" Define bundles via Github repos
-Plugin 'marijnh/tern_for_vim'
+Plug 'marijnh/tern_for_vim'
   " Provides tern based JS editing support
   " Tern needs node & npm for it to work
   " cd ~/.vim/bundle/tern_for_vim && npm install
 
-Plugin 'geekjuice/vim-mocha'             " Run mocha tests from vim
-Plugin 'pangloss/vim-javascript'         " JS syntax and indent plugins
-Plugin 'mxw/vim-jsx'                     " JSX Syntax highlighting
-Plugin 'wookiehangover/jshint.vim'       " Javascript Hint
-Plugin 'ctrlpvim/ctrlp.vim'              " Actively developed fork of ctrlpvim
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'scrooloose/nerdtree'             " File tree
-Plugin 'bling/vim-airline'               " Status bar
-Plugin 'tpope/vim-surround'   " Mappings to change surroundings
-Plugin 'tpope/vim-fugitive'              " Git integration
-Plugin 'tpope/vim-commentary'            " Comment/uncomment lines
-Plugin 'christoomey/vim-tmux-navigator'  " integrates tmux and vim navigation
-Plugin 'wincent/ferret'                  " Powerful multi file search
-Plugin 'mattn/emmet-vim'
-Plugin 'Raimondi/delimitMate'            " Auto close quotes, parens, brackets
-Plugin 'rust-lang/rust.vim'              " Rust syntax highlighting
-Plugin 'vimwiki/vimwiki'
+Plug 'pangloss/vim-javascript'         " JS syntax and indent plugins
+Plug 'mxw/vim-jsx'                     " JSX Syntax highlighting
+Plug 'wookiehangover/jshint.vim'       " Javascript Hint
+Plug 'ctrlpvim/ctrlp.vim'              " Actively developed fork of ctrlpvim
+Plug 'kchmck/vim-coffee-script'
+Plug 'scrooloose/nerdtree'             " File tree
+Plug 'bling/vim-airline'               " Status bar
+Plug 'tpope/vim-surround'   " Mappings to change surroundings
+Plug 'tpope/vim-fugitive'              " Git integration
+Plug 'tpope/vim-commentary'            " Comment/uncomment lines
+Plug 'christoomey/vim-tmux-navigator'  " integrates tmux and vim navigation
+Plug 'wincent/ferret'                  " Powerful multi file search
+Plug 'mattn/emmet-vim'
+Plug 'Raimondi/delimitMate'            " Auto close quotes, parens, brackets
+Plug 'vimwiki/vimwiki'
 
 " Vim Tmux runner, to launch programs from vim.
-Plugin 'christoomey/vim-tmux-runner'
+Plug 'christoomey/vim-tmux-runner'
 
 " Color Schemes
-Plugin 'morhetz/gruvbox'
-" Plugin 'whatyouhide/vim-gotham'
+Plug 'morhetz/gruvbox'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
 endif
   
-call vundle#end()
-filetype on
+call plug#end()
 
-" Brief Vundle Help
-" -----------------------------------------------------------------------
-" :PluginList        - lists configured plugins.
-" :PluginInstall     - append ! to update or just :PluginUpdate.
-" :PluginSearch foo  - searches for foo; append ! to refresh local cache.
-" :PluginClean       - confirms removal of unused plugins; ! to auto aprov.
-
-" see :h vundle for more help.
