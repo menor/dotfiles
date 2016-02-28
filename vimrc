@@ -91,6 +91,11 @@ let g:airline_powerline_fonts = 1
 
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
+" Activates tern shortcuts http://usevim.com/2013/05/24/tern/ 
+let g:tern_map_keys=1
+"show argument hints for tern
+let g:tern_show_argument_hints='on_hold'
+
 " ----------------------------------------------------------------------
 "                         Shortcuts
 " ----------------------------------------------------------------------
