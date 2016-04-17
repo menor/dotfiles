@@ -28,9 +28,10 @@ Plug 'mxw/vim-jsx'                     " JSX Syntax highlighting
 Plug 'pangloss/vim-javascript'         " JS syntax and indent plugins
 Plug 'Raimondi/delimitMate'            " Auto close quotes, parens, brackets
 Plug 'scrooloose/nerdtree'             " File tree
-Plug 'tpope/vim-surround'              " Mappings to change surroundings
-Plug 'tpope/vim-fugitive'              " Git integration
 Plug 'tpope/vim-commentary'            " Comment/uncomment lines
+Plug 'tpope/vim-fugitive'              " Git integration
+Plug 'tpope/vim-surround'              " Mappings to change surroundings
+Plug 'tpope/vim-unimpaired'            " Mappings to brackets
 Plug 'vimwiki/vimwiki'
 Plug 'wincent/ferret'                  " Powerful multi file search
 Plug 'wookiehangover/jshint.vim'       " Javascript Hint
