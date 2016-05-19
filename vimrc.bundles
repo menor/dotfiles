@@ -27,6 +27,7 @@ Plug 'mattn/emmet-vim'
 Plug 'mxw/vim-jsx'                     " JSX Syntax highlighting
 Plug 'pangloss/vim-javascript'         " JS syntax and indent plugins
 Plug 'Raimondi/delimitMate'            " Auto close quotes, parens, brackets
+Plug 'rust-lang/rust.vim'              " Rust syntax
 Plug 'scrooloose/nerdtree'             " File tree
 Plug 'tpope/vim-commentary'            " Comment/uncomment lines
 Plug 'tpope/vim-fugitive'              " Git integration
