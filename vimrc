@@ -22,13 +22,13 @@ set incsearch
 set number          " Show line numbers
 set nrformats=      " Treat all numbers as decimals
 
-:au FocusLost * :wa " Autosave on focus lost
 
 " display extra whitespace
-set list listchars=tab:»·,trail:·,nbsp:·
+set list listchars=tab:»·,trail:·,nbsp:· 
 
-" Switch syntax highlighting on
-syntax on
+set hls             " Switch search highlighting on
+syntax on           " Switch syntax highlighting on
+:au FocusLost * :wa " Autosave on focus lost
 
 " Load plugins fom external file
 if filereadable(expand("~/.vimrc.bundles"))
@@ -128,6 +128,9 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
+" Mute search highlighting when we redraw the screen
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+
 " Shortcuts for editing files in dir
 " for more info check http://vimcasts.org/episodes/the-edit-command/
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
@@ -146,6 +149,3 @@ nmap <silent> <LEFT> :cprev<CR>
 " Index ctags from any project
 map <Leader>ct :!ctags -R --exclude=node_modules --exclude='*\.min\.*' --exclude=bower_components .<CR>
 
-" Remap emmet-vim to tab
-" see https://coderwall.com/p/_uhrxw/using-tab-key-as-abbreviation-expander-on-emmet-vim
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
