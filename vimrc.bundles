@@ -16,14 +16,7 @@ call plug#begin('~/.vim/bundle')
 
 Plug 'bling/vim-airline'               " Status bar
 Plug 'christoomey/vim-tmux-navigator'  " integrates tmux and vim navigation
-Plug 'christoomey/vim-tmux-runner'     " to launch programs from vim.
-Plug 'ctrlpvim/ctrlp.vim'              " Actively developed fork of ctrlpvim
 Plug 'kchmck/vim-coffee-script'
-Plug 'marijnh/tern_for_vim'
-  " Provides tern based JS editing support
-  " Tern needs node & npm for it to work
-  " cd ~/.vim/bundle/tern_for_vim && npm install
-Plug 'mattn/emmet-vim'
 Plug 'mxw/vim-jsx'                     " JSX Syntax highlighting
 Plug 'pangloss/vim-javascript'         " JS syntax and indent plugins
 Plug 'Raimondi/delimitMate'            " Auto close quotes, parens, brackets
@@ -34,8 +27,6 @@ Plug 'tpope/vim-fugitive'              " Git integration
 Plug 'tpope/vim-surround'              " Mappings to change surroundings
 Plug 'tpope/vim-unimpaired'            " Mappings to brackets
 Plug 'vimwiki/vimwiki'
-Plug 'wincent/ferret'                  " Powerful multi file search
-Plug 'wookiehangover/jshint.vim'       " Javascript Hint
 
 " Color Schemes
 Plug 'morhetz/gruvbox'
