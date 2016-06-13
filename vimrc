@@ -96,11 +96,6 @@ let g:tern_map_keys=1
 "show argument hints for tern
 let g:tern_show_argument_hints='on_hold'
 
-" Configure syntastic
-" Use https://github.com/feross/standard config
-" Needs to run npm i -g standard to install standard first
-let g:syntastic_javascript_checkers = ['standard']
-
 " ----------------------------------------------------------------------
 "                         Shortcuts
 " ----------------------------------------------------------------------
