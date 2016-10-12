@@ -48,6 +48,7 @@ set shiftwidth=2
 set tabstop=2
 
 " Configure gruvbox color scheme
+let g:gruvbox_contrast_light='hard'
 colorscheme gruvbox
 set background=dark    " Setting dark mode
 
@@ -79,16 +80,22 @@ endif
 unlet g:ctrlp_user_command
 let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
 
-" Configure Airine
-" Make airline show the open buffers
+" ----------------------------------------------------------------------
+"                           plugin settings
+" ----------------------------------------------------------------------
+
+" == vim-airline/vim-airline ==
+
+" show the open buffers
 let g:airline#extensions#tabline#enabled = 1
 
-" Show just the filename
+" show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-" Use powerline fonts
+" use powerline fonts
 let g:airline_powerline_fonts = 1
 
+" == mxw/vim-jsx ==
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 " Activates tern shortcuts http://usevim.com/2013/05/24/tern/ 
@@ -96,8 +103,12 @@ let g:tern_map_keys=1
 "show argument hints for tern
 let g:tern_show_argument_hints='on_hold'
 
+" == junegunn/fzf (fuzzy search) ==
+" It must be installed via homebrew for this to work
+set rtp+=/usr/local/opt/fzf
+
 " ----------------------------------------------------------------------
-"                         Shortcuts
+"                             keybindings
 " ----------------------------------------------------------------------
 
 " Zoom a vim pane, <C-w>= to re-balance
@@ -149,3 +160,6 @@ nmap <silent> <LEFT> :cprev<CR>
 " Index ctags from any project
 map <Leader>ct :!ctags -R --exclude=node_modules --exclude='*\.min\.*' --exclude=bower_components .<CR>
 
+" == junegunn/fzf ==
+nnoremap <C-T> :FZF<CR>
+inoremap <C-\> <ESC>:FZF<CR>i

@@ -14,13 +14,10 @@ endif
 
 call plug#begin('~/.vim/bundle')
 
+" == General editor plugins ==
 Plug 'bling/vim-airline'               " Status bar
 Plug 'christoomey/vim-tmux-navigator'  " integrates tmux and vim navigation
-Plug 'kchmck/vim-coffee-script'
-Plug 'mxw/vim-jsx'                     " JSX Syntax highlighting
-Plug 'pangloss/vim-javascript'         " JS syntax and indent plugins
 Plug 'Raimondi/delimitMate'            " Auto close quotes, parens, brackets
-Plug 'rust-lang/rust.vim'              " Rust syntax
 Plug 'scrooloose/nerdtree'             " File tree
 Plug 'tpope/vim-commentary'            " Comment/uncomment lines
 Plug 'tpope/vim-fugitive'              " Git integration
@@ -28,7 +25,13 @@ Plug 'tpope/vim-surround'              " Mappings to change surroundings
 Plug 'tpope/vim-unimpaired'            " Mappings to brackets
 Plug 'vimwiki/vimwiki'
 
-" Color Schemes
+" == Syntax highlighting ==
+Plug 'mxw/vim-jsx'                     " JSX syntax highlighting
+Plug 'kchmck/vim-coffee-script'        " Coffescript syntax
+Plug 'pangloss/vim-javascript'         " JS syntax and indent plugins
+Plug 'rust-lang/rust.vim'              " Rust syntax
+
+" == Color Schemes ==
 Plug 'morhetz/gruvbox'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
