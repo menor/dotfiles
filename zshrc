@@ -69,6 +69,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:
+export PATH="$PATH:`yarn global bin`"
 
 #This fixes the Homebrew Node Bug
 # export PATH=/usr/local/share/npm/bin:$PATH
