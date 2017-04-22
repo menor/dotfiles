@@ -42,6 +42,7 @@ set fileencoding=utf-8
 " Don't unload buffers when they are abandoned, instead stay in the background
 set hidden
 
+
 " Configure indentation
 set expandtab
 set shiftwidth=2
