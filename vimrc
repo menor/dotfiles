@@ -26,7 +26,7 @@ set nrformats=      " Treat all numbers as decimals
 " display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:· 
 
-set hls             " Switch search highlighting on
+"set hls             " Switch search highlighting on
 syntax on           " Switch syntax highlighting on
 :au FocusLost * :wa " Autosave on focus lost
 
