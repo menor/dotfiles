@@ -1,1 +1,5 @@
-configure vim-mocha
+remove useless stuff from makesymlinks
+see if I can 'unfork' prezto
+save iterm2 preferences
+brew cask software (https://github.com/Homebrew/homebrew-bundle)
+check hammerspoon
