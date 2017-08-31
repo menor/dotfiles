@@ -167,3 +167,6 @@ map <Leader>ct :!ctags -R --exclude=node_modules --exclude='*\.min\.*' --exclude
 " == junegunn/fzf ==
 nnoremap <C-T> :FZF<CR>
 inoremap <C-\> <ESC>:FZF<CR>i
+
+"== vimwiki ==
+let g:vimwiki_list = [{'path': '$HOME/Dropbox/Aplicaciones/vimwiki'}]
