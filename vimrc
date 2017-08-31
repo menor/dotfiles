@@ -54,7 +54,7 @@ colorscheme gruvbox
 set background=dark    " Setting dark mode
 
 " Set term inside vim to match tmux color scheme
-set term=screen-256color-italic
+set term=xterm-256color-italic
 
 " enable italics
 highlight Comment cterm=italic
