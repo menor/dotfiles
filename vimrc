@@ -24,7 +24,7 @@ set nrformats=      " Treat all numbers as decimals
 
 
 " display extra whitespace
-set list listchars=tab:»·,trail:·,nbsp:· 
+set list listchars=tab:»·,trail:·,nbsp:·
 
 "set hls             " Switch search highlighting on
 syntax on           " Switch syntax highlighting on
@@ -102,7 +102,7 @@ let g:airline_powerline_fonts = 1
 " == mxw/vim-jsx ==
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
-" Activates tern shortcuts http://usevim.com/2013/05/24/tern/ 
+" Activates tern shortcuts http://usevim.com/2013/05/24/tern/
 let g:tern_map_keys=1
 "show argument hints for tern
 let g:tern_show_argument_hints='on_hold'
@@ -154,7 +154,7 @@ map <leader>es :sp %%
 map <leader>ev :vsp %%
 map <leader>et :tabe %%
 
-" Plugins shortcuts 
+" Plugins shortcuts
 map <leader>kb :NERDTreeToggle<CR>
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
