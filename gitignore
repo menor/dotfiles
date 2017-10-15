@@ -1,5 +1,8 @@
 # Vim files #
-*.swp 
+*.swp
+.undodir/
+Session.vim
+
 # Ignores swap files from vim
 # https://robots.thoughtbot.com/global-gitignore
 tags
@@ -12,7 +15,7 @@ tags
 *.exe
 *.o
 *.so
- 
+
 # Packages #
 ############
 # it's better to unpack these files and commit the raw source
@@ -25,13 +28,13 @@ tags
 *.rar
 *.tar
 *.zip
- 
+
 # Logs and databases #
 ######################
 *.log
 *.sql
 *.sqlite
- 
+
 # OS generated files #
 ######################
 .DS_Store

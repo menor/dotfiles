@@ -92,6 +92,11 @@ let g:deoplete#enable_at_startup = 1
 " Ale config
 " let g:ale_sign_column_always = 1
 
+" Javascript settings for neoformat
+" Configure prettier
+autocmd FileType javascript setlocal formatprg=prettier\ --single-quote\ --no-semi
+let g:neoformat_try_formatprg = 1
+
 " Make neoformat run prettier on save and on leaving insert mode
 autocmd BufWritePre,InsertLeave *.js Neoformat
 
