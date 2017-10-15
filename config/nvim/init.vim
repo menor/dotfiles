@@ -48,15 +48,17 @@ if dein#load_state('~/.config/nvim')
   call dein#add('othree/javascript-libraries-syntax.vim')
 
   " Linters and code formatters
-  call dein#add('w0rp/ale')
   call dein#add('sbdchd/neoformat')
 
   " Color Schemes
   call dein#add('atelierbram/Base2Tone-vim')
   call dein#add('morhetz/gruvbox')
 
-  " Session Management
-  call dein#add('thaerkh/vim-workspace')
+  " File Management
+  call dein#add('tpope/vim-vinegar')
+
+  " Utils
+  call dein#add('tpope/vim-surround')
 
   " Required
   call dein#end()
@@ -89,15 +91,14 @@ let g:used_javascript_libs = 'underscore,react'
 " enable deoplete
 let g:deoplete#enable_at_startup = 1
 
-" Ale config
-" let g:ale_sign_column_always = 1
+" Neoformat settings----------------------------------------------------------
+
+" Configure prettier
+autocmd FileType javascript setlocal formatprg=prettier\ --single-quote\ --no-semi
+let g:neoformat_try_formatprg = 1
 
 " Make neoformat run prettier on save and on leaving insert mode
 autocmd BufWritePre,InsertLeave *.js Neoformat
 
-" remap workspace to leader s
-nnoremap <leader>s :ToggleWorkspace<CR>
-
-" enable autosave even when outside a session
-let g:workspace_autosave_always = 1
+" End neoformat settings-------------------------------------------------------
 

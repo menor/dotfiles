@@ -1,1 +1,5 @@
-brew 'reattach-to-user-namespace'
+cask_args appdir: '/Applications'
+
+brew 'git'
+
+cask 'google-chrome'

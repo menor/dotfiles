@@ -5,11 +5,8 @@
 	helper = osxkeychain
 [push]
 	default = current
-[filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
 [core]
-	editor = /usr/bin/vim
+	editor = /usr/local/bin/nvim
 	excludesfile = /Users/menor/.gitignore
 [alias]
 	co = checkout
@@ -17,25 +14,6 @@
 	st = status
 	df = diff
 	br = branch
-  
-  # Commit all changes
-	ca = !git add -A && git commit -av
-
-	# Switch to a branch, creating it if necessary
-	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-[gui]
-	recentrepo = /Users/menor/Work/resmio
-	recentrepo = /Users/menor/Work/widget
-[filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
 [pager]
 	diff = diff-so-fancy | less --tabs=4 -RFX
 	show = diff-so-fancy | less --tabs=4 -RFX
