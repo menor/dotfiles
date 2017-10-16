@@ -1,12 +1,52 @@
+" -----------------------------------------------------------------------------
+" UI config
+" -----------------------------------------------------------------------------
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+:set number " show line numbers
+:set cursorline " highlight current line
+
+:set undofile
+
+"set italic support
+highlight Comment cterm=italic
+
+set wildmenu " visual autocomplete for command line
+set showmatch " highlight matching [{()}]
 
 " tabs = 2 spaces
 :set tabstop=2
 :set shiftwidth=2
 :set expandtab
 
-" Map the leader key to SPACE
+" enable folding
+set foldenable
+set foldmethod=indent
+set foldlevelstart=10   " open most folds by default
+
+" map the leader key to SPACE
 let mapleader="\<SPACE>"
+
+" -----------------------------------------------------------------------------
+" Searching
+" -----------------------------------------------------------------------------
+set incsearch " search as characters are entered
+set hlsearch " highlight matches
+
+" turn off search highlight
+nnoremap <silent><leader>c :nohlsearch<CR>
+
+" Map the semicolon to colon
+nnoremap ; :
+
+" Switch between the last two files
+nnoremap <Leader><Leader> <c-^>
+
+" Shortcuts for buffer navigation (from Practical Vim)
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
 
 " autoclose brackets
 ino " ""<left>
@@ -41,6 +81,9 @@ if dein#load_state('~/.config/nvim')
   call dein#add('ternjs/tern_for_vim')
   call dein#add('carlitux/deoplete-ternjs')
 
+  " Search
+  call dein#add('junegunn/fzf')
+
   " Syntax plugins
   call dein#add('pangloss/vim-javascript')
   call dein#add('mxw/vim-jsx')
@@ -54,11 +97,14 @@ if dein#load_state('~/.config/nvim')
   call dein#add('atelierbram/Base2Tone-vim')
   call dein#add('morhetz/gruvbox')
 
-  " File Management
+  " File & session management
   call dein#add('tpope/vim-vinegar')
+  call dein#add('tpope/vim-obsession')
+  call dein#add('vim-scripts/vim-auto-save')
 
   " Utils
   call dein#add('tpope/vim-surround')
+  call dein#add('christoomey/vim-tmux-navigator')
 
   " Required
   call dein#end()
@@ -79,9 +125,6 @@ endif
 colorscheme gruvbox
 set background=dark
 
-"set italic support
-highlight Comment cterm=italic
-
 " Enable jsx syntax in .js files (via mxw/vim-jsx plugin)
 let g:jsx_ext_required = 0
 
@@ -101,4 +144,7 @@ let g:neoformat_try_formatprg = 1
 autocmd BufWritePre,InsertLeave *.js Neoformat
 
 " End neoformat settings-------------------------------------------------------
+
+let g:auto_save = 1  " enable AutoSave on Vim startup
+let g:auto_save_silent = 1  " do not display the auto-save notification
 
