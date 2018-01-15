@@ -36,8 +36,11 @@ set hlsearch " highlight matches
 " turn off search highlight
 nnoremap <silent><leader>c :nohlsearch<CR>
 
-" Map the semicolon to colon
-nnoremap ; :
+" Use the_silver_searcher for searching
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" Enable fzf
+set rtp+=/usr/local/opt/fzf
 
 " Switch between the last two files
 nnoremap <Leader><Leader> <c-^>
@@ -82,7 +85,8 @@ if dein#load_state('~/.config/nvim')
   call dein#add('carlitux/deoplete-ternjs')
 
   " Search
-  call dein#add('junegunn/fzf')
+  call dein#add('Shougo/denite.nvim')
+  call dein#add('mileszs/ack.vim')
 
   " Syntax plugins
   call dein#add('pangloss/vim-javascript')
@@ -104,6 +108,7 @@ if dein#load_state('~/.config/nvim')
 
   " Utils
   call dein#add('tpope/vim-surround')
+  call dein#add('tpope/vim-unimpaired')
   call dein#add('christoomey/vim-tmux-navigator')
 
   " Required
@@ -137,14 +142,23 @@ let g:deoplete#enable_at_startup = 1
 " Neoformat settings----------------------------------------------------------
 
 " Configure prettier
-autocmd FileType javascript setlocal formatprg=prettier\ --single-quote\ --no-semi
-let g:neoformat_try_formatprg = 1
+" autocmd FileType javascript setlocal formatprg=prettier\ --single-quote\ --no-semi
+" let g:neoformat_try_formatprg = 1
 
-" Make neoformat run prettier on save and on leaving insert mode
-autocmd BufWritePre,InsertLeave *.js Neoformat
+" Make neoformat run prettier on save 
+" autocmd BufWritePre *.js Neoformat
 
 " End neoformat settings-------------------------------------------------------
 
 let g:auto_save = 1  " enable AutoSave on Vim startup
 let g:auto_save_silent = 1  " do not display the auto-save notification
 
+" Change shortcut here since it interferes with tmux move to right panel
+" nnoremap <C-l> :Denite file_rec<CR>
+
+" Configure ack.vim to be used as ag.vim (and use ag under the hood)
+let g:ackprg = 'ag --vimgrep --smart-case'
+cnoreabbrev ag Ack
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
