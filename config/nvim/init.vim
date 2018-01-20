@@ -134,7 +134,7 @@ set background=dark
 let g:jsx_ext_required = 0
 
 " Highlighting for js libraries
-let g:used_javascript_libs = 'underscore,react'
+let g:used_javascript_libs = 'lodash,react'
 
 " enable deoplete
 let g:deoplete#enable_at_startup = 1
