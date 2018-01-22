@@ -3,6 +3,7 @@
 .undodir/
 Session.vim
 .tern-project
+.tern-port
 
 # Ignores swap files from vim
 # https://robots.thoughtbot.com/global-gitignore
