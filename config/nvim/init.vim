@@ -27,6 +27,9 @@ set foldlevelstart=10   " open most folds by default
 " map the leader key to SPACE
 let mapleader="\<SPACE>"
 
+" vv to generate new vertical split
+nnoremap <silent> vv <C-w>v
+
 " -----------------------------------------------------------------------------
 " Searching
 " -----------------------------------------------------------------------------
@@ -162,3 +165,8 @@ cnoreabbrev ag Ack
 cnoreabbrev aG Ack
 cnoreabbrev Ag Ack
 cnoreabbrev AG Ack
+
+" https://github.com/christoomey/vim-tmux-navigator/pull/165
+" Disable tmux navigator whe zoomed to avoid going out of vi
+let g:tmux_navigator_disable_when_zoomed=1
+

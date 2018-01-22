@@ -12,7 +12,7 @@
 	co = checkout
 	ma = checkout master
 	st = status
-	df = diff
+	df = diff -- . ':(exclude)package-lock.json'
 	br = branch
 [pager]
 	diff = diff-so-fancy | less --tabs=4 -RFX
