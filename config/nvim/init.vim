@@ -28,7 +28,14 @@ set foldlevelstart=10   " open most folds by default
 let mapleader="\<SPACE>"
 
 " vv to generate new vertical split
+" vh to generate horizontal split
 nnoremap <silent> vv <C-w>v
+nnoremap <silent> vh <C-w>S
+
+" check one time after 4s of inactivity in normal mode
+" so files are refreshed on outside changes
+set autoread
+au CursorHold * checktime
 
 " -----------------------------------------------------------------------------
 " Searching
@@ -86,6 +93,7 @@ if dein#load_state('~/.config/nvim')
   call dein#add('ervandew/supertab')
   call dein#add('ternjs/tern_for_vim')
   call dein#add('carlitux/deoplete-ternjs')
+  call dein#add('alvan/vim-closetag')
 
   " Search
   call dein#add('Shougo/denite.nvim')
@@ -113,6 +121,7 @@ if dein#load_state('~/.config/nvim')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-unimpaired')
   call dein#add('christoomey/vim-tmux-navigator')
+  call dein#add('metakirby5/codi.vim')
 
   " Required
   call dein#end()
@@ -170,3 +179,77 @@ cnoreabbrev AG Ack
 " Disable tmux navigator whe zoomed to avoid going out of vi
 let g:tmux_navigator_disable_when_zoomed=1
 
+" Denite settings ------------------------------------------------------------------
+" copied from here https://github.com/sodiumjoe/dotfiles/blob/master/vimrc
+
+" reset 50% winheight on window resize
+augroup deniteresize
+  autocmd!
+  autocmd VimResized,VimEnter * call denite#custom#option('default',
+        \'winheight', winheight(0) / 2)
+augroup end
+
+call denite#custom#option('default', {
+      \ 'prompt': '❯'
+      \ })
+
+call denite#custom#var('file_rec', 'command',
+      \ ['rg', '--files', '--glob', '!.git', ''])
+call denite#custom#var('ag', 'command', ['rg'])
+call denite#custom#var('ag', 'default_opts',
+      \ ['--hidden', '--vimgrep', '--no-heading', '-S'])
+call denite#custom#var('ag', 'recursive_opts', [])
+call denite#custom#var('ag', 'pattern_opt', ['--regexp'])
+call denite#custom#var('ag', 'separator', ['--'])
+call denite#custom#var('ag', 'final_opts', [])
+call denite#custom#map('insert', '<Esc>', '<denite:enter_mode:normal>',
+      \'noremap')
+call denite#custom#map('normal', '<Esc>', '<NOP>',
+      \'noremap')
+call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>',
+      \'noremap')
+call denite#custom#map('normal', '<C-v>', '<denite:do_action:vsplit>',
+      \'noremap')
+call denite#custom#map('normal', 'dw', '<denite:delete_word_after_caret>',
+      \'noremap')
+
+nnoremap <C-p> :<C-u>Denite file_rec<CR>
+nnoremap <leader>s :<C-u>Denite buffer<CR>
+nnoremap <leader><Space>s :<C-u>DeniteBufferDir buffer<CR>
+nnoremap <leader>8 :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
+nnoremap <leader>/ :<C-u>Denite grep:. -mode=normal<CR>
+nnoremap <leader><Space>/ :<C-u>DeniteBufferDir grep:. -mode=normal<CR>
+nnoremap <leader>d :<C-u>DeniteBufferDir file_rec<CR>
+
+hi link deniteMatchedChar Special
+
+" denite-extra
+
+nnoremap <leader>o :<C-u>Denite location_list -mode=normal -no-empty<CR>
+nnoremap <leader>hs :<C-u>Denite history:search -mode=normal<CR>
+nnoremap <leader>hc :<C-u>Denite history:cmd -mode=normal<CR>
+
+" Files
+" Use the opening path to seach files
+set path=$PWD/**
+
+" vim-closetag configuration
+" -----------------------------------------------------------------------------
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non closing tags self closing in the specified files.
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js'
+
+" integer value [0|1]
+" This will make the list of non closing tags case sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+let g:closetag_emptyTags_caseSensitive = 1
+
+" Shortcut for closing tags, default is '>'
+let g:closetag_shortcut = '>'
+
+" Add > at current position without closing the current tag, default is ''
+let g:closetag_close_shortcut = '<leader>>'
+
+" vim-closetag configuration ends
+" -----------------------------------------------------------------------------
