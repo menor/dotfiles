@@ -1,1 +1,1 @@
-set guifont=Inconsolata\ for\ Powerline\ Nerd\ Font\ Complete\ Mono:h16
+et guifont=Inconsolata\ for\ Powerline\ Nerd\ Font\ Complete\ Mono:h16
