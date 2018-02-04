@@ -70,10 +70,6 @@ ino { {}<left>
 ino {<CR> {<CR>}<ESC>O
 ino {;<CR> {<CR>};<ESC>O
 
-if &compatible
-  set nocompatible               " Be iMproved
-endif
-
 " Setup dein Scripts-------------------------------------------------------}}}
 if (!isdirectory(expand("$HOME/.config/nvim/repos/github.com/Shougo/dein.vim")))
     call system(expand("mkdir -p $HOME/.config/nvim/repos/github.com"))
