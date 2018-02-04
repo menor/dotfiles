@@ -15,7 +15,8 @@ set wildmenu " visual autocomplete for command line
 set showmatch " highlight matching [{()}]
 
 " tabs = 2 spaces
-:set tabstop=2
+:set tabstop=8
+:set softtabstop=2
 :set shiftwidth=2
 :set expandtab
 
@@ -150,11 +151,13 @@ let g:deoplete#enable_at_startup = 1
 " Neoformat settings----------------------------------------------------------
 
 " Configure prettier
-" autocmd FileType javascript setlocal formatprg=prettier\ --single-quote\ --no-semi
-" let g:neoformat_try_formatprg = 1
+" augroup prettier   autocmd FileType javascript setlocal formatprg=prettier\ --single-quote\ --no-semi
+"  let g:neoformat_try_formatprg = 1
 
 " Make neoformat run prettier on save 
-" autocmd BufWritePre *.js Neoformat
+" This should be changed to run on staged files
+"  autocmd BufWritePre *.js Neoformat
+" augroup end
 
 " End neoformat settings-------------------------------------------------------
 
