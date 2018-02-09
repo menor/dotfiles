@@ -1,12 +1,17 @@
-" -----------------------------------------------------------------------------
-" UI config
-" -----------------------------------------------------------------------------
+" === === === === === === === === === === === === === === === === === === ===
+"                             UI configuration
+" === === === === === === === === === === === === === === === === === === ===
+
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 :set number " show line numbers
 :set cursorline " highlight current line
 
 :set undofile
+
+" Required
+filetype plugin indent on
+syntax enable
 
 "set italic support
 highlight Comment cterm=italic
@@ -25,42 +30,50 @@ set foldenable
 set foldmethod=indent
 set foldlevelstart=10   " open most folds by default
 
-" map the leader key to SPACE
-let mapleader="\<SPACE>"
-
-" vv to generate new vertical split
-" vh to generate horizontal split
-nnoremap <silent> vv <C-w>v
-nnoremap <silent> vh <C-w>S
-
 " check one time after 4s of inactivity in normal mode
 " so files are refreshed on outside changes
 set autoread
 au CursorHold * checktime
 
-" -----------------------------------------------------------------------------
-" Searching
-" -----------------------------------------------------------------------------
-set incsearch " search as characters are entered
-set hlsearch " highlight matches
+" === === === === === === === === === === === === === === === === === === ===
+"                   Key Bindings (except for plugins)
+" === === === === === === === === === === === === === === === === === === ===
 
-" turn off search highlight
-nnoremap <silent><leader>c :nohlsearch<CR>
+let mapleader="\<SPACE>"
 
-" Use the_silver_searcher for searching
-let g:ackprg = 'ag --nogroup --nocolor --column'
+" === panels ===
+nnoremap <silent> vv <C-w>v  " new vertical split
+nnoremap <silent> vh <C-w>S  " new horizontal split
 
-" Enable fzf
-set rtp+=/usr/local/opt/fzf
-
-" Switch between the last two files
-nnoremap <Leader><Leader> <c-^>
+" === buffers ===
+nnoremap <Leader><Leader> <c-^> " Switch between the last two files
 
 " Shortcuts for buffer navigation (from Practical Vim)
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
+
+
+nnoremap <silent><leader>c :nohlsearch<CR> " turn off search highlight
+
+" === edit configs ===
+nnoremap <leader>, :vsp $MYVIMRC<CR>
+nnoremap <leader>,z :vsp ~/.zshrc<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
+" === === === === === === === === === === === === === === === === === === ===
+"                                 Searching
+" === === === === === === === === === === === === === === === === === === ===
+
+set incsearch " search as characters are entered
+set hlsearch " highlight matches
+
+" Use the_silver_searcher for searching
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" Enable fzf
+set rtp+=/usr/local/opt/fzf
 
 " autoclose brackets
 ino " ""<left>
@@ -71,7 +84,12 @@ ino { {}<left>
 ino {<CR> {<CR>}<ESC>O
 ino {;<CR> {<CR>};<ESC>O
 
-" Setup dein Scripts-------------------------------------------------------}}}
+" === === === === === === === === === === === === === === === === === === ===
+"                                 Plugins
+" === === === === === === === === === === === === === === === === === === ===
+
+" === dein setup ===
+
 if (!isdirectory(expand("$HOME/.config/nvim/repos/github.com/Shougo/dein.vim")))
     call system(expand("mkdir -p $HOME/.config/nvim/repos/github.com"))
     call system(expand("git clone https://github.com/Shougo/dein.vim $HOME/.config/nvim/repos/github.com/Shougo/dein.vim"))
@@ -83,13 +101,13 @@ if dein#load_state('~/.config/nvim')
   call dein#begin(expand('~/.config/nvim'))
 
   " Let dein manage dein
-  call dein#add('/Users/menor/.vim/bundles/repos/github.com/Shougo/dein.vim')
+  call dein#add('$HOME/.config/nvim/repos/github.com/Shougo/dein.vim')
 
   " Autocompletion
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('ervandew/supertab')
-  call dein#add('ternjs/tern_for_vim')
   call dein#add('carlitux/deoplete-ternjs')
+  call dein#add('ternjs/tern_for_vim')
   call dein#add('alvan/vim-closetag')
 
   " Search
@@ -101,6 +119,8 @@ if dein#load_state('~/.config/nvim')
   call dein#add('mxw/vim-jsx')
   call dein#add('jelera/vim-javascript-syntax')
   call dein#add('othree/javascript-libraries-syntax.vim')
+  call dein#add('mattn/emmet-vim')
+  call dein#add('styled-components/vim-styled-components')
 
   " Linters and code formatters
   call dein#add('sbdchd/neoformat')
@@ -119,25 +139,32 @@ if dein#load_state('~/.config/nvim')
   call dein#add('tpope/vim-unimpaired')
   call dein#add('christoomey/vim-tmux-navigator')
   call dein#add('metakirby5/codi.vim')
+  call dein#add('majutsushi/tagbar')
+  call dein#add('vimwiki/vimwiki')
+  call dein#add('sjl/gundo.vim')
 
   " Required
   call dein#end()
   call dein#save_state()
 endif
 
-" Required
-filetype plugin indent on
-syntax enable
-
 " If you want to install not installed plugins on startup.
 if dein#check_install()
   call dein#install()
 endif
 
-"End dein Scripts-------------------------
+" === === === === === === === === === === === === === === === === === === ===
+"                           Plugins configuration
+" === === === === === === === === === === === === === === === === === === ===
 
+" === theme config ===
 colorscheme gruvbox
 set background=dark
+
+" === gundo ===
+let g:gundo_prefer_python3 = 1 " makes it work with neovim
+let g:gundo_close_on_revert = 1
+nnoremap <leader>u :GundoToggle<CR> " super undo
 
 " Enable jsx syntax in .js files (via mxw/vim-jsx plugin)
 let g:jsx_ext_required = 0
@@ -252,3 +279,9 @@ let g:closetag_close_shortcut = '<leader>>'
 
 " vim-closetag configuration ends
 " -----------------------------------------------------------------------------
+
+" === emmet-vim ===
+let g:user_emmet_leader_key='<C-e>'
+
+" === vimwiki ===
+let g:vimwiki_list = [{'path': '$HOME/Dropbox/Aplicaciones/vimwiki'}]
