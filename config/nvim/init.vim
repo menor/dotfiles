@@ -18,6 +18,7 @@ highlight Comment cterm=italic
 
 set wildmenu " visual autocomplete for command line
 set showmatch " highlight matching [{()}]
+set termguicolors
 
 " tabs = 2 spaces
 :set tabstop=8
@@ -109,6 +110,7 @@ if dein#load_state('~/.config/nvim')
   call dein#add('carlitux/deoplete-ternjs')
   call dein#add('ternjs/tern_for_vim')
   call dein#add('alvan/vim-closetag')
+  call dein#add('tpope/vim-commentary')
 
   " Search
   call dein#add('Shougo/denite.nvim')
@@ -124,14 +126,19 @@ if dein#load_state('~/.config/nvim')
 
   " Linters and code formatters
   call dein#add('sbdchd/neoformat')
+  call dein#add('prettier/vim-prettier')
 
-  " Color Schemes
+  " Color Schemes & Interface enhancers
   call dein#add('atelierbram/Base2Tone-vim')
   call dein#add('morhetz/gruvbox')
+  call dein#add('arcticicestudio/nord-vim')
+  call dein#add('vim-airline/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
 
   " File & session management
   call dein#add('tpope/vim-vinegar')
   call dein#add('tpope/vim-obsession')
+  call dein#add('tpope/vim-fugitive')
   call dein#add('vim-scripts/vim-auto-save')
 
   " Utils
@@ -148,7 +155,7 @@ if dein#load_state('~/.config/nvim')
   call dein#save_state()
 endif
 
-" If you want to install not installed plugins on startup.
+" Install not installed plugins on startup.
 if dein#check_install()
   call dein#install()
 endif
@@ -158,8 +165,17 @@ endif
 " === === === === === === === === === === === === === === === === === === ===
 
 " === theme config ===
-colorscheme gruvbox
-set background=dark
+
+" nord
+let g:nord_italic = 1
+let g:nord_italic_comments = 1
+let g:nord_comment_brightness = 20
+let g:nord_uniform_diff_background = 1
+
+colorscheme nord
+
+" gruvbox
+" set background=dark
 
 " === gundo ===
 let g:gundo_prefer_python3 = 1 " makes it work with neovim
@@ -178,8 +194,9 @@ let g:deoplete#enable_at_startup = 1
 " Neoformat settings----------------------------------------------------------
 
 " Configure prettier
-" augroup prettier   autocmd FileType javascript setlocal formatprg=prettier\ --single-quote\ --no-semi
-"  let g:neoformat_try_formatprg = 1
+" augroup prettier
+  " autocmd FileType javascript setlocal formatprg=prettier\ --single-quote\ --no-semi
+  " let g:neoformat_try_formatprg = 1
 
 " Make neoformat run prettier on save 
 " This should be changed to run on staged files
@@ -188,6 +205,12 @@ let g:deoplete#enable_at_startup = 1
 
 " End neoformat settings-------------------------------------------------------
 
+" === prettier ===
+nmap <Leader>p <Plug>(Prettier)
+
+let g:prettier#config#semi = 'false' " No semi-colons por favor
+
+" === vim auto save ===
 let g:auto_save = 1  " enable AutoSave on Vim startup
 let g:auto_save_silent = 1  " do not display the auto-save notification
 
@@ -285,3 +308,23 @@ let g:user_emmet_leader_key='<C-e>'
 
 " === vimwiki ===
 let g:vimwiki_list = [{'path': '$HOME/Dropbox/Aplicaciones/vimwiki'}]
+
+" === airline ===
+let g:airline_theme = 'nord'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline_inactive_collapse=1 " Show only filename in inactive windows
+
+" airline loads by default all the extensions available,
+" this changes this behaviour to opt-in 
+let g:airline_extensions = ['branch', 'tabline']
+
+let g:airline_section_y = '' " disable fileencoding section
+let g:airline_powerline_fonts = 1
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+
