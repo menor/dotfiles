@@ -55,8 +55,13 @@ nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 
-
 nnoremap <silent><leader>c :nohlsearch<CR> " turn off search highlight
+
+" === search & replace ===
+" Make & trigger the :&& command so it preserves flags and create a visual
+" equivalent, see Pracitcal Vim tip 93
+nnoremap & :&&<CR>
+xnoremap & :&&<CR>
 
 " === edit configs ===
 nnoremap <leader>, :vsp $MYVIMRC<CR>
@@ -77,13 +82,13 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 set rtp+=/usr/local/opt/fzf
 
 " autoclose brackets
-ino " ""<left>
-ino ' ''<left>
-ino ( ()<left>
-ino [ []<left>
-ino { {}<left>
-ino {<CR> {<CR>}<ESC>O
-ino {;<CR> {<CR>};<ESC>O
+" ino " ""<left>
+" ino ' ''<left>
+" ino ( ()<left>
+" ino [ []<left>
+" ino { {}<left>
+" ino {<CR> {<CR>}<ESC>O
+" ino {;<CR> {<CR>};<ESC>O
 
 " === === === === === === === === === === === === === === === === === === ===
 "                                 Plugins
@@ -115,6 +120,7 @@ if dein#load_state('~/.config/nvim')
   " Search
   call dein#add('Shougo/denite.nvim')
   call dein#add('mileszs/ack.vim')
+  call dein#add('bronson/vim-visual-star-search')
 
   " Syntax plugins
   call dein#add('pangloss/vim-javascript')
@@ -123,8 +129,12 @@ if dein#load_state('~/.config/nvim')
   call dein#add('othree/javascript-libraries-syntax.vim')
   call dein#add('mattn/emmet-vim')
   call dein#add('styled-components/vim-styled-components')
+  call dein#add('slashmili/alchemist.vim')
+  call dein#add('elixir-editors/vim-elixir')
+  " call dein#add('elmcast/elm-vim')
 
   " Linters and code formatters
+  call dein#add('w0rp/ale')
   call dein#add('sbdchd/neoformat')
   call dein#add('prettier/vim-prettier')
 
@@ -182,6 +192,9 @@ let g:gundo_prefer_python3 = 1 " makes it work with neovim
 let g:gundo_close_on_revert = 1
 nnoremap <leader>u :GundoToggle<CR> " super undo
 
+" === emmet ===
+let g:user_emmet_settings = {'javascript.jsx' : {'extends' : 'jsx',}}
+
 " Enable jsx syntax in .js files (via mxw/vim-jsx plugin)
 let g:jsx_ext_required = 0
 
@@ -210,12 +223,24 @@ nmap <Leader>p <Plug>(Prettier)
 
 let g:prettier#config#semi = 'false' " No semi-colons por favor
 
+" === ale ===
+let g:ale_linters = {'js': ['stylelint', 'eslint']}
+let g:ale_fixers = {'javascript': ['eslint']}
+let g:ale_sign_column_always = 1
+let g:ale_lint_on_text_changed = 'never'
+
 " === vim auto save ===
 let g:auto_save = 1  " enable AutoSave on Vim startup
 let g:auto_save_silent = 1  " do not display the auto-save notification
 
+
+" === vim-visual-star-search ===
+" use ag for recursive searching so we don't find 10,000 useless hits inside node_modules
+nnoremap <leader>* :call ag#Ag('grep', '--literal ' . shellescape(expand("<cword>")))<CR>
+vnoremap <leader>* :<C-u>call VisualStarSearchSet('/', 'raw')<CR>:call ag#Ag('grep', '--literal ' . shellescape(@/))<CR>
+
 " Change shortcut here since it interferes with tmux move to right panel
-" nnoremap <C-l> :Denite file_rec<CR>
+nnoremap <C-i> :Denite file_rec<CR>
 
 " Configure ack.vim to be used as ag.vim (and use ag under the hood)
 let g:ackprg = 'ag --vimgrep --smart-case'
@@ -303,9 +328,6 @@ let g:closetag_close_shortcut = '<leader>>'
 " vim-closetag configuration ends
 " -----------------------------------------------------------------------------
 
-" === emmet-vim ===
-let g:user_emmet_leader_key='<C-e>'
-
 " === vimwiki ===
 let g:vimwiki_list = [{'path': '$HOME/Dropbox/Aplicaciones/vimwiki'}]
 
@@ -328,3 +350,5 @@ let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
 
+" === vim javascript ===
+let g:javascript_plugin_flow = 1 " enable flow syntax
