@@ -14,6 +14,7 @@
 	st = status
 	df = diff -- . ':(exclude)package-lock.json'
 	br = branch
+        lg  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 [pager]
 	diff = diff-so-fancy | less --tabs=4 -RFX
 	show = diff-so-fancy | less --tabs=4 -RFX
