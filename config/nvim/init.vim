@@ -153,6 +153,7 @@ if dein#load_state('~/.config/nvim')
 
   " Utils
   call dein#add('tpope/vim-surround')
+  call dein#add('tpope/vim-repeat')
   call dein#add('tpope/vim-unimpaired')
   call dein#add('christoomey/vim-tmux-navigator')
   call dein#add('metakirby5/codi.vim')
