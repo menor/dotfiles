@@ -28,7 +28,7 @@ set termguicolors
 
 " enable folding
 set foldenable
-set foldmethod=indent
+set foldmethod=syntax
 set foldlevelstart=10   " open most folds by default
 
 " check one time after 4s of inactivity in normal mode
@@ -132,6 +132,7 @@ if dein#load_state('~/.config/nvim')
   call dein#add('slashmili/alchemist.vim')
   call dein#add('elixir-editors/vim-elixir')
   " call dein#add('elmcast/elm-vim')
+  call dein#add('digitaltoad/vim-pug')
 
   " Linters and code formatters
   call dein#add('w0rp/ale')
