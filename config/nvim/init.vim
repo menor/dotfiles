@@ -36,6 +36,14 @@ set foldlevelstart=10   " open most folds by default
 set autoread
 au CursorHold * checktime
 
+" Share data between vim instances (:help shada)
+set shada='50,<1000,s100,h,n~/nvim/shada
+
+augroup shada
+  autocmd!
+  autocmd CursorHold * rshada|wshada
+augroup END
+
 " === === === === === === === === === === === === === === === === === === ===
 "                   Key Bindings (except for plugins)
 " === === === === === === === === === === === === === === === === === === ===
