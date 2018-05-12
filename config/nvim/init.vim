@@ -363,3 +363,7 @@ let g:airline_right_alt_sep = ''
 
 " === vim javascript ===
 let g:javascript_plugin_flow = 1 " enable flow syntax
+
+" === codi ===
+let g:codi#rightsplit=0
+let g:codi#rightalign=0
