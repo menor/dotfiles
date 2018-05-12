@@ -14,7 +14,15 @@ brew upgrade
 brew install coreutils
 
 # Install basic utilities
-brew 'git'
-brew 'ripgrep'
-brew 'gist'
+brew install 'git'
+brew install 'ripgrep'
+brew install 'gist'
+
+# Install improved versions of system utils
+
+# A cat(1) clone with syntax highlighting and Git integration.
+brew install 'bat'
+
+# Helps to pick paths out of bash
+brew install 'fpp'
 
