@@ -5,7 +5,7 @@
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 :set number " show line numbers
-:set cursorline " highlight current line
+" :set cursorline " highlight current line disabled cause it slows things down
 
 :set undofile
 
@@ -157,6 +157,7 @@ if dein#load_state('~/.config/nvim')
   " File & session management
   call dein#add('tpope/vim-vinegar')
   call dein#add('tpope/vim-obsession')
+  call dein#add('dhruvasagar/vim-prosession')
   call dein#add('tpope/vim-fugitive')
   call dein#add('vim-scripts/vim-auto-save')
 
@@ -339,7 +340,7 @@ let g:closetag_close_shortcut = '<leader>>'
 " -----------------------------------------------------------------------------
 
 " === vimwiki ===
-let g:vimwiki_list = [{'path': '$HOME/Dropbox/Aplicaciones/vimwiki'}]
+let g:vimwiki_list = [{'path': '$HOME/Dropbox/Aplicaciones/vimwiki', 'syntax': 'markdown', 'ext': '.md'},{'path': '$HOME/Dropbox/Aplicaciones/adawiki/wiki'}]
 
 " === airline ===
 let g:airline_theme = 'nord'

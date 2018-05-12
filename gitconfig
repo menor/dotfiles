@@ -12,7 +12,7 @@
 	co = checkout
 	ma = checkout master
 	st = status
-	df = diff -- . ':(exclude)package-lock.json'
+	df = diff -- . ':(exclude)package-lock.json' ':(exclude)yarn.lock'
 	br = branch
         lg  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 [pager]
