@@ -17,6 +17,7 @@ brew install coreutils
 brew install 'git'
 brew install 'ripgrep'
 brew install 'gist'
+brew install 'z'
 
 # Install improved versions of system utils
 
