@@ -1,1 +1,1 @@
-et guifont=Inconsolata\ for\ Powerline\ Nerd\ Font\ Complete\ Mono:h16
+t guifont=Inconsolata\ for\ Powerline\ Nerd\ Font\ Complete\ Mono:h16
