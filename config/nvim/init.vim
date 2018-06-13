@@ -10,18 +10,16 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 :set undofile
 
 " Required
-filetype plugin indent on
 syntax enable
 
 "set italic support
 highlight Comment cterm=italic
 
-set wildmenu " visual autocomplete for command line
 set showmatch " highlight matching [{()}]
 set termguicolors
 
 " tabs = 2 spaces
-:set tabstop=8
+:set tabstop=2
 :set softtabstop=2
 :set shiftwidth=2
 :set expandtab
@@ -57,11 +55,14 @@ nnoremap <silent> vh <C-w>S  " new horizontal split
 " === buffers ===
 nnoremap <Leader><Leader> <c-^> " Switch between the last two files
 
-" Shortcuts for buffer navigation (from Practical Vim)
-nnoremap <silent> [b :bprevious<CR>
-nnoremap <silent> ]b :bnext<CR>
-nnoremap <silent> [B :bfirst<CR>
-nnoremap <silent> ]B :blast<CR>
+" === autoclose brackets ===
+" ino " ""<left>
+" ino ' ''<left>
+" ino ( ()<left>
+" ino [ []<left>
+ino {<CR> {<CR>}<ESC>O<tab>
+ino {,<CR> {<CR>},<ESC>O<tab>
+" ino {;<CR> {<CR>};<ESC>O\<tab>
 
 nnoremap <silent><leader>c :nohlsearch<CR> " turn off search highlight
 
@@ -88,15 +89,6 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " Enable fzf
 set rtp+=/usr/local/opt/fzf
-
-" autoclose brackets
-" ino " ""<left>
-" ino ' ''<left>
-" ino ( ()<left>
-" ino [ []<left>
-" ino { {}<left>
-" ino {<CR> {<CR>}<ESC>O
-" ino {;<CR> {<CR>};<ESC>O
 
 " === === === === === === === === === === === === === === === === === === ===
 "                                 Plugins
@@ -139,8 +131,12 @@ if dein#load_state('~/.config/nvim')
   call dein#add('styled-components/vim-styled-components')
   call dein#add('slashmili/alchemist.vim')
   call dein#add('elixir-editors/vim-elixir')
-  " call dein#add('elmcast/elm-vim')
+  call dein#add('elmcast/elm-vim')
+  call dein#add('pbogut/deoplete-elm')
   call dein#add('digitaltoad/vim-pug')
+  " call dein#add('Shougo/neosnippet.vim')
+  call dein#add('reasonml-editor/vim-reason-plus')
+  call dein#add('rust-lang/rust.vim')
 
   " Linters and code formatters
   call dein#add('w0rp/ale')
@@ -231,8 +227,12 @@ let g:deoplete#enable_at_startup = 1
 
 " === prettier ===
 nmap <Leader>p <Plug>(Prettier)
-
 let g:prettier#config#semi = 'false' " No semi-colons por favor
+
+" === rust.vim ===
+nnoremap <Leader>f :RustFmt<CR>
+
+" === elm ===
 
 " === ale ===
 let g:ale_linters = {'js': ['stylelint', 'eslint']}
@@ -248,7 +248,7 @@ let g:auto_save_silent = 1  " do not display the auto-save notification
 " === vim-visual-star-search ===
 " use ag for recursive searching so we don't find 10,000 useless hits inside node_modules
 nnoremap <leader>* :call ag#Ag('grep', '--literal ' . shellescape(expand("<cword>")))<CR>
-vnoremap <leader>* :<C-u>call VisualStarSearchSet('/', 'raw')<CR>:call ag#Ag('grep', '--literal ' . shellescape(@/))<CR>
+vnoremap <leader>* :<C-u>call VisualStarSearchSet('/', 'raw')<CR>:call ag#Ag('ag', '--literal ' . shellescape(@/))<CR>
 
 " Change shortcut here since it interferes with tmux move to right panel
 nnoremap <C-i> :Denite file_rec<CR>
@@ -367,3 +367,10 @@ let g:javascript_plugin_flow = 1 " enable flow syntax
 " === codi ===
 let g:codi#rightsplit=0
 let g:codi#rightalign=0
+
+" === vim reason plus ===
+" Needs npm i -g ocaml-language-server
+let g:LanguageClient_serverCommands = {
+  \ 'reason': ['ocaml-language-server', '--stdio'],
+  \ 'ocaml': ['ocaml-language-server', '--stdio']
+  \ }
