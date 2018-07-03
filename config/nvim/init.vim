@@ -9,6 +9,9 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 :set undofile
 
+" Not needed anymore, but vimwiki needs it for the links to work properly
+filetype plugin on
+
 " Required
 syntax enable
 
@@ -149,6 +152,7 @@ if dein#load_state('~/.config/nvim')
   call dein#add('arcticicestudio/nord-vim')
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
+  call dein#add('junegunn/goyo.vim')
 
   " File & session management
   call dein#add('tpope/vim-vinegar')
@@ -342,6 +346,10 @@ let g:closetag_close_shortcut = '<leader>>'
 " === vimwiki ===
 let g:vimwiki_list = [{'path': '$HOME/Dropbox/Aplicaciones/vimwiki', 'syntax': 'markdown', 'ext': '.md'},{'path': '$HOME/Dropbox/Aplicaciones/adawiki/wiki'}]
 
+" Fixes weird <cr> behaviour with markdown files
+" https://github.com/vimwiki/vimwiki/issues/345
+let g:vimwiki_global_ext = 0
+
 " === airline ===
 let g:airline_theme = 'nord'
 let g:airline#extensions#tabline#enabled = 1
@@ -374,3 +382,36 @@ let g:LanguageClient_serverCommands = {
   \ 'reason': ['ocaml-language-server', '--stdio'],
   \ 'ocaml': ['ocaml-language-server', '--stdio']
   \ }
+
+" === Auto enable goyo for markdown ===
+" https://josh.blog/2017/04/writing-mode-vim
+function! s:auto_goyo()
+  if &ft == 'markdown' && winnr('$') == 1
+    Goyo 80
+  elseif exists('#goyo')
+    Goyo!
+  endif
+endfunction
+
+function! s:goyo_leave()
+  if winnr('$') < 2
+    silent! :q
+  endif
+endfunction
+
+augroup goyo_markdown
+  autocmd!
+  autocmd BufNewFile,BufRead * call s:auto_goyo()
+  autocmd! User GoyoLeave nested call s:goyo_leave()
+augroup END
+
+" === Vim-Markdown ===
+au BufNewFile,BufFilePre,BufReadPost,BufRead *.md set filetype=markdown
+
+" Highlight Javascript code in markdown
+let g:markdown_fenced_languages = ['javascript']
+
+" Spell check
+setlocal spell spelllang=en_us
+highlight clear SpellBad
+highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
