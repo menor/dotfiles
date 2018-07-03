@@ -4,10 +4,10 @@
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-:set number " show line numbers
+set number " show line numbers
 " :set cursorline " highlight current line disabled cause it slows things down
 
-:set undofile
+set undofile
 
 " Not needed anymore, but vimwiki needs it for the links to work properly
 filetype plugin on
@@ -22,10 +22,10 @@ set showmatch " highlight matching [{()}]
 set termguicolors
 
 " tabs = 2 spaces
-:set tabstop=2
-:set softtabstop=2
-:set shiftwidth=2
-:set expandtab
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
 
 " enable folding
 set foldenable
