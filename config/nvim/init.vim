@@ -153,7 +153,6 @@ if dein#load_state('~/.config/nvim')
   call dein#add('arcticicestudio/nord-vim')
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
-  call dein#add('junegunn/goyo.vim')
 
   " File & session management
   call dein#add('tpope/vim-vinegar')
@@ -387,28 +386,6 @@ let g:LanguageClient_serverCommands = {
   \ 'reason': ['ocaml-language-server', '--stdio'],
   \ 'ocaml': ['ocaml-language-server', '--stdio']
   \ }
-
-" === Auto enable goyo for markdown ===
-" https://josh.blog/2017/04/writing-mode-vim
-function! s:auto_goyo()
-  if &ft == 'markdown' && winnr('$') == 1
-    Goyo 80
-  elseif exists('#goyo')
-    Goyo!
-  endif
-endfunction
-
-function! s:goyo_leave()
-  if winnr('$') < 2
-    silent! :q
-  endif
-endfunction
-
-augroup goyo_markdown
-  autocmd!
-  autocmd BufNewFile,BufRead * call s:auto_goyo()
-  autocmd! User GoyoLeave nested call s:goyo_leave()
-augroup END
 
 " === Vim-Markdown ===
 au BufNewFile,BufFilePre,BufReadPost,BufRead *.md set filetype=markdown
