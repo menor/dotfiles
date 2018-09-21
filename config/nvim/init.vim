@@ -140,6 +140,7 @@ if dein#load_state('~/.config/nvim')
   " call dein#add('Shougo/neosnippet.vim')
   call dein#add('reasonml-editor/vim-reason-plus')
   call dein#add('rust-lang/rust.vim')
+  call dein#add('fatih/vim-go')
 
   " Linters and code formatters
   call dein#add('w0rp/ale')
@@ -190,13 +191,11 @@ endif
 " nord
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
+let g:nord_underline = 1
 let g:nord_comment_brightness = 20
 let g:nord_uniform_diff_background = 1
 
 colorscheme nord
-
-" gruvbox
-" set background=dark
 
 " === gundo ===
 let g:gundo_prefer_python3 = 1 " makes it work with neovim
@@ -282,8 +281,14 @@ call denite#custom#option('default', {
       \ 'prompt': '❯'
       \ })
 
+" Fixes highlights not visible when using the nord theme
+" https://github.com/arcticicestudio/nord-vim/issues/79#issuecomment-348974334
+
+call denite#custom#option('default', 'highlight_matched_char', 'PreProc')
+call denite#custom#option('default', 'highlight_matched_range', 'Comment')
+
 call denite#custom#var('file_rec', 'command',
-      \ ['rg', '--files', '--glob', '!.git', ''])
+      \ ['rg', '--files', '--glob', ''])
 call denite#custom#var('ag', 'command', ['rg'])
 call denite#custom#var('ag', 'default_opts',
       \ ['--hidden', '--vimgrep', '--no-heading', '-S'])
@@ -344,7 +349,7 @@ let g:closetag_close_shortcut = '<leader>>'
 " -----------------------------------------------------------------------------
 
 " === vimwiki ===
-let g:vimwiki_list = [{'path': '$HOME/Dropbox/Aplicaciones/vimwiki', 'syntax': 'markdown', 'ext': '.md'},{'path': '$HOME/Dropbox/Aplicaciones/adawiki/wiki'}]
+let g:vimwiki_list = [{'path': '$HOME/Dropbox/Aplicaciones/vimwiki', 'syntax': 'markdown', 'ext': '.md'},{'path': '$HOME/Dropbox/Aplicaciones/adawiki/wiki', 'syntax': 'markdown', 'ext': '.md'}]
 
 " Fixes weird <cr> behaviour with markdown files
 " https://github.com/vimwiki/vimwiki/issues/345
