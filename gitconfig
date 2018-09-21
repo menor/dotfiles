@@ -31,6 +31,10 @@
 	# a.k.a. ‘delete merged’
   dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 
+[color]
+  # It looks this is still needed for vim-fugitive
+  ui = auto
+
 [core]
 
 	editor = /usr/local/bin/nvim
