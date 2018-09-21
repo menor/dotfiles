@@ -1,25 +1,55 @@
-[user]
-	name = menor
-	email = josemenor@gmail.com
-[credential]
-	helper = osxkeychain
-[push]
-	default = current
-[core]
-	editor = /usr/local/bin/nvim
-	excludesfile = ~/.gitignore_global
 [alias]
+
 	co = checkout
 	ma = checkout master
-	st = status
-	df = diff -- . ':(exclude)package-lock.json' ':(exclude)yarn.lock'
 	br = branch
-        lg  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  aa = add --all
+  ci = commit -v
+
+  # Add and commit all the changes with verbose diff
+  ca = !git add -A && git commit -av
+
+  # View status using the short format
+	s = status -s
+
+  # Show the diff excluding lock files
+	df = diff -- . ':(exclude)package-lock.json' ':(exclude)yarn.lock'
+
+  # View abbreviated log history
+  l = log --pretty=oneline -n 20 --graph --abbrev-commit
+
+  # View tree log story
+  lg  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+
+  # List aliases
+  aliases = config --get-regexp alias
+
+  # Interactive rebase with the given number of latest commits
+  reb = "!r() { git rebase -i HEAD~$1; }; r"
+
+  # Remove branches that have already been merged with master
+	# a.k.a. ‘delete merged’
+  dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
+[core]
+
+	editor = /usr/local/bin/nvim
+	excludesfile = ~/.gitignore_global
+
+[credential]
+
+	helper = osxkeychain
+
 [pager]
+
 	diff = diff-so-fancy | less --tabs=4 -RFX
 	show = diff-so-fancy | less --tabs=4 -RFX
-[filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
+
+[push]
+
+	default = current
+
+[user]
+
+	name = menor
+	email = josemenor@gmail.com
