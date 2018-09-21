@@ -1,0 +1,16 @@
+
+alias n='nvim'
+
+# Cheatsheets
+alias vimch='nvim ~/Documents/code/cheatsheets/vim.md'
+alias tmuxch='nvim ~/Documents/code/cheatsheets/tmux.md'
+
+# Tmux
+alias tl='tmux ls'
+alias ta='tmux attach -t'
+alias tn='tmux new-session -s'
+alias tk='tmux kill-session -t'
+
+# Javascript alias
+alias pkg='cat package.json'
+
