@@ -125,6 +125,12 @@ if dein#load_state('~/.config/nvim')
   call dein#add('mileszs/ack.vim')
   call dein#add('bronson/vim-visual-star-search')
 
+  " Snippets engine
+  call dein#add('SirVer/ultisnips')
+
+  " Snippets files
+  call dein#add('epilande/vim-react-snippets')
+
   " Syntax plugins
   call dein#add('pangloss/vim-javascript')
   call dein#add('mxw/vim-jsx')
@@ -137,7 +143,6 @@ if dein#load_state('~/.config/nvim')
   call dein#add('elmcast/elm-vim')
   call dein#add('pbogut/deoplete-elm')
   call dein#add('digitaltoad/vim-pug')
-  " call dein#add('Shougo/neosnippet.vim')
   call dein#add('reasonml-editor/vim-reason-plus')
   call dein#add('rust-lang/rust.vim')
   call dein#add('fatih/vim-go')
@@ -226,6 +231,9 @@ let g:deoplete#enable_at_startup = 1
 " augroup end
 
 " End neoformat settings-------------------------------------------------------
+
+" === Ultisnips ===
+let g:UltiSnipsExpandTrigger="<C-l>"
 
 " === prettier ===
 nmap <Leader>p <Plug>(Prettier)
