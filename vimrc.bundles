@@ -33,6 +33,7 @@ Plug 'rust-lang/rust.vim'              " Rust syntax
 
 " == Color Schemes ==
 Plug 'morhetz/gruvbox'
+Plug 'arcticicestudio/nord-vim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
