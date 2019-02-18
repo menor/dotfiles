@@ -1,5 +1,6 @@
-
+# vim
 alias n='nvim'
+alias nb='nvim -u ~/.config/nvim/basic.vim'
 
 # Cheatsheets
 alias vimch='nvim ~/Documents/code/cheatsheets/vim.md'

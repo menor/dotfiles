@@ -1,11 +1,10 @@
-" === === === === === === === === === === === === === === === === === === ===
+" ---------------------------------------------------------------------------
 "                             UI configuration
 " === === === === === === === === === === === === === === === === === === ===
-
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 set number " show line numbers
-" :set cursorline " highlight current line disabled cause it slows things down
+set cursorline " highlight current line used to slow things down, keep an eye on it
 
 set undofile
 
@@ -13,13 +12,15 @@ set undofile
 filetype plugin on
 
 " Required
-syntax enable
+if has('syntax') && !exists('g:syntax_on')
+ syntax enable
+endif
 
 "set italic support
 highlight Comment cterm=italic
 
 set showmatch " highlight matching [{()}]
-set termguicolors
+" set termguicolors
 
 " tabs = 2 spaces
 set tabstop=2
@@ -45,6 +46,10 @@ augroup shada
   autocmd CursorHold * rshada|wshada
 augroup END
 
+" fixes error when copying files using netrw
+" https://stackoverflow.com/a/41236668/2565132
+let g:netrw_keepdir=0
+
 " === === === === === === === === === === === === === === === === === === ===
 "                   Key Bindings (except for plugins)
 " === === === === === === === === === === === === === === === === === === ===
@@ -55,37 +60,33 @@ let mapleader="\<SPACE>"
 nnoremap <silent> vv <C-w>v  " new vertical split
 nnoremap <silent> vh <C-w>S  " new horizontal split
 
-" === buffers ===
-nnoremap <Leader><Leader> <c-^> " Switch between the last two files
-
 " === autoclose brackets ===
-" ino " ""<left>
-" ino ' ''<left>
-" ino ( ()<left>
-" ino [ []<left>
-ino {<CR> {<CR>}<ESC>O<tab>
-ino {,<CR> {<CR>},<ESC>O<tab>
-" ino {;<CR> {<CR>};<ESC>O\<tab>
+ino {<CR> {<CR>}<ESC>O
 
 nnoremap <silent><leader>c :nohlsearch<CR> " turn off search highlight
 
 " === search & replace ===
 " Make & trigger the :&& command so it preserves flags and create a visual
-" equivalent, see Pracitcal Vim tip 93
+" equivalent, see Practical Vim tip 93
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>
 
 " === edit configs ===
 nnoremap <leader>, :vsp $MYVIMRC<CR>
-nnoremap <leader>,z :vsp ~/.zshrc<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " === === === === === === === === === === === === === === === === === === ===
 "                                 Searching
 " === === === === === === === === === === === === === === === === === === ===
 
+set gdefault " use global flag by default in s: commands
 set incsearch " search as characters are entered
 set hlsearch " highlight matches
+
+" If we search in lowercase search won't be case sensitive
+" as soon as we search with an uppercase, it will turn into case sensitive
+set ignorecase 
+set smartcase 
 
 " Use the_silver_searcher for searching
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -114,67 +115,79 @@ if dein#load_state('~/.config/nvim')
 
   " Autocompletion
   call dein#add('Shougo/deoplete.nvim')
-  call dein#add('ervandew/supertab')
   call dein#add('carlitux/deoplete-ternjs')
-  call dein#add('ternjs/tern_for_vim')
-  call dein#add('alvan/vim-closetag')
+  call dein#add('ternjs/tern_for_vim', {'on_ft': ['js', 'jsx', 'ts', 'tsx', 'html']})
+  " call dein#add('ervandew/supertab')
   call dein#add('tpope/vim-commentary')
+
+  " Language client
+  "call dein#add('autozimu/LanguageClient-neovim',{
+    "\ 'rev': 'next',
+    "\ 'build': 'bash install.sh'
+  "\ })
+
+  " Plugin to register the typescript-language-server autonmatically
+  " See https://github.com/prabirshrestha/vim-lsp/wiki/Servers-TypeScript
+" call dein#add('ryanolsonx/vim-lsp-typescript')
 
   " Search
   call dein#add('Shougo/denite.nvim')
-  call dein#add('mileszs/ack.vim')
-  call dein#add('bronson/vim-visual-star-search')
+  " call dein#add('mileszs/ack.vim')
+  " call dein#add('bronson/vim-visual-star-search')
 
   " Snippets engine
-  call dein#add('SirVer/ultisnips')
-
-  " Snippets files
-  call dein#add('epilande/vim-react-snippets')
+  " call dein#add('Shougo/neosnippet.vim')
+  " call dein#add('Shougo/neosnippet-snippets')
 
   " Syntax plugins
-  call dein#add('pangloss/vim-javascript')
-  call dein#add('mxw/vim-jsx')
-  call dein#add('jelera/vim-javascript-syntax')
-  call dein#add('othree/javascript-libraries-syntax.vim')
-  call dein#add('mattn/emmet-vim')
-  call dein#add('styled-components/vim-styled-components')
-  call dein#add('slashmili/alchemist.vim')
-  call dein#add('elixir-editors/vim-elixir')
-  call dein#add('elmcast/elm-vim')
-  call dein#add('pbogut/deoplete-elm')
-  call dein#add('digitaltoad/vim-pug')
-  call dein#add('reasonml-editor/vim-reason-plus')
-  call dein#add('rust-lang/rust.vim')
-  call dein#add('fatih/vim-go')
+   call dein#add('pangloss/vim-javascript', {'on_ft': ['js', 'jsx', 'ts', 'tsx', 'html']})
+  " call dein#add('mxw/vim-jsx', {'on_ft': ['js', 'jsx', 'ts', 'tsx', 'html']})
+  " call dein#add('jelera/vim-javascript-syntax', {'on_ft': ['js', 'jsx', 'ts', 'tsx', 'html']})
+   call dein#add('othree/javascript-libraries-syntax.vim', {'on_ft': ['js', 'jsx', 'ts', 'tsx', 'html']})
+   call dein#add('mattn/emmet-vim')
+   call dein#add('styled-components/vim-styled-components')
+
+  " Typescript
+  " call dein#add('HerringtonDarkholme/yats.vim')
+  " call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
+
+  " Elixir
+  " call dein#add('slashmili/alchemist.vim', {'on_ft': ['ex', 'exs']})
+  " call dein#add('elixir-editors/vim-elixir')
+
+  " call dein#add('digitaltoad/vim-pug')
+  " call dein#add('rust-lang/rust.vim')
+  " call dein#add('ekalinin/Dockerfile.vim')
+  " call dein#add('fatih/vim-go')
 
   " Linters and code formatters
-  call dein#add('w0rp/ale')
-  call dein#add('sbdchd/neoformat')
-  call dein#add('prettier/vim-prettier')
+   call dein#add('w0rp/ale')
+   call dein#add('sbdchd/neoformat')
+   call dein#add('prettier/vim-prettier')
 
   " Color Schemes & Interface enhancers
-  call dein#add('atelierbram/Base2Tone-vim')
-  call dein#add('morhetz/gruvbox')
+  " call dein#add('atelierbram/Base2Tone-vim')
+  " call dein#add('morhetz/gruvbox')
   call dein#add('arcticicestudio/nord-vim')
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
 
   " File & session management
   call dein#add('tpope/vim-vinegar')
-  call dein#add('tpope/vim-obsession')
-  call dein#add('dhruvasagar/vim-prosession')
-  call dein#add('tpope/vim-fugitive')
+  " call dein#add('tpope/vim-obsession')
+  " call dein#add('dhruvasagar/vim-prosession')
+  " call dein#add('tpope/vim-fugitive')
   call dein#add('vim-scripts/vim-auto-save')
 
   " Utils
-  call dein#add('tpope/vim-surround')
-  call dein#add('tpope/vim-repeat')
-  call dein#add('tpope/vim-unimpaired')
+  " call dein#add('tpope/vim-surround')
+  " call dein#add('tpope/vim-repeat')
+  " call dein#add('tpope/vim-unimpaired')
   call dein#add('christoomey/vim-tmux-navigator')
-  call dein#add('metakirby5/codi.vim')
-  call dein#add('majutsushi/tagbar')
+  " call dein#add('metakirby5/codi.vim')
+  " call dein#add('majutsushi/tagbar')
   call dein#add('vimwiki/vimwiki')
-  call dein#add('sjl/gundo.vim')
+  " call dein#add('sjl/gundo.vim')
 
   " Required
   call dein#end()
@@ -187,8 +200,47 @@ if dein#check_install()
 endif
 
 " === === === === === === === === === === === === === === === === === === ===
+"                                 Fixes
+" === === === === === === === === === === === === === === === === === === ===
+" Needed for python plugins
+" let g:python2_host_prog = '/usr/local/bin/python2'
+" let g:python3_host_prog = '/usr/local/bin/python'
+
+" Programs to use for evaluating Python code
+" Setting this here makes startup faster
+" Also required for plugins that use python
+" https://ricostacruz.com/til/neovim-with-python-on-osx
+let g:python_host_prog  = '/usr/local/bin/python2'
+let g:python3_host_prog = '/usr/local/bin/python3'
+
+" === === === === === === === === === === === === === === === === === === ===
 "                           Plugins configuration
 " === === === === === === === === === === === === === === === === === === ===
+
+" language servers
+" Automatically start language servers
+" let g:LanguageClient_autoStart = 1
+" let g:LanguageClient_serverCommands = {
+ "      \ 'javascript': [
+  "     \ '/usr/local/bin/javascript-typescript-stdio'],
+   "    \ 'typescript': [
+    "   \ '/usr/local/bin/javascript-typescript-stdio']
+     "  \}
+
+" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+" === snippets config ===
+ 
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-l>     <Plug>(neosnippet_expand_or_jump)
+smap <C-l>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-l>     <Plug>(neosnippet_expand_target)
+
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " === theme config ===
 
@@ -232,17 +284,13 @@ let g:deoplete#enable_at_startup = 1
 
 " End neoformat settings-------------------------------------------------------
 
-" === Ultisnips ===
-let g:UltiSnipsExpandTrigger="<C-l>"
-
 " === prettier ===
 nmap <Leader>p <Plug>(Prettier)
 let g:prettier#config#semi = 'false' " No semi-colons por favor
+let g:prettier#config#trailing_comma = 'none'
 
 " === rust.vim ===
 nnoremap <Leader>f :RustFmt<CR>
-
-" === elm ===
 
 " === ale ===
 let g:ale_linters = {'js': ['stylelint', 'eslint']}
@@ -253,7 +301,6 @@ let g:ale_lint_on_text_changed = 'never'
 " === vim auto save ===
 let g:auto_save = 1  " enable AutoSave on Vim startup
 let g:auto_save_silent = 1  " do not display the auto-save notification
-
 
 " === vim-visual-star-search ===
 " use ag for recursive searching so we don't find 10,000 useless hits inside node_modules
@@ -401,7 +448,4 @@ au BufNewFile,BufFilePre,BufReadPost,BufRead *.md set filetype=markdown
 " Highlight Javascript code in markdown
 let g:markdown_fenced_languages = ['javascript']
 
-" Spell check
-setlocal spell spelllang=en_us
-highlight clear SpellBad
-highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
+

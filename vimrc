@@ -48,10 +48,12 @@ set expandtab
 set shiftwidth=2
 set tabstop=2
 
+colorscheme nord
 " Configure gruvbox color scheme
-let g:gruvbox_contrast_light='hard'
-colorscheme gruvbox
-set background=dark    " Setting dark mode
+" let g:gruvbox_contrast_light='medium'
+" let g:gruvbox_contrast_dark='medium'
+" colorscheme gruvbox
+" set background=dark    " Setting dark mode
 
 " Set term inside vim to match tmux color scheme
 set term=xterm-256color-italic
