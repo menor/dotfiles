@@ -143,7 +143,7 @@ if dein#load_state('~/.config/nvim')
    call dein#add('pangloss/vim-javascript', {'on_ft': ['js', 'jsx', 'ts', 'tsx', 'html']})
   " call dein#add('mxw/vim-jsx', {'on_ft': ['js', 'jsx', 'ts', 'tsx', 'html']})
   " call dein#add('jelera/vim-javascript-syntax', {'on_ft': ['js', 'jsx', 'ts', 'tsx', 'html']})
-   call dein#add('othree/javascript-libraries-syntax.vim', {'on_ft': ['js', 'jsx', 'ts', 'tsx', 'html']})
+   " call dein#add('othree/javascript-libraries-syntax.vim', {'on_ft': ['js', 'jsx', 'ts', 'tsx', 'html']})
    call dein#add('mattn/emmet-vim')
    call dein#add('styled-components/vim-styled-components')
 
@@ -162,7 +162,7 @@ if dein#load_state('~/.config/nvim')
 
   " Linters and code formatters
    call dein#add('w0rp/ale')
-   call dein#add('sbdchd/neoformat')
+   " call dein#add('sbdchd/neoformat')
    call dein#add('prettier/vim-prettier')
 
   " Color Schemes & Interface enhancers
@@ -176,7 +176,7 @@ if dein#load_state('~/.config/nvim')
   call dein#add('tpope/vim-vinegar')
   " call dein#add('tpope/vim-obsession')
   " call dein#add('dhruvasagar/vim-prosession')
-  " call dein#add('tpope/vim-fugitive')
+  call dein#add('tpope/vim-fugitive')
   call dein#add('vim-scripts/vim-auto-save')
 
   " Utils
@@ -293,6 +293,7 @@ let g:prettier#config#trailing_comma = 'none'
 nnoremap <Leader>f :RustFmt<CR>
 
 " === ale ===
+let g:ale_completion_enabled = 1
 let g:ale_linters = {'js': ['stylelint', 'eslint']}
 let g:ale_fixers = {'javascript': ['eslint']}
 let g:ale_sign_column_always = 1

@@ -15,34 +15,32 @@ if dein#load_state('$HOME/.config/nvim')
   call dein#add('Shougo/dein.vim')                    " Let dein manage dein
   call dein#add('vim-scripts/vim-auto-save')          " Autosave
   call dein#add('christoomey/vim-tmux-navigator')     " Tmux & VIM love
-  call dein#add('tpope/vim-vinegar')     " Tmux & VIM love
+  call dein#add('tpope/vim-vinegar')
 
   " UI
   call dein#add('arcticicestudio/nord-vim')
  
-
   " Autocomplete
-  call dein#add('Shougo/deoplete.nvim')
+  " call dein#add('Shougo/deoplete.nvim')
   call dein#add('tpope/vim-commentary')
-
+  call dein#add('w0rp/ale')
+  call dein#add('prettier/vim-prettier')
 
   " Javascript
   call dein#add('pangloss/vim-javascript')
-  " Plugin to register the javascript-language-server autonmatically
-  call dein#add('ryanolsonx/vim-lsp-javascript')
   " call dein#add('carlitux/deoplete-ternjs')
   " call dein#add('ternjs/tern_for_vim', {'build': 'npm install -g tern'})
 
   " Typescript
-  call dein#add('HerringtonDarkholme/yats.vim')
-  call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
+  " call dein#add('HerringtonDarkholme/yats.vim')
+  " call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
   " Using nvim-typescript instead of the commented out code down here, it
   " still didn't work well in Jan 19 but keeping an eye on the language 
   " client implementation in the future
     " Language client
     call dein#add('autozimu/LanguageClient-neovim',{
       \ 'rev': 'next',
-      \ 'build': 'install.sh'
+      \ 'build': 'bash install.sh'
     \ })
 
     " Plugin to register the typescript-language-server autonmatically
