@@ -29,6 +29,8 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 set autoread
 au CursorHold * checktime
 
+set foldmethod=indent
+
 " ------------------------------------------------------------------------------
 "                               plugins
 " ------------------------------------------------------------------------------
@@ -58,6 +60,11 @@ else
   :cq
 endif
 
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 " ------------------------------------------------------------------------------
 "                             theme config
@@ -82,3 +89,8 @@ let g:auto_save_silent = 1
 
 " === deoplete ===
 let g:deoplete#enable_at_startup = 1
+
+" === prettier ===
+nmap <Leader>p <Plug>(Prettier)
+let g:prettier#config#semi = 'false' " No semi-colons por favor
+let g:prettier#config#trailing_comma = 'none'
