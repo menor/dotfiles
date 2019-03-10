@@ -74,8 +74,15 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
 let g:nord_underline = 1
-let g:nord_comment_brightness = 10
+set termguicolors " Needed for the comment brightness to work
+let g:nord_comment_brightness = 15
 let g:nord_uniform_diff_background = 1
+
+" https://github.com/arcticicestudio/nord-vim/issues/36#issuecomment-315519950
+augroup nord-overrides
+  autocmd!
+  autocmd ColorScheme nord highlight Folded gui=bold,italic guibg=#3B4252 guifg=#616E88
+augroup end
 
 colorscheme nord
 
