@@ -57,3 +57,5 @@
 
 	name = menor
 	email = josemenor@gmail.com
+[url "git@github.com:"]
+	insteadOf = https://github.com/

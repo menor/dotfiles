@@ -75,7 +75,8 @@ let g:nord_italic = 1
 let g:nord_italic_comments = 1
 let g:nord_underline = 1
 set termguicolors " Needed for the comment brightness to work
-let g:nord_comment_brightness = 15
+" commented out since it has been deprecated
+" let g:nord_comment_brightness = 15
 let g:nord_uniform_diff_background = 1
 
 " https://github.com/arcticicestudio/nord-vim/issues/36#issuecomment-315519950
@@ -94,6 +95,21 @@ colorscheme nord
 let g:auto_save = 1 " enable autosave on vim startup
 let g:auto_save_silent = 1
 
+" === coc ===
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver',
+  \ 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier']
+
+" === denite ===
+nnoremap <C-p> :<C-u>Denite file_rec<CR>
+nnoremap <leader>s :<C-u>Denite buffer<CR>
+nnoremap <leader>8 :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
+nnoremap <leader>/ :<C-u>Denite grep:. -mode=normal<CR>
+nnoremap <leader><Space>/ :<C-u>DeniteBufferDir grep:. -mode=normal<CR>
+
+" use ripgrep for searching
+call denite#custom#var('file_rec', 'command',
+    \ ['rg', '--files', '--vimgrep'])
+
 " === deoplete ===
 let g:deoplete#enable_at_startup = 1
 
@@ -101,3 +117,10 @@ let g:deoplete#enable_at_startup = 1
 nmap <Leader>p <Plug>(Prettier)
 let g:prettier#config#semi = 'false' " No semi-colons por favor
 let g:prettier#config#trailing_comma = 'none'
+
+" ------------------------------------------------------------------------------
+"                           keyboard shortcuts
+" ------------------------------------------------------------------------------
+
+" turn off search highlight
+nnoremap <silent><leader>c :nohlsearch<CR>
