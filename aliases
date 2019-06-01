@@ -15,3 +15,5 @@ alias tk='tmux kill-session -t'
 # Javascript alias
 alias pkg='cat package.json'
 
+# Apps
+alias jr='nb "/Users/menor/iCloud/journal/."'
