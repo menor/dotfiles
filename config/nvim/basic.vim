@@ -31,6 +31,28 @@ au CursorHold * checktime
 
 set foldmethod=indent
 
+" Share data between vim instances (:help shada)
+set shada='50,<1000,s100,h,n~/nvim/shada
+
+augroup shada
+  autocmd!
+  autocmd CursorHold * rshada|wshada
+augroup END
+
+" use an undo file
+set undofile
+" set a directory to store the undo history
+set undodir=~/.vimundo/
+
+" Autoclose
+" inoremap " ""<left>
+" inoremap ' ''<left>
+" inoremap ( ()<left>
+" inoremap [ []<left>
+" inoremap { {}<left>
+" inoremap {<CR> {<CR>}<ESC>O<TAB>
+" inoremap {;<CR> {<CR>};<ESC>O<TAB>
+
 " ------------------------------------------------------------------------------
 "                               plugins
 " ------------------------------------------------------------------------------
@@ -100,23 +122,26 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver',
   \ 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier']
 
 " === denite ===
-nnoremap <C-p> :<C-u>Denite file_rec<CR>
-nnoremap <leader>s :<C-u>Denite buffer<CR>
-nnoremap <leader>8 :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
-nnoremap <leader>/ :<C-u>Denite grep:. -mode=normal<CR>
-nnoremap <leader><Space>/ :<C-u>DeniteBufferDir grep:. -mode=normal<CR>
+" nnoremap <C-p> :<C-u>Denite file_rec<CR>
+" nnoremap <leader>s :<C-u>Denite buffer<CR>
+" nnoremap <leader>8 :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
+" nnoremap <leader>/ :<C-u>Denite grep:. -mode=normal<CR>
+" nnoremap <leader><Space>/ :<C-u>DeniteBufferDir grep:. -mode=normal<CR>
 
-" use ripgrep for searching
-call denite#custom#var('file_rec', 'command',
-    \ ['rg', '--files', '--vimgrep'])
+" " use ripgrep for searching
+" call denite#custom#var('file_rec', 'command',
+"     \ ['rg', '--files', '--vimgrep'])
 
 " === deoplete ===
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 3
 
 " === prettier ===
 nmap <Leader>p <Plug>(Prettier)
 let g:prettier#config#semi = 'false' " No semi-colons por favor
 let g:prettier#config#trailing_comma = 'none'
+
+" === ultiSnips ===
+let g:UltiSnipsSnippetDirectories=[expand("$HOME/.dotfiles/snippets")]
 
 " ------------------------------------------------------------------------------
 "                           keyboard shortcuts

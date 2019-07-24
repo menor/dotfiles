@@ -18,7 +18,7 @@ if dein#load_state('$HOME/.config/nvim')
   call dein#add('tpope/vim-vinegar')
 
   " search
-  call dein#add('Shougo/denite.nvim')
+  " call dein#add('Shougo/denite.nvim')
 
   " git
   call dein#add('tpope/vim-fugitive')
@@ -31,13 +31,18 @@ if dein#load_state('$HOME/.config/nvim')
     \ 'build': 'bash install.sh' 
   \ })
   call dein#add('tpope/vim-commentary')
-  call dein#add('w0rp/ale')
-  call dein#add('prettier/vim-prettier')
+  call dein#add('tpope/vim-surround')
+  " call dein#add('w0rp/ale')
   call dein#add('mattn/emmet-vim')
+
+  " Snippets
+  call dein#add('SirVer/ultisnips')
+  call dein#add('honza/vim-snippets')
 
   " Javascript
   call dein#add('pangloss/vim-javascript')
   call dein#add('mxw/vim-jsx')
+  call dein#add('prettier/vim-prettier', {'build': 'yarn install'})
 
   " Typescript
   call dein#add('leafgarland/typescript-vim') " Typescript syntax coloring
