@@ -20,6 +20,7 @@ brew install 'gist'
 brew install 'z'
 
 # Install improved versions of system utils
+brew install 'ctags'
 
 # A cat(1) clone with syntax highlighting and Git integration.
 brew install 'bat'
