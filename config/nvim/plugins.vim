@@ -1,4 +1,3 @@
-
 " Install the dein plugin manager and creates a plugin dir if they don't exist
 if (!isdirectory(expand("$HOME/.config/nvim/repos/github.com/Shougo/dein.vim")))
   call system(expand("mkdir -p $HOME/.config/nvim/repos/github.com"))
@@ -18,22 +17,26 @@ if dein#load_state('$HOME/.config/nvim')
   call dein#add('tpope/vim-vinegar')
 
   " search
-  " call dein#add('Shougo/denite.nvim')
+  call dein#add('Shougo/denite.nvim')
 
   " git
-  call dein#add('tpope/vim-fugitive')
+  " call dein#add('tpope/vim-fugitive')
 
   " UI
   call dein#add('arcticicestudio/nord-vim')
  
   " Autocomplete
   call dein#add('neoclide/coc.nvim', {
-    \ 'build': 'bash install.sh' 
+    \ 'build': 'bash install.sh',
+    \ 'merge':0,
+    \ 'rev': 'release'
   \ })
+
   call dein#add('tpope/vim-commentary')
   call dein#add('tpope/vim-surround')
-  " call dein#add('w0rp/ale')
+  call dein#add('w0rp/ale')
   call dein#add('mattn/emmet-vim')
+  call dein#add('jiangmiao/auto-pairs')
 
   " Snippets
   call dein#add('SirVer/ultisnips')
@@ -52,6 +55,9 @@ if dein#load_state('$HOME/.config/nvim')
   call dein#add('fatih/vim-go', {
     \ 'build': ':GoInstallBinaries'
   \ })
+
+  " Utils
+  call dein#add('vimwiki/vimwiki')
 
   " Required
   call dein#end()

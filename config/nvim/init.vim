@@ -436,7 +436,7 @@ let g:javascript_plugin_flow = 1 " enable flow syntax
 let g:codi#rightsplit=0
 let g:codi#rightalign=0
 
-" === vim reason plus ===
+" == vim reason plus ===
 " Needs npm i -g ocaml-language-server
 let g:LanguageClient_serverCommands = {
   \ 'reason': ['ocaml-language-server', '--stdio'],

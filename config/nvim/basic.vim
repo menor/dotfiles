@@ -7,7 +7,10 @@ set noswapfile               " Disable swapfiles
 set visualbell               " Use visual bell instead of beeping
 set number                   " Show line
 set cursorline
+set encoding=utf8
 
+
+set nocompatible						 " Required for vim wiki
 syntax on                    " Switch syntax highlighting on
 filetype indent plugin on    " Load filetype plugin automatically
 
@@ -32,26 +35,17 @@ au CursorHold * checktime
 set foldmethod=indent
 
 " Share data between vim instances (:help shada)
-set shada='50,<1000,s100,h,n~/nvim/shada
+" set shada='50,<1000,s100,h,n~/nvim/shada
 
-augroup shada
-  autocmd!
-  autocmd CursorHold * rshada|wshada
-augroup END
+" augroup shada
+  " autocmd!
+  " autocmd CursorHold * rshada|wshada
+" augroup END
 
 " use an undo file
 set undofile
 " set a directory to store the undo history
 set undodir=~/.vimundo/
-
-" Autoclose
-" inoremap " ""<left>
-" inoremap ' ''<left>
-" inoremap ( ()<left>
-" inoremap [ []<left>
-" inoremap { {}<left>
-" inoremap {<CR> {<CR>}<ESC>O<TAB>
-" inoremap {;<CR> {<CR>};<ESC>O<TAB>
 
 " ------------------------------------------------------------------------------
 "                               plugins
@@ -61,6 +55,7 @@ set undodir=~/.vimundo/
 if filereadable(expand("$HOME/.config/nvim/plugins.vim"))
   source $HOME/.config/nvim/plugins.vim
 endif
+
 
 
 " ------------------------------------------------------------------------------
@@ -97,7 +92,6 @@ let g:nord_italic = 1
 let g:nord_italic_comments = 1
 let g:nord_underline = 1
 set termguicolors " Needed for the comment brightness to work
-" commented out since it has been deprecated
 " let g:nord_comment_brightness = 15
 let g:nord_uniform_diff_background = 1
 
@@ -113,6 +107,9 @@ colorscheme nord
 "                             plugin config
 " ------------------------------------------------------------------------------
 
+" === ale ===
+let g:ale_linters = {'javascript': ['eslint']}
+
 " === vim autosave ===
 let g:auto_save = 1 " enable autosave on vim startup
 let g:auto_save_silent = 1
@@ -122,6 +119,7 @@ let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver',
   \ 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier']
 
 " === denite ===
+nmap ; :Denite buffer -split=floating -winrow=1<CR>
 " nnoremap <C-p> :<C-u>Denite file_rec<CR>
 " nnoremap <leader>s :<C-u>Denite buffer<CR>
 " nnoremap <leader>8 :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
@@ -143,7 +141,16 @@ let g:prettier#config#trailing_comma = 'none'
 " === ultiSnips ===
 let g:UltiSnipsSnippetDirectories=[expand("$HOME/.dotfiles/snippets")]
 
-" ------------------------------------------------------------------------------
+" === vimwiki ===
+let g:vimwiki_list = [
+      \ {'path': '$HOME/Dropbox/Aplicaciones/vimwiki',
+      \ 'syntax': 'markdown', 'ext': '.md'},
+      \ {'path': '$HOME/Dropbox/Aplicaciones/adawiki/wiki',
+      \ 'syntax': 'markdown', 'ext': '.md'}]
+
+" Fixes weird <cr> behaviour with markdown files
+" https://github.com/vimwiki/vimwiki/issues/345
+" let g:vimwiki_global_ext = 0
 "                           keyboard shortcuts
 " ------------------------------------------------------------------------------
 
