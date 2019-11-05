@@ -35,12 +35,12 @@ au CursorHold * checktime
 set foldmethod=indent
 
 " Share data between vim instances (:help shada)
-" set shada='50,<1000,s100,h,n~/nvim/shada
+set shada='50,<1000,s100,h,n~/nvim/shada
 
-" augroup shada
-  " autocmd!
-  " autocmd CursorHold * rshada|wshada
-" augroup END
+augroup shada
+  autocmd!
+  autocmd CursorHold * rshada|wshada
+augroup END
 
 " use an undo file
 set undofile
