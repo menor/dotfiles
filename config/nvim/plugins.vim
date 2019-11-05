@@ -52,6 +52,7 @@ if dein#load_state('$HOME/.config/nvim')
   call dein#add('fatih/vim-go', {
     \ 'build': ':GoInstallBinaries'
   \ })
+  call dein#add('sebdah/vim-delve')
 
   " Utils
   call dein#add('vimwiki/vimwiki')
