@@ -19,15 +19,12 @@ if dein#load_state('$HOME/.config/nvim')
   " search
   call dein#add('Shougo/denite.nvim')
 
-  " git
-  " call dein#add('tpope/vim-fugitive')
-
   " UI
   call dein#add('arcticicestudio/nord-vim')
  
   " Autocomplete
   call dein#add('neoclide/coc.nvim', {
-    \ 'build': 'bash install.sh',
+    \ 'build': 'install.sh',
     \ 'merge':0,
     \ 'rev': 'release'
   \ })
@@ -51,7 +48,7 @@ if dein#load_state('$HOME/.config/nvim')
   call dein#add('leafgarland/typescript-vim') " Typescript syntax coloring
   call dein#add('ianks/vim-tsx')              " jsx syntax coloring
 
-  " Go
+  " Golang
   call dein#add('fatih/vim-go', {
     \ 'build': ':GoInstallBinaries'
   \ })
