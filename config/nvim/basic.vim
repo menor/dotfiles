@@ -1,3 +1,6 @@
+" TODO: coc config
+" https://github.com/neoclide/coc.nvim#example-vim-configuration
+
 " Remap leader key to spacebar
 let mapleader=" "
 
@@ -115,20 +118,116 @@ let g:auto_save = 1 " enable autosave on vim startup
 let g:auto_save_silent = 1
 
 " === coc ===
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver',
-  \ 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier']
+let g:coc_global_extensions = [ 
+  \ 'coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
+  \ 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier'
+\ ]
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <C-d> <Plug>(coc-range-select)
+xmap <silent> <C-d> <Plug>(coc-range-select)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <leader>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <leader>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <leader>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <leader>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
 
 " === denite ===
 nmap ; :Denite buffer -split=floating -winrow=1<CR>
-" nnoremap <C-p> :<C-u>Denite file_rec<CR>
-" nnoremap <leader>s :<C-u>Denite buffer<CR>
-" nnoremap <leader>8 :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
-" nnoremap <leader>/ :<C-u>Denite grep:. -mode=normal<CR>
-" nnoremap <leader><Space>/ :<C-u>DeniteBufferDir grep:. -mode=normal<CR>
+nnoremap <C-p> :<C-u>Denite file_rec<CR>
+nnoremap <leader>b :<C-u>Denite buffer<CR>
+nnoremap <leader>8 :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
+nnoremap <leader>/ :<C-u>Denite grep:. -mode=normal<CR>
+nnoremap <leader><Space>/ :<C-u>DeniteBufferDir grep:. -mode=normal<CR>
 
-" " use ripgrep for searching
-" call denite#custom#var('file_rec', 'command',
-"     \ ['rg', '--files', '--vimgrep'])
+" use ripgrep for searching
+call denite#custom#var('file_rec', 'command',
+    \ ['rg', '--files', '--vimgrep'])
 
 " === deoplete ===
 let g:deoplete#enable_at_startup = 3
@@ -141,7 +240,17 @@ let g:prettier#config#trailing_comma = 'none'
 " === ultiSnips ===
 let g:UltiSnipsSnippetDirectories=[expand("$HOME/.dotfiles/snippets")]
 
-" === vimwiki ===
+" === vim go ===
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>rt <Plug>(go-run-tab)
+au FileType go nmap <leader>rs <Plug>(go-run-split)
+au FileType go nmap <leader>rv <Plug>(go-run-vertical)
+
+let g:go_term_mode = "split" " Open go terminals in split by default
+
+let g:go_term_height = 12
+ 
+ " === vimwiki ===
 let g:vimwiki_list = [
       \ {'path': '$HOME/Dropbox/Aplicaciones/vimwiki',
       \ 'syntax': 'markdown', 'ext': '.md'},
