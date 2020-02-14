@@ -15,5 +15,10 @@ alias tk='tmux kill-session -t'
 # Javascript alias
 alias pkg='cat package.json'
 
+# Docker
+alias dcu='docker-compose up'
+alias dcub='docker-compose up --build'
+alias dcd='docker-compose down'
+
 # Apps
 alias jr='nb "/Users/menor/iCloud/journal/."'
