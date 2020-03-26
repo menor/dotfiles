@@ -14,10 +14,11 @@ if dein#load_state('$HOME/.config/nvim')
   call dein#add('Shougo/dein.vim')                    " Let dein manage dein
   call dein#add('vim-scripts/vim-auto-save')          " Autosave
   call dein#add('christoomey/vim-tmux-navigator')     " Tmux & VIM love
-  call dein#add('tpope/vim-vinegar')
+  " call dein#add('tpope/vim-vinegar')
 
   " search
-  call dein#add('Shougo/denite.nvim')
+  " call dein#add('Shougo/denite.nvim')
+  call dein#add('junegunn/fzf.nvim')
 
   " UI
   call dein#add('arcticicestudio/nord-vim')
