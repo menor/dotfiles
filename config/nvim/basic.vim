@@ -1,6 +1,3 @@
-" TODO: coc config
-" https://github.com/neoclide/coc.nvim#example-vim-configuration
-
 " Remap leader key to spacebar
 let mapleader=" "
 
@@ -17,6 +14,15 @@ set nocompatible						 " Required for vim wiki
 syntax on                    " Switch syntax highlighting on
 filetype indent plugin on    " Load filetype plugin automatically
 
+" Settings to improve coc.nvim
+" https://github.com/neoclide/coc.nvim#example-vim-configuration
+set hidden                    " TextEdit might fail if hidden is not set
+set nowritebackup             " Needed by some servers
+set cmdheight=2               " More space for messages
+set updatetime=300            " Shorten it (default is 4000) for better experience
+set shortmess+=c              " Don't pass messages to |ins-completion-menu|.
+set signcolumn=yes            " To avoid shifting when errors appear
+
 " Configure indentation tabs = 2 spaces
 set expandtab
 set shiftwidth=2
@@ -24,6 +30,9 @@ set tabstop=2
 
 " display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
+
+" always display the status line
+set laststatus=2
 
 " Programs to use for evaluating Python code
 " Setting this here makes startup faster
@@ -58,8 +67,6 @@ set undodir=~/.vimundo/
 if filereadable(expand("$HOME/.config/nvim/plugins.vim"))
   source $HOME/.config/nvim/plugins.vim
 endif
-
-
 
 " ------------------------------------------------------------------------------
 "                           language server
@@ -119,8 +126,8 @@ let g:auto_save_silent = 1
 
 " === coc ===
 let g:coc_global_extensions = [ 
-  \ 'coc-tslint-plugin', 'coc-tsserver', 'coc-emmet',
-  \ 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier'
+  \ 'coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-lists',
+  \ 'coc-css', 'coc-html', 'coc-json', 'coc-prettier'
 \ ]
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
@@ -196,9 +203,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-" Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
 " Using CocList
 " Show all diagnostics
 nnoremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
@@ -218,24 +222,26 @@ nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
 
 " === denite ===
-nmap ; :Denite buffer -split=floating -winrow=1<CR>
-nnoremap <C-p> :<C-u>Denite file_rec<CR>
-nnoremap <leader>b :<C-u>Denite buffer<CR>
-nnoremap <leader>8 :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
-nnoremap <leader>/ :<C-u>Denite grep:. -mode=normal<CR>
-nnoremap <leader><Space>/ :<C-u>DeniteBufferDir grep:. -mode=normal<CR>
+" nmap ; :Denite buffer -split=floating -winrow=1<CR>
+" nnoremap <C-p> :<C-u>Denite file/rec<CR>
+" nnoremap <leader>b :<C-u>Denite buffer<CR>
+" nnoremap <leader>8 :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
+" nnoremap <leader>/ :<C-u>Denite grep:. -mode=normal<CR>
+" nnoremap <leader><Space>/ :<C-u>DeniteBufferDir grep:. -mode=normal<CR>
 
 " use ripgrep for searching
-call denite#custom#var('file_rec', 'command',
-    \ ['rg', '--files', '--vimgrep'])
+" call denite#custom#var('file/rec', 'command',
+    " \ ['rg', '--files', '--vimgrep'])
 
 " === deoplete ===
-let g:deoplete#enable_at_startup = 3
+" let g:deoplete#enable_at_startup = 3
 
 " === prettier ===
 nmap <Leader>p <Plug>(Prettier)
+let g:prettier#autoformat_config_present = 1 " Prefer project config if available
 let g:prettier#config#semi = 'false' " No semi-colons por favor
 let g:prettier#config#trailing_comma = 'none'
+let g:prettier#config#single_quote = 'true'
 
 " === ultiSnips ===
 let g:UltiSnipsSnippetDirectories=[expand("$HOME/.dotfiles/snippets")]
