@@ -265,7 +265,8 @@ let g:vimwiki_list = [
 
 " Fixes weird <cr> behaviour with markdown files
 " https://github.com/vimwiki/vimwiki/issues/345
-" let g:vimwiki_global_ext = 0
+let g:vimwiki_global_ext = 0
+
 "                           keyboard shortcuts
 " ------------------------------------------------------------------------------
 

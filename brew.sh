@@ -28,3 +28,60 @@ brew install 'bat'
 # Helps to pick paths out of bash
 brew install 'fpp'
 
+
+# Casks
+brew cask '1password'
+brew cask 'alfred'
+brew cask 'anki'
+brew cask 'appcleaner'
+brew cask 'brave-browser'
+brew cask 'calibre'
+brew cask 'canary'
+brew cask 'deepl'
+brew cask 'docker'
+brew cask 'drawio'
+brew cask 'dropbox'
+brew cask 'fantastical'
+brew cask 'firefox'
+brew cask 'flux'
+brew cask 'google-chrome'
+brew cask 'imageoptim'
+brew cask 'insomnia'
+brew cask 'iterm2'
+brew cask 'karabiner-elements'
+brew cask 'keka'
+brew cask 'kekadefaultapp' # Helper to make keka default uncompressinf
+brew cask 'keybase'
+brew cask 'macdown'
+brew cask 'mark-text'
+brew cask 'moom'
+brew cask 'mullvadvpn'
+brew cask 'omnidisksweeper'
+brew cask 'oversight'
+brew cask 'pdf-expert'
+brew cask 'sip'
+brew cask 'soulseek'
+brew cask 'spotify'
+brew cask 'sublime-text'
+brew cask 'telegram'
+brew cask 'transmit'
+brew cask 'tripmode'
+brew cask 'tunnelblick'
+brew cask 'visual-studio-code'
+brew cask 'vlc'
+brew cask 'vox'
+brew cask 'whatsapp'
+brew cask 'wire'
+brew cask 'xld'
+
+# Install manually
+# Affinity designer
+# BeFocused Pro
+# Firefox developer edition
+# Chrome Canary
+# Klib 
+# Reeder
+# The Archive
+# The Tagger
+# Things
+# Tunefab spotify music converter
