@@ -3,8 +3,10 @@
 	co = checkout
 	ma = checkout master
 	br = branch
+  db = branch -D
   aa = add --all
   ci = commit -v
+  am = commit --amend -v
 
   # Add and commit all the changes with verbose diff
   ca = !git add -A && git commit -av
@@ -53,9 +55,13 @@
 
 	default = current
 
+[fetch]
+    prune = true
+
 [user]
 
 	name = menor
 	email = josemenor@gmail.com
+
 [url "git@github.com:"]
 	insteadOf = https://github.com/
