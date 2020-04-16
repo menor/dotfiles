@@ -31,4 +31,5 @@ done
 # also link the modules directory
 ln -s ${preztodir}/modules ${configdir}/zsh
 
-########## TODO GIT VIM
+########## GIT
+ln -s ${dotdir}/git ${configdir}/git

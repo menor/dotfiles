@@ -3,9 +3,9 @@
 	co = checkout
 	ma = checkout master
 	br = branch
-  db = branch -D
+  bd = branch -D
   aa = add --all
-  ci = commit -v
+  c = commit -v
   am = commit --amend -v
 
   # Add and commit all the changes with verbose diff
