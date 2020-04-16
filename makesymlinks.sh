@@ -33,3 +33,8 @@ ln -s ${preztodir}/modules ${configdir}/zsh
 
 ########## GIT
 ln -s ${dotdir}/git ${configdir}/git
+
+########## KARABINER
+# This should run after karabiner installation sinc eit depends on the directory
+# being there, keep this in mind when creating the brew install file
+ln -s ${dotdir}/karabiner.json ${configdir}/karabiner
