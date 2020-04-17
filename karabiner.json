@@ -40,6 +40,32 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "Change right command to Hyper (cmd+ctrl+alt+shift).",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "right_command",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_command",
+                                        "modifiers": [
+                                            "left_shift",
+                                            "left_control",
+                                            "left_option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },
