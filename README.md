@@ -14,6 +14,9 @@ ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done
 ```
 
+## Tmux
+Tmux config needs _Tmux Plugin Manager_ to work, to install it you need to run `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm` (see [TPM Docs](https://github.com/tmux-plugins/tpm)
+
 ## What's included
 - Neovim configuration
 - Tmux configuration
