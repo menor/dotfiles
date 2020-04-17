@@ -45,4 +45,4 @@ ln -sv ${dotdir}/tmux/tmux.conf ~/.tmux.conf
 ########## KARABINER
 # This should run after karabiner installation sinc eit depends on the directory
 # being there, keep this in mind when creating the brew install file
-ln -sfv ${dotdir}/karabiner.json ${configdir}/karabiner
+ln -sfv ${dotdir}/karabiner/karabiner.json ${configdir}/karabiner
