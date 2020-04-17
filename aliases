@@ -2,9 +2,6 @@
 alias n='nvim'
 
 # Tmux
-# Hack to have tmux config on the .config dir, seems v3.1 will remove
-# the need for this https://github.com/tmux/tmux/issues/142#issuecomment-329946562
-alias tmux='tmux -f "$XDG_CONFIG_HOME"/tmux/.tmux.conf'
 alias tl='tmux ls'
 alias ta='tmux attach -t'
 alias tn='tmux new-session -s'

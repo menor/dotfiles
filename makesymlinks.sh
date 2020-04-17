@@ -34,8 +34,13 @@ ln -sv ${preztodir}/modules ${configdir}/zsh
 ln -sv ${dotdir}/git ${configdir}
 
 ########## TMUX
+# We need to have tmux config on the root, seems v3.1 will remove
+# the need for this https://github.com/tmux/tmux/issues/142#issuecomment-329946562
 mkdir ${configdir}/tmux
-ln -sv ${dotdir}/tmux/tmux.conf ${configdir}/tmux/.tmux.conf
+ln -sv ${dotdir}/tmux/tmux.conf ~/.tmux.conf
+
+# Clone tmux plugin manager
+# git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ########## KARABINER
 # This should run after karabiner installation sinc eit depends on the directory
