@@ -42,6 +42,11 @@ ln -sv ${dotdir}/tmux/tmux.conf ~/.tmux.conf
 # Clone tmux plugin manager
 # git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
+########## NEOVIM
+mkdir ${configdir}/nvim
+ln -sv ${dotdir}/nvim/init.vim ${configdir}/nvim/init.vim
+ln -sv ${dotdir}/nvim/plugins.vim ${configdir}/nvim/plugins.vim
+
 ########## KARABINER
 # This should run after karabiner installation sinc eit depends on the directory
 # being there, keep this in mind when creating the brew install file

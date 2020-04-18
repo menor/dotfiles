@@ -18,7 +18,7 @@ if dein#load_state('$HOME/.config/nvim')
 
   " search
   " call dein#add('Shougo/denite.nvim')
-  call dein#add('junegunn/fzf.nvim')
+  call dein#add('junegunn/fzf.vim')
 
   " UI
   call dein#add('arcticicestudio/nord-vim')
