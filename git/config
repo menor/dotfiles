@@ -6,7 +6,7 @@
   bd = branch -D
   aa = add --all
   c = commit -v
-  am = commit --amend -v
+  cam = commit --amend -v
 
   # Add and commit all the changes with verbose diff
   ca = !git add -A && git commit -av

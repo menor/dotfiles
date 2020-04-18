@@ -1,6 +1,3 @@
-# vim
-alias n='nvim'
-
 # Tmux
 alias tl='tmux ls'
 alias ta='tmux attach -t'
