@@ -18,6 +18,10 @@ brew install 'git'
 brew install 'ripgrep'
 brew install 'gist'
 brew install 'z'
+brew install 'diff-so-fancy'
+brew install 'neovim'
+brew install 'tmux'
+brew install 'tree'
 
 # Install improved versions of system utils
 brew install 'ctags'
@@ -27,4 +31,33 @@ brew install 'bat'
 
 # Helps to pick paths out of bash
 brew install 'fpp'
+
+
+# Casks
+#####################################
+
+brew cask install 'karabiner-elements'
+brew cask install 'iterm2'
+
+brew cask install '1password'
+brew cask install 'alfred'
+brew cask install 'deepl'
+brew cask install 'dropbox'
+brew cask install 'flux'
+brew cask install 'keka'
+brew cask install 'kekadefaultapp'
+brew cask install 'moom'
+brew cask install 'mullvadvpn'
+
+brew cask install 'brave-browser'
+brew cask install 'firefox'
+
+brew cask install 'whatsapp'
+
+brew cask install 'plexamp'
+brew cask install 'vox'
+brew cask install 'vlc'
+
+brew cask install 'anki'
+brew cask install 'calibre'
 

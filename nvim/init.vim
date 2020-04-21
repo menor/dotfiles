@@ -1,3 +1,4 @@
+" Thwse two lines are needed for neovim to work properly outside tmux
 let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 
@@ -12,8 +13,7 @@ set number                   " Show line
 set cursorline
 set encoding=utf8
 
-
-set nocompatible						 " Required for vim wiki
+set nocompatible " Required for vim wiki
 syntax on                    " Switch syntax highlighting on
 filetype indent plugin on    " Load filetype plugin automatically
 
@@ -37,11 +37,6 @@ set list listchars=tab:»·,trail:·,nbsp:·
 " always display the status line
 set laststatus=2
 
-" Programs to use for evaluating Python code
-" Setting this here makes startup faster
-let g:python_host_prog  = '/usr/local/bin/python2'
-let g:python3_host_prog = '/usr/local/bin/python3'
-
 " Check file after 4 secs of inactivity in normal mode,
 " so files are refreshed on outside changes
 set autoread
@@ -50,7 +45,7 @@ au CursorHold * checktime
 set foldmethod=indent
 
 " Share data between vim instances (:help shada)
-set shada='50,<1000,s100,h,n~/nvim/shada
+set shada='50,<1000,s100,h,n~/.tmp/nvim/shada
 
 augroup shada
   autocmd!
@@ -60,7 +55,7 @@ augroup END
 " use an undo file
 set undofile
 " set a directory to store the undo history
-set undodir=~/.vimundo/
+set undodir=~/nvim/.vimundo/
 
 " ------------------------------------------------------------------------------
 "                               plugins
@@ -72,33 +67,6 @@ if filereadable(expand("$HOME/.config/nvim/plugins.vim"))
 endif
 
 " ------------------------------------------------------------------------------
-"                           language server
-" ------------------------------------------------------------------------------
-
-" TODO: Uncomment all this section once node and language server are installed
-
-" Automatically start language servers
-" let g:LanguageClient_autoStart = 1
-
-" Minimal LSP configuration for JavaScript
-" let g:LanguageClient_serverCommands = {}
-" if executable('javascript-typescript-stdio')
-"  let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
-"  let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
-  " Use LanguageServer for omnifunc completion
-"  autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
-"else
-"  echo "javascript-typescript-stdio not installed!\n"
-"  :cq
-"endif
-
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-" Or map each action separately
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
-" ------------------------------------------------------------------------------
 "                             theme config
 " ------------------------------------------------------------------------------
 
@@ -106,8 +74,6 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
 let g:nord_underline = 1
-set termguicolors " Needed for the comment brightness to work
-" let g:nord_comment_brightness = 15
 let g:nord_uniform_diff_background = 1
 
 " https://github.com/arcticicestudio/nord-vim/issues/36#issuecomment-315519950
@@ -249,7 +215,7 @@ let g:prettier#config#trailing_comma = 'none'
 let g:prettier#config#single_quote = 'true'
 
 " === ultiSnips ===
-let g:UltiSnipsSnippetDirectories=[expand("$HOME/.dotfiles/snippets")]
+" let g:UltiSnipsSnippetDirectories=[expand("$HOME/.dotfiles/snippets")]
 
 " === vim go ===
 au FileType go nmap <leader>r <Plug>(go-run)
