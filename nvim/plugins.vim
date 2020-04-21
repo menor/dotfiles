@@ -12,9 +12,9 @@ if dein#load_state('$HOME/.config/nvim')
 
   " System 
   call dein#add('Shougo/dein.vim')                    " Let dein manage dein
-  call dein#add('vim-scripts/vim-auto-save')          " Autosave
+  call dein#add('907th/vim-auto-save')          " Autosave
   call dein#add('christoomey/vim-tmux-navigator')     " Tmux & VIM love
-  " call dein#add('tpope/vim-vinegar')
+  call dein#add('tpope/vim-vinegar')
 
   " search
   " call dein#add('Shougo/denite.nvim')
@@ -37,8 +37,8 @@ if dein#load_state('$HOME/.config/nvim')
   call dein#add('jiangmiao/auto-pairs')
 
   " Snippets
-  call dein#add('SirVer/ultisnips')
-  call dein#add('honza/vim-snippets')
+  " call dein#add('SirVer/ultisnips')
+  " call dein#add('honza/vim-snippets')
 
   " Javascript
   call dein#add('pangloss/vim-javascript')

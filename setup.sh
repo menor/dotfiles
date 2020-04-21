@@ -40,7 +40,7 @@ mkdir ${configdir}/tmux
 ln -sv ${dotdir}/tmux/tmux.conf ~/.tmux.conf
 
 # Clone tmux plugin manager
-# git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ########## NEOVIM
 mkdir ${configdir}/nvim
@@ -51,3 +51,8 @@ ln -sv ${dotdir}/nvim/plugins.vim ${configdir}/nvim/plugins.vim
 # This should run after karabiner installation sinc eit depends on the directory
 # being there, keep this in mind when creating the brew install file
 ln -sfv ${dotdir}/karabiner/karabiner.json ${configdir}/karabiner
+
+########## OSX
+# Key speeds
+defaults write -g InitialKeyRepeat -int 15 # normal minimum is 15 (225 ms)
+defaults write -g KeyRepeat -int 2         # normal minimum is 3 (30 ms)
