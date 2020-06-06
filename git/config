@@ -41,6 +41,7 @@
 
 	editor = /usr/local/bin/nvim
 	excludesfile = ~/.config/git/.gitignore_global
+	ignorecase = false
 
 [credential]
 
@@ -59,9 +60,13 @@
     prune = true
 
 [user]
-
 	name = menor
 	email = josemenor@gmail.com
 
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+
+# Use a different config for work projects
+# https://stackoverflow.com/a/43654115
+[includeIf "gitdir:~/work/"]
+    path = ~/work/.gitconfig
