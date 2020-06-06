@@ -2,8 +2,7 @@
 let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 
-" Remap leader key to spacebar
-let mapleader=" "
+let mapleader=" "            " Remap leader key to spacebar
 
 set autoread                 " Updates file on external changes
 set nobackup                 " Don't backup files before saving
@@ -13,18 +12,19 @@ set number                   " Show line
 set cursorline
 set encoding=utf8
 
-set nocompatible " Required for vim wiki
+set nocompatible             " Required for vim wiki
 syntax on                    " Switch syntax highlighting on
 filetype indent plugin on    " Load filetype plugin automatically
+set foldmethod=indent
 
 " Settings to improve coc.nvim
 " https://github.com/neoclide/coc.nvim#example-vim-configuration
-set hidden                    " TextEdit might fail if hidden is not set
-set nowritebackup             " Needed by some servers
-set cmdheight=2               " More space for messages
-set updatetime=300            " Shorten it (default is 4000) for better experience
-set shortmess+=c              " Don't pass messages to |ins-completion-menu|.
-set signcolumn=yes            " To avoid shifting when errors appear
+set hidden                   " TextEdit might fail if hidden is not set
+set nowritebackup            " Needed by some servers
+set cmdheight=2              " More space for messages
+set updatetime=300           " Shorten it (default is 4000) for better experience
+set shortmess+=c             " Don't pass messages to |ins-completion-menu|.
+set signcolumn=yes           " To avoid shifting when errors appear
 
 " Configure indentation tabs = 2 spaces
 set expandtab
@@ -42,8 +42,6 @@ set laststatus=2
 set autoread
 au CursorHold * checktime
 
-set foldmethod=indent
-
 " Share data between vim instances (:help shada)
 set shada='50,<1000,s100,h,n~/.tmp/nvim/shada
 
@@ -52,10 +50,9 @@ augroup shada
   autocmd CursorHold * rshada|wshada
 augroup END
 
-" use an undo file
-set undofile
+set undofile                 " use an undo file
 " set a directory to store the undo history
-set undodir=~/nvim/.vimundo/
+set undodir=~/.tmp/nvim/.vimundo/
 
 " ------------------------------------------------------------------------------
 "                               plugins
@@ -67,20 +64,41 @@ if filereadable(expand("$HOME/.config/nvim/plugins.vim"))
 endif
 
 " ------------------------------------------------------------------------------
+"                             keybindings
+" ------------------------------------------------------------------------------
+
+" Moving through buffers, inspired by unimpaired.vim plugin
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
+
+" Moving through tabs
+" For moving to previous and next use the default gT gt
+nnoremap <silent> [t :tabfir<CR>
+nnoremap <silent> ]t :tabl<CR>
+
+nnoremap <silent> tn :tabe<CR>
+nnoremap <silent> tc :tabc<CR>
+nnoremap <silent> tC :tabo<CR>
+
+" ------------------------------------------------------------------------------
 "                             theme config
 " ------------------------------------------------------------------------------
 
 " nord
+" https://www.nordtheme.com/docs/ports/vim/configuration
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
 let g:nord_underline = 1
 let g:nord_uniform_diff_background = 1
+let g:nord_cursor_line_number_background = 1
 
 " https://github.com/arcticicestudio/nord-vim/issues/36#issuecomment-315519950
-augroup nord-overrides
-  autocmd!
-  autocmd ColorScheme nord highlight Folded gui=bold,italic guibg=#3B4252 guifg=#616E88
-augroup end
+" augroup nord-overrides
+  " autocmd!
+  " autocmd ColorScheme nord highlight Folded gui=bold,italic guibg=#3B4252 guifg=#FF0000
+" augroup end
 
 colorscheme nord
 
@@ -135,8 +153,9 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" disabled until I find a better shortcut (using <leader>f for fzf)
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -192,20 +211,15 @@ nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
 
-" === denite ===
-" nmap ; :Denite buffer -split=floating -winrow=1<CR>
-" nnoremap <C-p> :<C-u>Denite file/rec<CR>
-" nnoremap <leader>b :<C-u>Denite buffer<CR>
-" nnoremap <leader>8 :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
-" nnoremap <leader>/ :<C-u>Denite grep:. -mode=normal<CR>
-" nnoremap <leader><Space>/ :<C-u>DeniteBufferDir grep:. -mode=normal<CR>
+" === fzf ===
+" Needed when fzf is installed via homebrew
+" https://github.com/junegunn/fzf.vim/issues/210#issuecomment-341531470
+set rtp+=/usr/local/opt/fzf
 
-" use ripgrep for searching
-" call denite#custom#var('file/rec', 'command',
-    " \ ['rg', '--files', '--vimgrep'])
+" Ignore git tracked files by default
+nnoremap <silent> <leader>f  :<C-u>GFiles<CR> 
+nnoremap <silent> <leader>fg :<C-u>Files<CR>
 
-" === deoplete ===
-" let g:deoplete#enable_at_startup = 3
 
 " === prettier ===
 nmap <Leader>p <Plug>(Prettier)
@@ -215,7 +229,7 @@ let g:prettier#config#trailing_comma = 'none'
 let g:prettier#config#single_quote = 'true'
 
 " === ultiSnips ===
-" let g:UltiSnipsSnippetDirectories=[expand("$HOME/.dotfiles/snippets")]
+let g:UltiSnipsSnippetDirectories=[expand("$HOME/.dotfiles/snippets")]
 
 " === vim go ===
 au FileType go nmap <leader>r <Plug>(go-run)
@@ -231,14 +245,11 @@ let g:go_term_height = 12
 let g:vimwiki_list = [
       \ {'path': '$HOME/Dropbox/Aplicaciones/vimwiki',
       \ 'syntax': 'markdown', 'ext': '.md'},
-      \ {'path': '$HOME/Dropbox/Aplicaciones/adawiki/wiki',
+      \ {'path': '$HOME/Dropbox/Aplicaciones/platformwiki',
       \ 'syntax': 'markdown', 'ext': '.md'}]
 
 " Fixes weird <cr> behaviour with markdown files
 " https://github.com/vimwiki/vimwiki/issues/345
-" let g:vimwiki_global_ext = 0
-"                           keyboard shortcuts
-" ------------------------------------------------------------------------------
+let g:vimwiki_global_ext = 0
 
-" turn off search highlight
 nnoremap <silent><leader>c :nohlsearch<CR>
