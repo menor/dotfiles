@@ -65,7 +65,6 @@ brew cask install 'telegram'
 brew cask install 'plexamp'
 brew cask install 'vox'
 brew cask install 'vlc'
-brew cask install 'spotify'
 brew cask install 'soulseek'
 
 brew cask install 'anki'

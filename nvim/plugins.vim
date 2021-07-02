@@ -1,68 +1,59 @@
-" Install the dein plugin manager and creates a plugin dir if they don't exist
-if (!isdirectory(expand("$HOME/.config/nvim/repos/github.com/Shougo/dein.vim")))
-  call system(expand("mkdir -p $HOME/.config/nvim/repos/github.com"))
-  call system(expand("git clone https://github.com/Shougo/dein.vim $HOME/.config/nvim/repos/github.com/Shougo/dein.vim"))
+" Install minpac plugin manager and creates a plugin dir if they don't exist
+if (!isdirectory(expand("$HOME/.config/nvim/pack/minpac/opt")))
+  call system(expand("mkdir -p $HOME/.config/nvim/pack/minpac/opt"))
+  call system(expand("git clone https://github.com/k-takata/minpac.git $HOME/.config/nvim/pack/minpac/opt/minpac"))
 endif
 
-" Add the dein installation directory into the runtimepath
-set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
+packadd minpac
+call minpac#init()
 
-if dein#load_state('$HOME/.config/nvim')
-  call dein#begin(expand('~/.config/nvim'))
+" System 
+call minpac#add('907th/vim-auto-save')              " Autosave
+call minpac#add('christoomey/vim-tmux-navigator')   " Tmux & VIM love
+call minpac#add('tpope/vim-vinegar')
 
-  " System 
-  call dein#add('Shougo/dein.vim')                  " Let dein manage dein
-  call dein#add('907th/vim-auto-save')              " Autosave
-  call dein#add('christoomey/vim-tmux-navigator')   " Tmux & VIM love
-  call dein#add('tpope/vim-vinegar')
-
-  " search
+" search
 "  call dein#add('junegunn/fzf') I think is not needed since we rely in the
 "  system one, remove the line once I am sure
-  call dein#add('junegunn/fzf.vim')
+  " call dein#add('junegunn/fzf.vim')
 
-  " UI
-  call dein#add('arcticicestudio/nord-vim')
+" UI
+call minpac#add('arcticicestudio/nord-vim')
  
-  " Autocomplete
-  call dein#add('neoclide/coc.nvim', {
-    \ 'build': 'install.sh',
-    \ 'merge':0,
-    \ 'rev': 'release'
-  \ })
+" Autocomplete
+call minpac#add('neoclide/coc.nvim', {
+  \ 'rev': 'release'
+\ })
 
-  call dein#add('tpope/vim-commentary')
-  call dein#add('tpope/vim-surround')
-  call dein#add('w0rp/ale')
-  call dein#add('mattn/emmet-vim')
-  call dein#add('jiangmiao/auto-pairs')
+call minpac#add('tpope/vim-commentary')
+call minpac#add('tpope/vim-surround')
+" call minpac#add('w0rp/ale')
+" call minpac#add('mattn/emmet-vim')
+" call minpac#add('jiangmiao/auto-pairs')
 
-  " Snippets
-  call dein#add('sirver/ultisnips')
-  call dein#add('honza/vim-snippets')
+" Snippets
+" call dein#add('sirver/ultisnips')
+" call dein#add('honza/vim-snippets')
 
   " Javascript
-  call dein#add('pangloss/vim-javascript')
-  call dein#add('mxw/vim-jsx')
-  call dein#add('prettier/vim-prettier', {'build': 'yarn install'})
-  call dein#add('styled-components/vim-styled-components')
+call minpac#add('pangloss/vim-javascript')
+call minpac#add('maxmellon/vim-jsx-pretty')
+" call minpac#add('prettier/vim-prettier', {'do': 'yarn install'})
+call minpac#add('styled-components/vim-styled-components')
 
-  " Typescript
-  call dein#add('leafgarland/typescript-vim')  " Typescript syntax coloring
-  call dein#add('ianks/vim-tsx')               " jsx syntax coloring
+" Svelte
+call minpac#add('evanleck/vim-svelte')
 
-  " Golang
-  call dein#add('fatih/vim-go', {
-    \ 'build': ':GoInstallBinaries'
-  \ })
-  call dein#add('sebdah/vim-delve')
+" Typescript
+call minpac#add('leafgarland/typescript-vim')  " Typescript syntax coloring
+call minpac#add('peitalin/vim-jsx-typescript') " jsx syntax coloring
 
-  " Utils
-  call dein#add('vimwiki/vimwiki')
-  call dein#add('tpope/vim-fugitive')
+" Golang
+" call dein#add('fatih/vim-go', {
+  " \ 'build': ':GoInstallBinaries'
+" \ })
+" call dein#add('sebdah/vim-delve')
 
-  " Required
-  call dein#end()
-  call dein#save_state()
-endif
-
+" Utils
+" call dein#add('vimwiki/vimwiki')
+" call dein#add('tpope/vim-fugitive')
