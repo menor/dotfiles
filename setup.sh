@@ -30,6 +30,10 @@ done
 # also link the modules directory
 ln -sv ${preztodir}/modules ${configdir}/zsh
 
+########## ZSH (Vanilla instalation with no prezto)
+
+curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+
 ########## GIT
 ln -sv ${dotdir}/git ${configdir}
 
@@ -56,3 +60,5 @@ ln -sfv ${dotdir}/karabiner/karabiner.json ${configdir}/karabiner
 # Key speeds
 defaults write -g InitialKeyRepeat -int 15 # normal minimum is 15 (225 ms)
 defaults write -g KeyRepeat -int 2         # normal minimum is 3 (30 ms)
+
+
