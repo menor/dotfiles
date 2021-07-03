@@ -56,6 +56,10 @@ ln -sv ${dotdir}/nvim/plugins.vim ${configdir}/nvim/plugins.vim
 # being there, keep this in mind when creating the brew install file
 ln -sfv ${dotdir}/karabiner/karabiner.json ${configdir}/karabiner
 
+########## BAT
+mkdir ${configdir}/bat
+ln -sv ${dotdir}/bat/config ${configdir}/bat/config
+
 ########## OSX
 # Key speeds
 defaults write -g InitialKeyRepeat -int 15 # normal minimum is 15 (225 ms)
