@@ -78,6 +78,9 @@ nnoremap <silent> tn :tabe<CR>
 nnoremap <silent> tc :tabc<CR>
 nnoremap <silent> tC :tabo<CR>
 
+" Clear highlighted search
+nnoremap <silent><leader>c :nohlsearch<CR>
+
 " ------------------------------------------------------------------------------
 "                             theme config
 " ------------------------------------------------------------------------------
@@ -96,18 +99,27 @@ colorscheme nord
 "                             plugin config
 " ------------------------------------------------------------------------------
 
-" === ale ===
-" let g:ale_linters = {'javascript': ['eslint']}
-
 " === vim autosave ===
 let g:auto_save = 1 " enable autosave on vim startup
 let g:auto_save_silent = 1
 
+" === telescope ===
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+
+" set telescope preview layout to be vertical
+:lua require("telescope").setup { defaults = { layout_strategy = "vertical" } }
+
+" === ale ===
+" let g:ale_linters = {'javascript': ['eslint']}
+
 " === coc ===
-let g:coc_global_extensions = [ 
-  \ 'coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-lists',
-  \ 'coc-css', 'coc-html', 'coc-json', 'coc-prettier'
-\ ]
+" let g:coc_global_extensions = [ 
+  " \ 'coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-lists',
+  " \ 'coc-css', 'coc-html', 'coc-json', 'coc-prettier'
+" \ ]
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -116,25 +128,25 @@ let g:coc_global_extensions = [
 " inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" nmap <silent> [g <Plug>(coc-diagnostic-prev)
+" nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+" function! s:show_documentation()
+  " if (index(['vim','help'], &filetype) >= 0)
+    " execute 'h '.expand('<cword>')
+  " else
+    " call CocAction('doHover')
+  " endif
+" endfunction
 
 " Highlight symbol under cursor on CursorHold
 " autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -204,7 +216,7 @@ endfunction
 " === fzf ===
 " Needed when fzf is installed via homebrew
 " https://github.com/junegunn/fzf.vim/issues/210#issuecomment-341531470
-set rtp+=/usr/local/opt/fzf
+" set rtp+=/usr/local/opt/fzf
 
 " Ignore git tracked files by default
 " nnoremap <silent> <leader>f  :<C-u>GFiles<CR> 
@@ -219,7 +231,7 @@ set rtp+=/usr/local/opt/fzf
 " let g:prettier#config#single_quote = 'true'
 
 " === svelte ===
-let g:svelte_preprocessors = ['typescript']
+" let g:svelte_preprocessors = ['typescript']
 
 " === ultiSnips ===
 " let g:UltiSnipsSnippetDirectories=[expand("$HOME/.dotfiles/snippets")]
@@ -245,4 +257,3 @@ let g:svelte_preprocessors = ['typescript']
 " https://github.com/vimwiki/vimwiki/issues/345
 " let g:vimwiki_global_ext = 0
 
-nnoremap <silent><leader>c :nohlsearch<CR>
