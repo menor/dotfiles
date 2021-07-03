@@ -45,6 +45,10 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
 
+" Open URL under cursor with browser
+" https://stackoverflow.com/a/67890996
+nnoremap <silent> gx :
+      \ execute 'silent! !open ' . shellescape(expand('<cWORD>'), 1)<cr>
 " ------------------------------------------------------------------------------
 "                               plugins
 " ------------------------------------------------------------------------------
