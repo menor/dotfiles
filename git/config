@@ -73,3 +73,5 @@
 
 [includeIf "gitdir:~/glitch/"]
   path = ~/glitch/.gitconfig
+[init]
+	defaultBranch = main
