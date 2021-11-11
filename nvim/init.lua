@@ -49,6 +49,13 @@ opt.termguicolors = true
 
 local plugins = require "plugins"
 
+-- Do not source the default filetype.vim
+-- Uses filetype.nvim plugin instead
+-- Speeds up nvim initialization 
+-- Seems this line won't be needed after nvim 0.6.0
+-- https://github.com/nathom/filetype.nvim#usage
+vim.g.did_load_filetypes = 1
+
 ------------------------------------ theme -------------------------------------
 
 -- nord
