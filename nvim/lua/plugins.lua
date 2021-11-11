@@ -12,6 +12,8 @@ require 'paq-nvim' {
   'tpope/vim-commentary',
   'tpope/vim-surround',
 
+  'nathom/filetype.nvim', -- speed up nvim initialization
+
   -- fuzy finding
   'nvim-lua/plenary.nvim',
   'nvim-telescope/telescope.nvim',
@@ -25,14 +27,15 @@ require 'paq-nvim' {
 
   -- autocompletion
   'neovim/nvim-lspconfig', -- includes configs for most language servers
+  'nvim-treesitter/nvim-treesitter',
 
   -- cmp is what handles the autocompletion, it uses neovim lsp
   -- underneath to accomplish that.
-  -- 'hrsh7th/nvim-cmp',
+  'hrsh7th/nvim-cmp',
   -- below are the completion sources for nvim-cmp
-  -- 'hrsh7th/cmp-nvim-lsp',
-  -- 'hrsh7th/cmp-buffer',
-  -- 'hrsh7th/cmp-path',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-path',
 
   -- 'windwp/nvim-autopairs',
 }
