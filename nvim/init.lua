@@ -49,13 +49,6 @@ opt.termguicolors = true
 
 local plugins = require "plugins"
 
--- Do not source the default filetype.vim
--- Uses filetype.nvim plugin instead
--- Speeds up nvim initialization 
--- Seems this line won't be needed after nvim 0.6.0
--- https://github.com/nathom/filetype.nvim#usage
-vim.g.did_load_filetypes = 1
-
 ------------------------------------ theme -------------------------------------
 
 -- nord
@@ -69,9 +62,8 @@ g.nord_cursor_line_number_background = 1
 cmd 'colorscheme nord'  
 
 -------------------------------- plugins config ---------------------------------
--- vim autosave
--- g.auto_save = 1           -- enable autosave on vim startup
--- g.auto_save_silent = 1
+
+-- Autosave
 
 local autosave = require('autosave')
 
@@ -86,14 +78,26 @@ autosave.setup(
     },
   }
 )
+-- Filetype
+
+-- Do not source the default filetype.vim
+-- Uses filetype.nvim plugin instead
+-- Speeds up nvim initialization 
+-- Seems this line won't be needed after nvim 0.6.0
+-- https://github.com/nathom/filetype.nvim#usage
+vim.g.did_load_filetypes = 1
 
 
--- treesitter
--- local ts = require("nvim-treesitter.configs")
--- ts.setup({
-  -- ensure_installed = "maintained",
-  -- highlight = { enable = true }
--- })
+-- Treesitter
+
+require("nvim-treesitter.configs").setup({
+  ensure_installed = "maintained",
+  highlight = { enable = true },
+  -- Use treesitter to autoclose and autorename html tag
+  autotag = {
+    enable = true
+  },
+})
 
 -- lspconfig
 -- https://blog.inkdrop.app/how-to-set-up-neovim-0-5-modern-plugins-lsp-treesitter-etc-542c3d9c9887
