@@ -27,7 +27,8 @@ require 'paq-nvim' {
 
   -- autocompletion
   'neovim/nvim-lspconfig', -- includes configs for most language servers
-  'nvim-treesitter/nvim-treesitter',
+  {'nvim-treesitter/nvim-treesitter', run=':TSUpdate'},
+  "windwp/nvim-ts-autotag", -- autoclose html tags using treesitter
 
   -- cmp is what handles the autocompletion, it uses neovim lsp
   -- underneath to accomplish that.
