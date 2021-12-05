@@ -87,7 +87,6 @@ autosave.setup(
 -- https://github.com/nathom/filetype.nvim#usage
 vim.g.did_load_filetypes = 1
 
-
 -- Treesitter
 
 require("nvim-treesitter.configs").setup({
@@ -139,18 +138,18 @@ nvim_lsp.tsserver.setup {
 require'lspconfig'.gopls.setup{}
 
 -- nvim-cmp
--- local cmp = require('cmp').setup({
-  -- sources = {
-    -- { name = 'buffer' },
-    -- { name = 'nvim_lsp' },
-    -- { name = 'path' },
-  -- }
--- })
+local cmp = require('cmp').setup({
+  sources = {
+    { name = 'buffer' },
+    { name = 'nvim_lsp' },
+    { name = 'path' },
+  }
+})
 
 -- The nvim-cmp almost supports LSP's capabilities
 -- so You should advertise it to LSP servers..
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- telescope
 map('n', '<leader>ff', ':Telescope find_files<CR>', {noremap = true, silent = true})
@@ -194,3 +193,6 @@ map('n', 'tC', ':tabo<CR>', {noremap = true, silent = true})
 
 -- Clear highlighted search
 map('n', '<leader>c', ':nohlsearch<CR>', {noremap = true, silent = true})
+
+-- Sane mappings
+map('n', 'Y', 'y$', {noremap = true, silent = true})
