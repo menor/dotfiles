@@ -3,9 +3,15 @@
 -- we use Paq as a package manager since it is written in Lua
 -- we need to install it first https://github.com/savq/paq-nvim 
 -- you can run :PaqSync to install, clean and update packages in one go
-require 'paq-nvim' {
-  'savq/paq-nvim',
-  -- '907th/vim-auto-save',
+-- Bootstrap Paq when needed
+local fn = vim.fn
+local install_path = fn.stdpath("data") .. "/site/pack/paqs/start/paq-nvim"
+
+if fn.empty(fn.glob(install_path)) > 0 then
+  fn.system({ "git", "clone", "--depth=1", "https://github.com/savq/paq-nvim.git", install_path })
+end
+
+require 'paq' {
   'pocco81/autosave.nvim',
   'christoomey/vim-tmux-navigator',   -- tmux & vim love
   'tpope/vim-vinegar',
@@ -18,12 +24,11 @@ require 'paq-nvim' {
   'nvim-lua/plenary.nvim',
   'nvim-telescope/telescope.nvim',
 
-  -- for improved syntax highlighting, for how to install language parsers
-  -- check https://github.com/nvim-treesitter/nvim-treesitter#language-parsers
-  -- "nvim-treesitter/nvim-treesitter",
-
   -- UI
   'arcticicestudio/nord-vim',
+
+  -- CSS
+  'norcalli/nvim-colorizer.lua',
 
   -- autocompletion
   'neovim/nvim-lspconfig', -- includes configs for most language servers
