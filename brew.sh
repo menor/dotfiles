@@ -59,7 +59,6 @@ brew cask install 'brave-browser'
 brew cask install 'firefox'
 brew cask install 'transmit'
 
-brew cask install 'whatsapp'
 brew cask install 'telegram'
 
 brew cask install 'plexamp'
