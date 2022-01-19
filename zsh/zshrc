@@ -80,14 +80,18 @@ export DENOPATH=$HOME/.deno
 export DENOBIN=$DENOPATH/bin
 export PATH=$PATH:$DENOBIN
 
+export CMAKEPATH="/Applications/CMake.app/Contents/bin"
+export PATH=$PATH:$CMAKEPATH
+
+export WASMBINPATH=$HOME/code/wasm/wabt/bin
+export PATH=$PATH:$WASMBINPATH
+
 # Alias
 # -----------------------------------------------------------------------------
 source $DOTDIR/aliases
 
-# Added by nvm
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Needed by nvm https://github.com/Schniz/fnm#zsh
+eval "$(fnm env --use-on-cd)"
 
 export NVIMCONFIG=$HOME/.config/nvim
 export NVIMDATA=$HOME/.local/share/nvim
