@@ -4,5 +4,8 @@
 -- npm i -g typescript typescript-language-server
 -- npm i -g vscode-langservers-extracted 
 require("plugins")
-require("legacy")
+require("options")
+-- require("legacy")
+require("mappings")
+
 
