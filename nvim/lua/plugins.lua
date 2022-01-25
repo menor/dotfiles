@@ -1,49 +1,117 @@
------------------------------------ plugins -----------------------------------
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
 
--- we use Paq as a package manager since it is written in Lua
--- we need to install it first https://github.com/savq/paq-nvim 
--- you can run :PaqSync to install, clean and update packages in one go
--- Bootstrap Paq when needed
 local fn = vim.fn
-local install_path = fn.stdpath("data") .. "/site/pack/paqs/start/paq-nvim"
-
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({ "git", "clone", "--depth=1", "https://github.com/savq/paq-nvim.git", install_path })
+  packer_bootstrap = fn.system({
+    "git",
+    "clone",
+    "--depth",
+    "1",
+    "https://github.com/wbthomason/packer.nvim",
+    install_path,
+  })
+end
+vim.api.nvim_command("packadd packer.nvim")
+-- returns the require for use in `config` parameter of packer's use
+-- expects the name of the config file
+function get_setup(name)
+  return string.format('require("setup/%s")', name)
 end
 
-require 'paq' {
-  'pocco81/autosave.nvim',
-  'christoomey/vim-tmux-navigator',   -- tmux & vim love
-  'tpope/vim-vinegar',
-  'tpope/vim-commentary',
-  'tpope/vim-surround',
+return require("packer").startup({
+  function(use)
+    -- Packer can manage itself
+    use('wbthomason/packer.nvim')
+    use({
+      'pocco81/autosave.nvim',
+      config = get_setup('autosave')
+    })
+   -- UI
+   use({
+     'arcticicestudio/nord-vim',
+      config = get_setup('nord')
+   })
 
-  'nathom/filetype.nvim', -- speed up nvim initialization
+   -- fuzy finding
+   use({
+      "nvim-telescope/telescope.nvim",
+      module = "telescope",
+      cmd = "Telescope",
+      requires = {
+        { "nvim-lua/popup.nvim" },
+        { "nvim-lua/plenary.nvim" },
+        { "nvim-telescope/telescope-fzy-native.nvim", run = "make" },
+        { "nvim-telescope/telescope-file-browser.nvim" },
+      },
+      config = get_setup("telescope"),
+    })
 
-  -- fuzy finding
-  'nvim-lua/plenary.nvim',
-  'nvim-telescope/telescope.nvim',
+    -- faster init for nvim
+    -- use({ 'nathom/filetype.nvim' })
 
-  -- UI
-  'arcticicestudio/nord-vim',
+    -- autocomplete
+    -- use({
+      -- "nvim-treesitter/nvim-treesitter",
+      -- config = get_setup("treesitter"),
+      -- run = ":TSUpdate",
+    -- })
+    -- use("nvim-treesitter/nvim-treesitter-textobjects")
 
-  -- CSS
-  'norcalli/nvim-colorizer.lua',
+    -- use({ "neovim/nvim-lspconfig", config = get_setup("lsp") })
 
-  -- autocompletion
-  'neovim/nvim-lspconfig', -- includes configs for most language servers
-  {'nvim-treesitter/nvim-treesitter', run=':TSUpdate'},
-  "windwp/nvim-ts-autotag", -- autoclose html tags using treesitter
+   
+    if packer_bootstrap then
+      require("packer").sync()
+    end
+  end,
+  config = {
+    display = {
+      open_fn = require("packer.util").float,
+    },
+    profile = {
+      enable = true,
+      threshold = 1, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+    },
+  },
+})
 
-  -- cmp is what handles the autocompletion, it uses neovim lsp
-  -- underneath to accomplish that.
-  'hrsh7th/nvim-cmp',
-  -- below are the completion sources for nvim-cmp
-  'hrsh7th/cmp-nvim-lsp',
-  'hrsh7th/cmp-buffer',
-  'hrsh7th/cmp-path',
 
-  -- 'windwp/nvim-autopairs',
-}
+
+--   'christoomey/vim-tmux-navigator',   -- tmux & vim love
+--   'tpope/vim-vinegar',
+--   'tpope/vim-commentary',
+--   'tpope/vim-surround',
+
+--   'nathom/filetype.nvim', -- speed up nvim initialization
+
+--   -- fuzy finding
+--   'nvim-lua/plenary.nvim',
+--   'nvim-telescope/telescope.nvim',
+
+
+--   -- CSS
+--   'norcalli/nvim-colorizer.lua',
+
+--   -- autocompletion
+--   'neovim/nvim-lspconfig', -- includes configs for most language servers
+--   {'nvim-treesitter/nvim-treesitter', run=':TSUpdate'},
+--   "windwp/nvim-ts-autotag", -- autoclose html tags using treesitter
+
+--   -- cmp is what handles the autocompletion, it uses neovim lsp
+--   -- underneath to accomplish that.
+--   'hrsh7th/nvim-cmp',
+--   -- below are the completion sources for nvim-cmp
+--   'hrsh7th/cmp-nvim-lsp',
+--   'hrsh7th/cmp-buffer',
+--   'hrsh7th/cmp-path',
+
+--   -- 'windwp/nvim-autopairs',
+-- }
 
 

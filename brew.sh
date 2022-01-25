@@ -23,10 +23,7 @@ brew install 'diff-so-fancy'
 brew install 'neovim'
 brew install 'tmux'
 brew install 'tree'
-brew install 'fzf'
-
-# fzf keybindings
-$(brew --prefix)/opt/fzf/install
+brew install 'fzy'
 
 # Install improved versions of system utils
 brew install 'ctags'
