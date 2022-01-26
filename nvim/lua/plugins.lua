@@ -56,14 +56,14 @@ return require("packer").startup({
     -- use({ 'nathom/filetype.nvim' })
 
     -- autocomplete
-    -- use({
-      -- "nvim-treesitter/nvim-treesitter",
-      -- config = get_setup("treesitter"),
-      -- run = ":TSUpdate",
-    -- })
-    -- use("nvim-treesitter/nvim-treesitter-textobjects")
+    use({
+      "nvim-treesitter/nvim-treesitter",
+      config = get_setup("treesitter"),
+      run = ":TSUpdate",
+    })
+    use("nvim-treesitter/nvim-treesitter-textobjects")
 
-    -- use({ "neovim/nvim-lspconfig", config = get_setup("lsp") })
+    use({ "neovim/nvim-lspconfig", config = get_setup("lsp") })
 
    
     if packer_bootstrap then
