@@ -18,6 +18,9 @@ return require("packer").startup({
       config = get_setup('autosave')
     })
 
+    -- faster init for nvim
+    use({ 'nathom/filetype.nvim' })
+
    -- UI
    use({
       'shaunsingh/nord.nvim',
@@ -38,17 +41,16 @@ return require("packer").startup({
       config = get_setup("telescope"),
     })
 
-    -- faster init for nvim
-    -- use({ 'nathom/filetype.nvim' })
 
-    -- autocomplete
+    -- Syntax highlighting
     use({
       "nvim-treesitter/nvim-treesitter",
       config = get_setup("treesitter"),
       run = ":TSUpdate",
     })
-    -- use("nvim-treesitter/nvim-treesitter-textobjects")
+    use("nvim-treesitter/nvim-treesitter-textobjects")
 
+    -- Language Server
     use({ "neovim/nvim-lspconfig", config = get_setup("lsp") })
     use({'williamboman/nvim-lsp-installer'})
 
@@ -68,38 +70,3 @@ return require("packer").startup({
     },
   },
 })
-
-
-
---   'christoomey/vim-tmux-navigator',   -- tmux & vim love
---   'tpope/vim-vinegar',
---   'tpope/vim-commentary',
---   'tpope/vim-surround',
-
---   'nathom/filetype.nvim', -- speed up nvim initialization
-
---   -- fuzy finding
---   'nvim-lua/plenary.nvim',
---   'nvim-telescope/telescope.nvim',
-
-
---   -- CSS
---   'norcalli/nvim-colorizer.lua',
-
---   -- autocompletion
---   'neovim/nvim-lspconfig', -- includes configs for most language servers
---   {'nvim-treesitter/nvim-treesitter', run=':TSUpdate'},
---   "windwp/nvim-ts-autotag", -- autoclose html tags using treesitter
-
---   -- cmp is what handles the autocompletion, it uses neovim lsp
---   -- underneath to accomplish that.
---   'hrsh7th/nvim-cmp',
---   -- below are the completion sources for nvim-cmp
---   'hrsh7th/cmp-nvim-lsp',
---   'hrsh7th/cmp-buffer',
---   'hrsh7th/cmp-path',
-
---   -- 'windwp/nvim-autopairs',
--- }
-
-
