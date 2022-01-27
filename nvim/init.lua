@@ -5,7 +5,6 @@
 -- npm i -g vscode-langservers-extracted 
 require("plugins")
 require("options")
--- require("legacy")
 require("mappings")
 
 
