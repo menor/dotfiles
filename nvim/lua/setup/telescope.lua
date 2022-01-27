@@ -9,11 +9,12 @@ require('telescope').setup{
     grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
     qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
 
-    layout_strategy = 'vertical',
+    layout_strategy = 'horizontal',
     layout_config = {
-      vertical = {
-        mirror = true
-      }
+      width = 0.75,
+      preview_cutoff = 120,
+      horizontal = { mirror = false },
+      vertical = { mirror = false },
     },
   },
   extensions = {

@@ -20,7 +20,7 @@ opt.listchars = { tab = '»·', trail = '·', nbsp = '·'}
 opt.signcolumn = "yes:1"
 
 -- line lenght marker at 80 columns
-opt.colorcolumn = '80'
+-- opt.colorcolumn = '80'
 
 -- check file after 4 secs of inactivity in normal mode,
 -- so files are refreshed on outside changes
