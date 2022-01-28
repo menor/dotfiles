@@ -2,7 +2,7 @@
 -- https://www.nordtheme.com/docs/ports/vim/configuration
 -- https://github.com/shaunsingh/nord.nvim
 local g = vim.g
-g.nord_italic = true
+g.nord_italic = false
 
 -- Keeping this config in case I need to switch to
 -- arcticicestudio/nord-vim

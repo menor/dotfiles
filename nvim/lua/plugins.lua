@@ -18,8 +18,13 @@ return require("packer").startup({
       config = get_setup('autosave')
     })
 
-    -- faster init for nvim
-    use({ 'nathom/filetype.nvim' })
+    use({'christoomey/vim-tmux-navigator'})
+
+    -- Faster init for nvim
+    use({
+      'nathom/filetype.nvim',
+      config = get_setup('filetype')
+    })
 
    -- UI
    use({
@@ -27,7 +32,13 @@ return require("packer").startup({
       config = get_setup('nord')
    })
 
-   -- fuzy finding
+   -- File explorer
+   use({
+     'kyazdani42/nvim-tree.lua',
+     config = get_setup('nvimtree')
+   })
+
+   -- Fuzy finding
    use({
       "nvim-telescope/telescope.nvim",
       module = "telescope",
