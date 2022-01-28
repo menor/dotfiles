@@ -35,9 +35,9 @@ local on_attach = function(client, bufnr)
 
 end
 
-nvim_lsp.tsserver.setup({
-  capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-  on_attach = function(client)
-    client.resolved_capabilities.document_formatting = false
-  end,
-})
+--nvim_lsp.tsserver.setup({
+--  capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+--  on_attach = function(client)
+ --   client.resolved_capabilities.document_formatting = false
+--  end,
+--})

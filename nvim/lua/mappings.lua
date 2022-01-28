@@ -51,6 +51,10 @@ map('v', 'y', 'ygv<Esc>')
 map('n', '<Tab>', ':bnext<CR>')
 map('n', '<S-Tab>', ':bprevious<CR>')
 
+-- Neovim tree (file explorer)
+map('n', '<leader>e', ':NvimTreeToggle<CR>') 
+map('n', '<leader>s', ':NvimTreeFindFile<CR>')
+
 -- Telescope
 map("n", "<leader>ff", '<cmd>lua require("telescope.builtin").find_files()<cr>')
 map("n", "<leader>fg", '<cmd>lua require("telescope.builtin").live_grep()<cr>')
