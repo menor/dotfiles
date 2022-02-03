@@ -60,13 +60,14 @@ map("n", "<leader>ff", '<cmd>lua require("telescope.builtin").find_files()<cr>')
 map("n", "<leader>fg", '<cmd>lua require("telescope.builtin").live_grep()<cr>')
 map("n", "<leader>fh", '<cmd>lua require("telescope.builtin").help_tags()<cr>')
 map("n", "<leader>fb", '<cmd>lua require("telescope.builtin").buffers()<cr>')
+map("n", "<leader>fd", '<cmd>lua require("telescope.builtin").diagnostics()<cr>')
 map("n", "<leader>fa", '<cmd>lua require("telescope").extensions.file_browser.file_browser()<CR>')
 
 -- Packer
 map('n', '<Leader>u', ':PackerSync<CR>')
 
-map('n', '<leader>li', ':LspInfo<CR>')
 -- Language Server
+map('n', '<leader>li', ':LspInfo<CR>')
 local opts = { noremap=true, silent=true }
 
 local on_attach = function(client, bufnr)
