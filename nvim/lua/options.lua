@@ -17,7 +17,7 @@ opt.tabstop=2
 opt.listchars = { tab = '»·', trail = '·', nbsp = '·'}
 
 -- always display signcolumn
-opt.signcolumn = "yes:1"
+opt.signcolumn = 'yes:1'
 
 -- line lenght marker at 80 columns
 -- opt.colorcolumn = '80'
@@ -31,7 +31,7 @@ cmd 'au CursorHold * checktime'
 -- use an undo file
 opt.undofile = true
 -- set a directory to store the undo history
-opt.undodir= os.getenv("HOME") .. '/.tmp/nvim/.vimundo/'
+opt.undodir= os.getenv('HOME') .. '/.tmp/nvim/.vimundo/'
 
 opt.termguicolors = true
 

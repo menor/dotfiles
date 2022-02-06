@@ -1,7 +1,7 @@
 local telescope = require('telescope')
-local fb_actions = require "telescope".extensions.file_browser.actions
+local fb_actions =  telescope.extensions.file_browser.actions
 
-require('telescope').setup{
+telescope.setup{
   defaults = {
     file_sorter = require('telescope.sorters').get_fzy_sorter,
 
@@ -19,10 +19,10 @@ require('telescope').setup{
   },
   extensions = {
     file_browser = {
-      theme = "ivy",
+      theme = 'ivy',
       mappings = {
-        ["i"] = {
-          ["<C-h>"] = fb_actions.goto_home_dir
+        ['i'] = {
+          ['<C-h>'] = fb_actions.goto_home_dir
         }
       },
     },
@@ -34,4 +34,4 @@ require('telescope').setup{
 }
 
 telescope.load_extension('fzy_native')
-telescope.load_extension("file_browser")
+telescope.load_extension('file_browser')
