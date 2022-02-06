@@ -37,12 +37,12 @@ map('n', 'J', 'mzJ`z')
 map('n', 'Y', 'y$')
 
 -- More granular undo of text
-map("i", ",", ",<c-g>u")
-map("i", ".", ".<c-g>u")
-map("i", "!", "!<c-g>u")
-map("i", "?", "?<c-g>u")
-map("i", ";", ";<c-g>u")
-map("i", ":", ":<c-g>u")
+map('i', ',', ',<c-g>u')
+map('i', '.', '.<c-g>u')
+map('i', '!', '!<c-g>u')
+map('i', '?', '?<c-g>u')
+map('i', ';', ';<c-g>u')
+map('i', ':', ':<c-g>u')
 
 -- Make visual yanks place the cursor back where started
 map('v', 'y', 'ygv<Esc>')
@@ -56,12 +56,12 @@ map('n', '<leader>e', ':NvimTreeToggle<CR>')
 map('n', '<leader>s', ':NvimTreeFindFile<CR>')
 
 -- Telescope
-map("n", "<leader>ff", '<cmd>lua require("telescope.builtin").find_files()<cr>')
-map("n", "<leader>fg", '<cmd>lua require("telescope.builtin").live_grep()<cr>')
-map("n", "<leader>fh", '<cmd>lua require("telescope.builtin").help_tags()<cr>')
-map("n", "<leader>fb", '<cmd>lua require("telescope.builtin").buffers()<cr>')
-map("n", "<leader>fd", '<cmd>lua require("telescope.builtin").diagnostics()<cr>')
-map("n", "<leader>fa", '<cmd>lua require("telescope").extensions.file_browser.file_browser()<CR>')
+map('n', '<leader>ff', '<cmd>lua require("telescope.builtin").find_files()<cr>')
+map('n', '<leader>fg', '<cmd>lua require("telescope.builtin").live_grep()<cr>')
+map('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>')
+map('n', '<leader>fb', '<cmd>lua require("telescope.builtin").buffers()<cr>')
+map('n', '<leader>fd', '<cmd>lua require("telescope.builtin").diagnostics()<cr>')
+map('n', '<leader>fa', '<cmd>lua require("telescope").extensions.file_browser.file_browser()<CR>')
 
 -- Packer
 map('n', '<Leader>u', ':PackerSync<CR>')

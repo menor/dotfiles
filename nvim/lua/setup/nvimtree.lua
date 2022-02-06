@@ -1,7 +1,3 @@
-----------------------------------------------------------
--- File manager configuration file
------------------------------------------------------------
-
 -- Plugin: nvim-tree
 -- https://github.com/kyazdani42/nvim-tree.lua
 
@@ -32,7 +28,7 @@ g.nvim_tree_icons = {
 	default = "‣ "
 }
 
-local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
+local config_status_ok, nvim_tree_config = pcall(require, 'nvim-tree.config')
 if not config_status_ok then
   return
 end
@@ -57,7 +53,7 @@ require('nvim-tree').setup {
     mappings = {
       custom_only = false,
       list = {
-        { key = "l", cb = tree_cb("vsplit") }
+        { key = 'l', cb = tree_cb('vsplit') }
       }
     }
   },

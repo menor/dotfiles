@@ -4,7 +4,7 @@ function get_setup(name)
   return string.format('require("setup/%s")', name)
 end
 
-return require("packer").startup({
+return require('packer').startup({
   function(use)
     -- Packer can manage itself
     use({
@@ -40,28 +40,28 @@ return require("packer").startup({
 
    -- Fuzy finding
    use({
-      "nvim-telescope/telescope.nvim",
+      'nvim-telescope/telescope.nvim',
       module = "telescope",
       cmd = "Telescope",
       requires = {
-        { "nvim-lua/popup.nvim" },
-        { "nvim-lua/plenary.nvim" },
-        { "nvim-telescope/telescope-fzy-native.nvim", run = "make" },
-        { "nvim-telescope/telescope-file-browser.nvim" },
+        { 'nvim-lua/popup.nvim' },
+        { 'nvim-lua/plenary.nvim' },
+        { 'nvim-telescope/telescope-fzy-native.nvim', run = 'make' },
+        { 'nvim-telescope/telescope-file-browser.nvim' },
       },
-      config = get_setup("telescope"),
+      config = get_setup('telescope'),
     })
 
     -- Syntax highlighting
     use({
-      "nvim-treesitter/nvim-treesitter",
-      config = get_setup("treesitter"),
-      run = ":TSUpdate",
+      'nvim-treesitter/nvim-treesitter',
+      config = get_setup('treesitter'),
+      run = ':TSUpdate',
     })
-    use("nvim-treesitter/nvim-treesitter-textobjects")
+    use('nvim-treesitter/nvim-treesitter-textobjects')
 
     -- Language Server
-    use({ "neovim/nvim-lspconfig", config = get_setup("lsp") })
+    use({ 'neovim/nvim-lspconfig', config = get_setup('lsp') })
     -- Allows you to install language servers calling :LspInstall
     use({'williamboman/nvim-lsp-installer'})
     use({
@@ -73,15 +73,17 @@ return require("packer").startup({
 
     -- Autocompletion
     use({'hrsh7th/nvim-cmp'})
+    use({'tpope/vim-surround'})
+    use({'tpope/vim-repeat'})
 
    
     if packer_bootstrap then
-      require("packer").sync()
+      require('packer').sync()
     end
   end,
   config = {
     display = {
-      open_fn = require("packer.util").float,
+      open_fn = require('packer.util').float,
     },
     profile = {
       enable = true,

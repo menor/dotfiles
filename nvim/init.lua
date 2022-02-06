@@ -3,8 +3,8 @@
 -- You will need to install language servers
 -- npm i -g typescript typescript-language-server
 -- npm i -g vscode-langservers-extracted 
-require("plugins")
-require("options")
-require("mappings")
+require('plugins')
+require('options')
+require('mappings')
 
 

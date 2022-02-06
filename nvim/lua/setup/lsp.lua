@@ -1,6 +1,3 @@
------------------------------------------------------------
--- Neovim LSP configuration file
------------------------------------------------------------
 -- based on 
 -- https://github.com/brainfucksec/neovim-lua/blob/main/nvim/lua/plugins/nvim-lspconfig.lua
 
@@ -19,7 +16,7 @@ end
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
 
-  if client.name  == "tsserver" or client.name == "jsonls" then
+  if client.name  == 'tsserver' or client.name == 'jsonls' then
     ts_settings(client)
   end
 
