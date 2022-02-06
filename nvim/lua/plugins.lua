@@ -52,7 +52,6 @@ return require("packer").startup({
       config = get_setup("telescope"),
     })
 
-
     -- Syntax highlighting
     use({
       "nvim-treesitter/nvim-treesitter",
@@ -63,7 +62,17 @@ return require("packer").startup({
 
     -- Language Server
     use({ "neovim/nvim-lspconfig", config = get_setup("lsp") })
+    -- Allows you to install language servers calling :LspInstall
     use({'williamboman/nvim-lsp-installer'})
+    use({
+      'jose-elias-alvarez/null-ls.nvim',
+      config = get_setup('nullls'),
+      requires = {'nvim-lua/plenary.nvim'},
+    })
+
+
+    -- Autocompletion
+    use({'hrsh7th/nvim-cmp'})
 
    
     if packer_bootstrap then
