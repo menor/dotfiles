@@ -1,5 +1,6 @@
 # Neovim
 alias n='nvim'
+alias l='lvim'
 
 # Tmux
 alias tl='tmux ls'
@@ -14,3 +15,17 @@ alias pkg='cat package.json'
 alias dcu='docker-compose up'
 alias dcub='docker-compose up --build'
 alias dcd='docker-compose down'
+
+
+# Platform
+alias platfarm='PLATFORMSH_CLI_SESSION_ID=staging \
+  PLATFORMSH_CLI_API_URL=https://api.staging.plat.farm \
+  PLATFORMSH_CLI_ACCOUNTS_API=https://accounts.staging.plat.farm/api/v1/ \
+  PLATFORMSH_CLI_OAUTH2_AUTH_URL=https://auth.plat.farm/oauth2/authorize \
+  PLATFORMSH_CLI_OAUTH2_TOKEN_URL=https://auth.plat.farm/oauth2/token \
+  PLATFORMSH_CLI_OAUTH2_REVOKE_URL=https://auth.plat.farm/oauth2/revoke \
+  PLATFORMSH_CLI_CERTIFIER_URL=https://ssh.auth.plat.farm \
+  PLATFORMSH_CLI_SSH_DOMAIN_WILDCARD=*.plat.farm \
+  PLATFORMSH_CLI_API_PROXY_URL=https://api.staging.plat.farm \
+  platform'
+export PATH="$PATH:$HOME/src/platform/glue/bin"

@@ -42,10 +42,12 @@
 	editor = /usr/local/bin/nvim
 	excludesfile = ~/.config/git/.gitignore_global
 	ignorecase = false
+	hooksPath = .husky
 
 [credential]
 
 	helper = osxkeychain
+	username = menor
 
 [pager]
 

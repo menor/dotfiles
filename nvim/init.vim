@@ -110,8 +110,8 @@ colorscheme nord
 let g:ale_linters = {'javascript': ['eslint']}
 
 " === vim autosave ===
-let g:auto_save = 1 " enable autosave on vim startup
-let g:auto_save_silent = 1
+" let g:auto_save = 1 " enable autosave on vim startup
+" let g:auto_save_silent = 1
 
 " === coc ===
 let g:coc_global_extensions = [ 
@@ -223,10 +223,13 @@ nnoremap <silent> <leader>fg :<C-u>Files<CR>
 
 " === prettier ===
 nmap <Leader>p <Plug>(Prettier)
-let g:prettier#autoformat_config_present = 1 " Prefer project config if available
-let g:prettier#config#semi = 'false' " No semi-colons por favor
-let g:prettier#config#trailing_comma = 'none'
-let g:prettier#config#single_quote = 'true'
+let g:prettier#config#config_precedence = 'file-override'
+" let g:prettier#autoformat_config_present = 1 " Prefer project config if available
+let g:prettier#autoformat_config_files = ['.prettierrc', 'prettier-config.js', '.eslintrc' ]
+" let g:prettier#config#semi = 'false' " No semi-colons por favor
+let g:prettier#config#arrow_parens = 'avoid'
+" let g:prettier#config#trailing_comma = 'none'
+" let g:prettier#config#single_quote = 'true'
 
 " === ultiSnips ===
 let g:UltiSnipsSnippetDirectories=[expand("$HOME/.dotfiles/snippets")]
