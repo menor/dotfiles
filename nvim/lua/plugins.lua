@@ -17,7 +17,11 @@ return require('packer').startup({
       'pocco81/autosave.nvim',
       config = get_setup('autosave')
     })
-
+    use({
+      'numToStr/Comment.nvim',
+      config = get_setup('comment')
+    })
+  
     use({'christoomey/vim-tmux-navigator'})
 
     -- Faster init for nvim
