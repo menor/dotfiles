@@ -21,6 +21,11 @@ return require('packer').startup({
       'numToStr/Comment.nvim',
       config = get_setup('comment')
     })
+    -- this is to get proper commenting in embeded languages (i.e. css in js)
+    -- needs to be enabled in nvim-treesiter config
+    use({
+      'JoosepAlviste/nvim-ts-context-commentstring'
+    })
   
     use({'christoomey/vim-tmux-navigator'})
 
