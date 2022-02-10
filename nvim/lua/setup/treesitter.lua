@@ -23,6 +23,13 @@ require('nvim-treesitter.configs').setup({
       node_decremental = '<TAB>',
     },
   },
+
+  -- this is to enable JoosepAlviste/nvim-ts-context-commentstring
+  -- to allow comments in embedded languages (i.e. css in js)
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
+  },
 })
 
 -- Setup treesitter
