@@ -64,9 +64,13 @@ end
 -- npm install -g typescript typescript-language-server
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
 
+-- Rust server --> rust_analyzer
+-- rustup component add rust-src
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
+
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'html', 'tsserver' }
+local servers = { 'gopls', 'html', 'tsserver', 'rust_analyzer' }
 
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
