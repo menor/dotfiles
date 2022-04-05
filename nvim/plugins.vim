@@ -33,7 +33,7 @@ if dein#load_state('$HOME/.config/nvim')
 
   call dein#add('tpope/vim-commentary')
   call dein#add('tpope/vim-surround')
-  call dein#add('w0rp/ale')
+  " call dein#add('w0rp/ale')
   call dein#add('mattn/emmet-vim')
   call dein#add('jiangmiao/auto-pairs')
 
@@ -49,7 +49,8 @@ if dein#load_state('$HOME/.config/nvim')
 
   " Typescript
   call dein#add('leafgarland/typescript-vim')  " Typescript syntax coloring
-  call dein#add('ianks/vim-tsx')               " jsx syntax coloring
+  call dein#add('peitalin/vim-jsx-typescript') " jsx syntax coloring
+  " call dein#add('ianks/vim-tsx')               " jsx syntax coloring
 
   " Golang
   call dein#add('fatih/vim-go', {
