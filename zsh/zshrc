@@ -86,6 +86,10 @@ export PATH=$PATH:$CMAKEPATH
 export WASMBINPATH=$HOME/code/wasm/wabt/bin
 export PATH=$PATH:$WASMBINPATH
 
+export ZIGPATH=$HOME"/.zig/zig-macos-x86_64-0.10.0-dev.1717+91eb1af91"
+export PATH=$PATH:$ZIGPATH
+
+
 # Alias
 # -----------------------------------------------------------------------------
 source $DOTDIR/aliases
