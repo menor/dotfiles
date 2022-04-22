@@ -42,10 +42,10 @@ return require('packer').startup({
    })
 
    -- File explorer
-   use({
-     'kyazdani42/nvim-tree.lua',
-     config = get_setup('nvimtree')
-   })
+   -- use({
+     -- 'kyazdani42/nvim-tree.lua',
+     -- config = get_setup('nvimtree')
+   -- })
 
    -- Fuzy finding
    use({
@@ -93,6 +93,10 @@ return require('packer').startup({
     use ('onsails/lspkind-nvim')      -- Allows formatting cmp sources
     use({'tpope/vim-surround'})
     use({'tpope/vim-repeat'})
+    use({
+      'windwp/nvim-autopairs',
+      config = get_setup('autopairs')
+    })
 
    
     if packer_bootstrap then
