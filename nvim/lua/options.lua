@@ -1,5 +1,6 @@
 local opt = vim.opt -- to set options
 local cmd = vim.cmd -- execute vim commands
+local g = vim.g     -- set global variables
 
 opt.swapfile = false                  -- Disable swapfiles
 opt.visualbell = true                 -- visual bell instead of beeping
@@ -19,9 +20,6 @@ opt.listchars = { tab = '»·', trail = '·', nbsp = '·'}
 -- always display signcolumn
 opt.signcolumn = 'yes:1'
 
--- line lenght marker at 80 columns
--- opt.colorcolumn = '80'
-
 -- check file after 4 secs of inactivity in normal mode,
 -- so files are refreshed on outside changes
 -- lua still does not support autocommands so we need to call it
@@ -34,6 +32,8 @@ opt.undofile = true
 opt.undodir= os.getenv('HOME') .. '/.tmp/nvim/.vimundo/'
 
 opt.termguicolors = true
+
+g['netrw_banner'] = 0
 
 -- don't auto commenting for new lines
 cmd [[au BufEnter * set fo-=c fo-=r fo-=o]]
