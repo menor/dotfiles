@@ -80,6 +80,9 @@ export DENOPATH=$HOME/.deno
 export DENOBIN=$DENOPATH/bin
 export PATH=$PATH:$DENOBIN
 
+export VOLTA_HOME=$HOME/.volta
+export PATH=$PATH:$VOLTA_HOME/bin
+
 export CMAKEPATH="/Applications/CMake.app/Contents/bin"
 export PATH=$PATH:$CMAKEPATH
 
