@@ -3,8 +3,6 @@ To track new files:
 - Add them to the files variable in makesymlinks.sh
 - Run the script (this script creates symlinks to the dotfiles in the home directory)
 
-
-
 Prezto is included as a submodule, to we need to create symlinks from that folder to the main zsh dir to do that run this:
 
 ```
@@ -22,3 +20,7 @@ Tmux config needs _Tmux Plugin Manager_ to work, to install it you need to run `
 - Tmux configuration
 - Bash alias
 - Git alias
+
+## Binaries
+- *colorcheck* prints strips of colors to the the terminal to check if they are displayed correctly
+- *tat* creates a tmux session with the name of the current directory, if a session named like the current directory already exists, it will attach to it.
