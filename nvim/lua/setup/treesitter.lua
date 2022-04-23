@@ -1,5 +1,19 @@
+local ts = require('nvim-treesitter.configs')
+
 require('nvim-treesitter.configs').setup({
-  ensure_installed = 'maintained',
+  ensure_installed = {
+    'bash',
+    'c',
+    'comment',
+    'css',
+    'go',
+    'html',
+    'javascript',
+    'lua',
+    'rust',
+    'typescript',
+    'zig'
+  },
   rainbow = {
     enable = true,
     extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
@@ -13,6 +27,9 @@ require('nvim-treesitter.configs').setup({
       'typescript',
       'markdown',
     },
+  },
+  highlight = {
+    enable = true
   },
   incremental_selection = {
     enable = true,
@@ -31,7 +48,3 @@ require('nvim-treesitter.configs').setup({
     enable_autocmd = false,
   },
 })
-
--- Setup treesitter
-local ts = require('nvim-treesitter.configs')
-ts.setup({ ensure_installed = 'maintained', highlight = { enable = true } })

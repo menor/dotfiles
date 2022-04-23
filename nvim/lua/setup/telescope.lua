@@ -22,7 +22,8 @@ telescope.setup{
       theme = 'ivy',
       mappings = {
         ['i'] = {
-          ['<C-h>'] = fb_actions.goto_home_dir
+          ['<C-h>'] = fb_actions.goto_home_dir,
+          ['<C-t>'] = require 'telescope.actions'.select_tab
         }
       },
     },
