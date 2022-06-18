@@ -80,16 +80,13 @@ export DENOPATH=$HOME/.deno
 export DENOBIN=$DENOPATH/bin
 export PATH=$PATH:$DENOBIN
 
-export VOLTA_HOME=$HOME/.volta
-export PATH=$PATH:$VOLTA_HOME/bin
-
 export CMAKEPATH="/Applications/CMake.app/Contents/bin"
 export PATH=$PATH:$CMAKEPATH
 
 export WASMBINPATH=$HOME/code/wasm/wabt/bin
 export PATH=$PATH:$WASMBINPATH
 
-export ZIGPATH=$HOME"/.zig/zig-macos-x86_64-0.10.0-dev.1717+91eb1af91"
+export ZIGPATH=$HOME"/.zig/zig-macos-x86_64-0.10.0-dev.2562+61844b6bd"
 export PATH=$PATH:$ZIGPATH
 
 
