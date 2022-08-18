@@ -89,6 +89,11 @@ export PATH=$PATH:$WASMBINPATH
 export ZIGPATH=$HOME"/.zig/zig-macos-x86_64-0.10.0-dev.2562+61844b6bd"
 export PATH=$PATH:$ZIGPATH
 
+export BUN_INSTALL=$HOME/.bun
+export PATH=$PATH:$BUN_INSTALL/bin
+
+# bun completions
+[ -s "/Users/menor/.bun/_bun" ] && source "/Users/menor/.bun/_bun"
 
 # Alias
 # -----------------------------------------------------------------------------
@@ -107,3 +112,4 @@ export NVIMDATA=$HOME/.local/share/nvim
 HOME=${HOME:-'/Users/menor'}
 export PATH="$HOME/"'.platformsh/bin':"$PATH"
 if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/shell-config.rc'; fi # END SNIPPET
+
