@@ -63,6 +63,9 @@ if filereadable(expand("$HOME/.config/nvim/plugins.vim"))
   source $HOME/.config/nvim/plugins.vim
 endif
 
+" remove unused plugins from cache
+call map(dein#check_clean(), "delete(v:val, 'rf')")
+
 " ------------------------------------------------------------------------------
 "                             keybindings
 " ------------------------------------------------------------------------------
@@ -106,16 +109,13 @@ colorscheme nord
 "                             plugin config
 " ------------------------------------------------------------------------------
 
-" === ale ===
-let g:ale_linters = {'javascript': ['eslint']}
-
 " === vim autosave ===
 " let g:auto_save = 1 " enable autosave on vim startup
 " let g:auto_save_silent = 1
 
 " === coc ===
 let g:coc_global_extensions = [ 
-  \ 'coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-lists',
+  \ 'coc-eslint', 'coc-tsserver', 'coc-emmet', 'coc-lists',
   \ 'coc-css', 'coc-html', 'coc-json', 'coc-prettier'
 \ ]
 
@@ -136,7 +136,8 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> K :call CocAction('doHover')<CR>
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)

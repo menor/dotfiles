@@ -32,6 +32,7 @@ if dein#load_state('$HOME/.config/nvim')
   \ })
 
   call dein#add('tpope/vim-commentary')
+ " call dein#add('tomtom/tcomment_vim')
   call dein#add('tpope/vim-surround')
   " call dein#add('w0rp/ale')
   call dein#add('mattn/emmet-vim')
