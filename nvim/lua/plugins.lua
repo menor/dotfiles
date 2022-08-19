@@ -41,6 +41,14 @@ return require('packer').startup({
       config = get_setup('nord')
    })
 
+   use ({
+      'nvim-lualine/lualine.nvim',
+      config = get_setup('lualine'),
+      requires = {
+        'kyazdani42/nvim-web-devicons', opt = true
+      }
+   })
+
    -- File explorer
    -- use({
      -- 'kyazdani42/nvim-tree.lua',
