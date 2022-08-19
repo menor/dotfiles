@@ -70,9 +70,18 @@ return require('packer').startup({
     use('nvim-treesitter/nvim-treesitter-textobjects')
 
     -- Language Server
+    -- The Language server client is integrated into neovim
+    -- This plugin is only a set of configs for it
     use({ 'neovim/nvim-lspconfig', config = get_setup('lsp') })
+
     -- Allows you to install language servers calling :LspInstall
-    use({'williamboman/nvim-lsp-installer'})
+    use({'williamboman/mason.nvim', config = get_setup('mason') })
+    use({
+      'williamboman/mason-lspconfig.nvim',
+      config = get_setup('mason-lspconfig')
+    })
+
+
     use({
       'jose-elias-alvarez/null-ls.nvim',
       config = get_setup('nullls'),
