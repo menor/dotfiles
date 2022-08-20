@@ -1,3 +1,4 @@
+-- Autocommand that reloads neovim whenever you save the packer_init.lua file
 vim.cmd([[
   augroup packer_user_config
     autocmd!
