@@ -1,30 +1,48 @@
-local function map(mode, lhs, rhs, opts) local options = { noremap = true }
+-----------------------------------------------------------
+-- Define keymaps of Neovim and installed plugins.
+-----------------------------------------------------------
+
+local function map(mode, lhs, rhs, opts)
+  local options = { noremap = true, silent = true }
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
--- remap leader key to spacebar
+-- Remap leader key to spacebar
 vim.g.mapleader = ' '
 
+-----------------------------------------------------------
+-- Neovim shortcuts
+-----------------------------------------------------------
+
+-- Disable arrow keys
+map('', '<up>', '<nop>')
+map('', '<down>', '<nop>')
+map('', '<left>', '<nop>')
+map('', '<right>', '<nop>')
+
+-- Map Esc to kk
+map('i', 'kk', '<Esc>')
+
 -- moving through buffers, inspired by unimpaired.vim plugin
-map('n', '[b', ':bprevious<CR>', {silent = true})
-map('n', ']b', ':bnext<CR>', {silent = true})
-map('n', '[B', ':bfirst<CR>', {silent = true})
-map('n', ']B', ':blast<CR>', {silent = true})
+map('n', '[b', ':bprevious<CR>')
+map('n', ']b', ':bnext<CR>')
+map('n', '[B', ':bfirst<CR>')
+map('n', ']B', ':blast<CR>')
 
 -- moving through tabs
 -- for moving to previous and next use the default gT gt
-map('n', '[t', ':tabfir<CR>', {silent = true})
-map('n', ']t', ':tabl<CR>', {silent = true})
+map('n', '[t', ':tabfir<CR>')
+map('n', ']t', ':tabl<CR>')
 
-map('n', 'tn', ':tabe<CR>', {silent = true})
-map('n', 'tc', ':tabc<CR>', {silent = true})
-map('n', 'tC', ':tabo<CR>', {silent = true})
+map('n', 'tn', ':tabe<CR>')
+map('n', 'tc', ':tabc<CR>')
+map('n', 'tC', ':tabo<CR>')
 
 -- Clear highlighted search
-map('n', '<leader>c', ':nohlsearch<CR>', {silent = true})
+map('n', '<leader>c', ':nohlsearch<CR>')
 
 -- Keep search results centered
 map('n', 'n', 'nzzzv')
@@ -44,6 +62,10 @@ map('i', '?', '?<c-g>u')
 map('i', ';', ';<c-g>u')
 map('i', ':', ':<c-g>u')
 
+-- Change split orientation
+map('n', '<leader>tk', '<C-w>t<C-w>K') -- change vertical to horizontal
+map('n', '<leader>th', '<C-w>t<C-w>H') -- change horizontal to vertical
+
 -- Make visual yanks place the cursor back where started
 map('v', 'y', 'ygv<Esc>')
 
@@ -51,8 +73,19 @@ map('v', 'y', 'ygv<Esc>')
 map('n', '<Tab>', ':bnext<CR>')
 map('n', '<S-Tab>', ':bprevious<CR>')
 
+-- Reload configuration without restart nvim
+map('n', '<leader>r', ':so %<CR>')
+
+-- Fast saving with <leader> and s
+map('n', '<leader>w', ':w<CR>')
+map('i', '<leader>w', '<C-c>:w<CR>')
+
+-----------------------------------------------------------
+-- Applications and Plugins shortcuts
+-----------------------------------------------------------
+
 -- Neovim tree (file explorer)
--- map('n', '<leader>e', ':NvimTreeToggle<CR>') 
+-- map('n', '<leader>e', ':NvimTreeToggle<CR>')
 -- map('n', '<leader>s', ':NvimTreeFindFile<CR>')
 
 -- Telescope
@@ -69,17 +102,3 @@ map('n', '<Leader>u', ':PackerSync<CR>')
 -- Language Server
 map('n', '<leader>li', ':LspInfo<CR>')
 local opts = { noremap=true, silent=true }
-
-local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
---   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>li', ':LSPInfo<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-end
-
