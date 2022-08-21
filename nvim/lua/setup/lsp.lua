@@ -11,7 +11,6 @@ if not lsp_status_ok then
   return
 end
 
-
 -- tsserver settings
 local ts_settings = function(client)
   client.resolved_capabilities.document_formatting = false
