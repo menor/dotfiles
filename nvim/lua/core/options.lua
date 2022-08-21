@@ -25,9 +25,9 @@ opt.termguicolors = true              -- Enable 24-bit RGB colors
 -- Tabs, indent
 -----------------------------------------------------------
 opt.expandtab = true                  -- Use spaces instead of tabs
-opt.shiftwidth = 2                    -- Shift 2 spaces when tab
+opt.shiftwidth = 4                    -- Shift 4 spaces when tab
 opt.smartindent = true                -- Autoindent new lines
-opt.tabstop = 2                       -- 1 tab = 2 spaces
+opt.tabstop = 4                       -- 1 tab = 4 spaces
 
 -----------------------------------------------------------
 -- Memory, CPU
@@ -37,12 +37,38 @@ opt.synmaxcol = 240                   -- Avoid syntax highlight on long lines
 -----------------------------------------------------------
 -- Startup
 -----------------------------------------------------------
+-- Disable nvim intro
+opt.shortmess:append "sI"
 
--- check file after 4 secs of inactivity in normal mode,
--- so files are refreshed on outside changes
--- lua still does not support autocommands so we need to call it
--- as a vim command https://github.com/neovim/neovim/pull/12378
-cmd 'au CursorHold * checktime'
+-- -- Disable builtin plugins
+local disabled_built_ins = {
+   "2html_plugin",
+   "getscript",
+   "getscriptPlugin",
+   "gzip",
+   "logipat",
+   "netrw",
+   "netrwPlugin",
+   "netrwSettings",
+   "netrwFileHandlers",
+   "matchit",
+   "tar",
+   "tarPlugin",
+   "rrhelper",
+   "spellfile_plugin",
+   "vimball",
+   "vimballPlugin",
+   "zip",
+   "zipPlugin",
+   "tutor",
+   "rplugin",
+   "synmenu",
+   "optwin",
+   "compiler",
+   "bugreport",
+   "ftplugin",
+}
 
--- don't auto commenting for new lines
-cmd [[au BufEnter * set fo-=c fo-=r fo-=o]]
+for _, plugin in pairs(disabled_built_ins) do
+   g["loaded_" .. plugin] = 1
+end

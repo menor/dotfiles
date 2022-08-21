@@ -4,7 +4,6 @@
 -- npm i -g typescript typescript-language-server
 -- npm i -g vscode-langservers-extracted 
 require('plugins')
-require('options')
-require('mappings')
-
-
+require('core/options')
+require('core/autocmds')
+require('core/mappings')
