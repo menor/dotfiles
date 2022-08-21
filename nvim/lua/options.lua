@@ -1,39 +1,48 @@
-local opt = vim.opt -- to set options
-local cmd = vim.cmd -- execute vim commands
-local g = vim.g     -- set global variables
+local opt = vim.opt   -- to set options
+local cmd = vim.cmd   -- execute vim commands
+local g = vim.g       -- set global variables
 
-opt.swapfile = false                  -- Disable swapfiles
-opt.visualbell = true                 -- visual bell instead of beeping
-opt.number = true                     -- line
-opt.cursorline = true
-opt.foldmethod = 'syntax'
+-----------------------------------------------------------
+-- General
+-----------------------------------------------------------
+opt.clipboard = 'unnamedplus'         -- Copy/paste to system clipboard
+opt.completeopt = 'menuone,noinsert,noselect'  -- Autocomplete options
+opt.swapfile = false                  -- Disable swapfile
+opt.undofile = true                   -- Use an undo file
+opt.undodir= os.getenv('HOME') .. '/.tmp/nvim/.vimundo/' -- Undo file location
 
--- indentation tabs = 2 spaces
-opt.expandtab = true
-opt.shiftwidth=2
-opt.tabstop=2
+-----------------------------------------------------------
+-- Neovim UI
+-----------------------------------------------------------
+opt.colorcolumn = '80'                -- Line length marker
+opt.cursorline = true                 -- Highlight cursor line
+opt.laststatus = 3                    -- Set global status line
+opt.number = true                     -- Show line number
+opt.signcolumn = 'yes:1'              -- Always display sign column
+opt.termguicolors = true              -- Enable 24-bit RGB colors
 
--- display extra whitespace
--- for some reason this is not working yet, maybe related to no syntax?
-opt.listchars = { tab = '»·', trail = '·', nbsp = '·'}
+-----------------------------------------------------------
+-- Tabs, indent
+-----------------------------------------------------------
+opt.expandtab = true                  -- Use spaces instead of tabs
+opt.shiftwidth = 2                    -- Shift 2 spaces when tab
+opt.smartindent = true                -- Autoindent new lines
+opt.tabstop = 2                       -- 1 tab = 2 spaces
 
--- always display signcolumn
-opt.signcolumn = 'yes:1'
+-----------------------------------------------------------
+-- Memory, CPU
+-----------------------------------------------------------
+opt.synmaxcol = 240                   -- Avoid syntax highlight on long lines
+
+-----------------------------------------------------------
+-- Startup
+-----------------------------------------------------------
 
 -- check file after 4 secs of inactivity in normal mode,
 -- so files are refreshed on outside changes
 -- lua still does not support autocommands so we need to call it
 -- as a vim command https://github.com/neovim/neovim/pull/12378
 cmd 'au CursorHold * checktime'
-
--- use an undo file
-opt.undofile = true
--- set a directory to store the undo history
-opt.undodir= os.getenv('HOME') .. '/.tmp/nvim/.vimundo/'
-
-opt.termguicolors = true
-
-g['netrw_banner'] = 0
 
 -- don't auto commenting for new lines
 cmd [[au BufEnter * set fo-=c fo-=r fo-=o]]

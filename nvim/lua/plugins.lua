@@ -18,6 +18,20 @@ return require('packer').startup({
       config = get_setup('packer')
     })
 
+   -- UI
+   use({
+      'shaunsingh/nord.nvim',
+      config = get_setup('nord')
+   })
+
+   use ({
+      'nvim-lualine/lualine.nvim',
+      config = get_setup('lualine'),
+      requires = {
+        'kyazdani42/nvim-web-devicons', opt = true
+      }
+   })
+
     -- Helpers
     use({
       'pocco81/autosave.nvim',
@@ -40,20 +54,6 @@ return require('packer').startup({
       'nathom/filetype.nvim',
       config = get_setup('filetype')
     })
-
-   -- UI
-   use({
-      'shaunsingh/nord.nvim',
-      config = get_setup('nord')
-   })
-
-   use ({
-      'nvim-lualine/lualine.nvim',
-      config = get_setup('lualine'),
-      requires = {
-        'kyazdani42/nvim-web-devicons', opt = true
-      }
-   })
 
    -- File explorer
    -- use({
