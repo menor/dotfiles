@@ -46,7 +46,7 @@ return require('packer').startup({
     use({
       'JoosepAlviste/nvim-ts-context-commentstring'
     })
-  
+
     use({'christoomey/vim-tmux-navigator'})
 
     -- Faster init for nvim
@@ -108,7 +108,7 @@ return require('packer').startup({
       'hrsh7th/nvim-cmp',
       config = get_setup('cmp')
     })
-    use('hrsh7th/cmp-buffer')
+   use('hrsh7th/cmp-buffer')
     use('hrsh7th/cmp-path')
     use('hrsh7th/cmp-nvim-lsp')
     use('saadparwaiz1/cmp_luasnip')   -- Snippets source for nvim-cmp
@@ -121,7 +121,7 @@ return require('packer').startup({
       config = get_setup('autopairs')
     })
 
-   
+
     if packer_bootstrap then
       require('packer').sync()
     end
