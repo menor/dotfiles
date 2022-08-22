@@ -55,6 +55,7 @@ map('n', 'J', 'mzJ`z')
 map('n', 'Y', 'y$')
 
 -- More granular undo of text
+
 map('i', ',', ',<c-g>u')
 map('i', '.', '.<c-g>u')
 map('i', '!', '!<c-g>u')
@@ -77,8 +78,8 @@ map('n', '<S-Tab>', ':bprevious<CR>')
 map('n', '<leader>r', ':so %<CR>')
 
 -- Fast saving with <leader> and s
-map('n', '<leader>w', ':w<CR>')
-map('i', '<leader>w', '<C-c>:w<CR>')
+map('n', '<leader>s', ':w<CR>')
+map('i', '<leader>s', '<C-c>:w<CR>')
 
 -----------------------------------------------------------
 -- Applications and Plugins shortcuts
@@ -101,4 +102,3 @@ map('n', '<Leader>u', ':PackerSync<CR>')
 
 -- Language Server
 map('n', '<leader>li', ':LspInfo<CR>')
-local opts = { noremap=true, silent=true }
