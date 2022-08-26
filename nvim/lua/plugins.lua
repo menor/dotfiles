@@ -116,6 +116,7 @@ return require('packer').startup({
     use ('onsails/lspkind-nvim')      -- Adds icons to completion panel
     use({'tpope/vim-surround'})
     use({'tpope/vim-repeat'})
+    use({'windwp/nvim-ts-autotag'})   -- For HTMLish, enabled on the treesitter config
     use({
       'windwp/nvim-autopairs',
       config = get_setup('autopairs')

@@ -27,7 +27,10 @@ require('nvim-treesitter.configs').setup({
     filetypes = {
       'html',
       'javascript',
-      'typescript',
+      'javascriptreact',
+      'typescriptreact',
+      'svelte',
+      'tsx',
       'markdown',
     },
   },
