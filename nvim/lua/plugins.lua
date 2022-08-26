@@ -113,7 +113,7 @@ return require('packer').startup({
     use('hrsh7th/cmp-nvim-lsp')
     use('saadparwaiz1/cmp_luasnip')   -- Snippets source for nvim-cmp
     use ('L3MON4D3/LuaSnip')          -- Snippets plugin
-    use ('onsails/lspkind-nvim')      -- Allows formatting cmp sources
+    use ('onsails/lspkind-nvim')      -- Adds icons to completion panel
     use({'tpope/vim-surround'})
     use({'tpope/vim-repeat'})
     use({
