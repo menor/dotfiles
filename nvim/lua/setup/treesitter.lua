@@ -9,15 +9,18 @@ require('nvim-treesitter.configs').setup({
     'go',
     'html',
     'javascript',
+    'json',
     'lua',
     'rust',
     'typescript',
     'zig'
   },
+   -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
   rainbow = {
     enable = true,
     extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+    max_file_lines = 4096, -- Do not enable for files with more than n lines, int
   },
   autotag = {
     enable = true,
