@@ -24,6 +24,9 @@ telescope.setup{
         ['i'] = {
           ['<C-h>'] = fb_actions.goto_home_dir,
           ['<C-t>'] = require 'telescope.actions'.select_tab
+        },
+        ['n'] = {
+          ['%'] = fb_actions.create
         }
       },
     },
@@ -31,7 +34,7 @@ telescope.setup{
       override_generic_sorter = false,
       override_file_sorter = true,
     }
-  } 
+  }
 }
 
 telescope.load_extension('fzy_native')
