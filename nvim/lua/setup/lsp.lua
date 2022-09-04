@@ -78,7 +78,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>dn', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   vim.keymap.set('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   vim.keymap.set('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  vim.keymap.set('n', '<leader>p', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  vim.keymap.set('n', '<leader>p', '<cmd>lua vim.lsp.buf.formatting_syn()<CR>', opts)
 end
 
 -----------------------------------------------------------

@@ -2,11 +2,16 @@
 -- Null LS configuration file
 -----------------------------------------------------------
 -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
+-- You need to install prettierd brew install prettierd
 
 -- Plugin: null-ls
 -- https://github.com/jose-elias-alvarez/null-ls.nvim
 
-local null_ls = require('null-ls')
+local status_ok, null_ls = pcall(require('null-ls'))
+
+if (not status_ok) then
+  return
+end
 
 null_ls.setup({
   sources = {
