@@ -13,18 +13,30 @@ end
 -- Remap leader key to spacebar
 vim.g.mapleader = ' '
 
------------------------------------------------------------
--- Neovim shortcuts
------------------------------------------------------------
-
 -- Disable arrow keys
 map('', '<up>', '<nop>')
 map('', '<down>', '<nop>')
 map('', '<left>', '<nop>')
 map('', '<right>', '<nop>')
 
--- Map Esc to kk
-map('i', 'kk', '<Esc>')
+-----------------------------------------------------------
+-- Insert mode shortcuts
+-----------------------------------------------------------
+
+-- Map Esc to jk
+map('i', 'jk', '<Esc>')
+
+-- More granular undo of text
+map('i', ',', ',<c-g>u')
+map('i', '.', '.<c-g>u')
+map('i', '!', '!<c-g>u')
+map('i', '?', '?<c-g>u')
+map('i', ';', ';<c-g>u')
+map('i', ':', ':<c-g>u')
+
+-----------------------------------------------------------
+-- Normal mode shortcuts
+-----------------------------------------------------------
 
 -- moving through buffers, inspired by unimpaired.vim plugin
 map('n', '[b', ':bprevious<CR>')
@@ -54,21 +66,9 @@ map('n', 'J', 'mzJ`z')
 -- Make Y yank to end of the line
 map('n', 'Y', 'y$')
 
--- More granular undo of text
-
-map('i', ',', ',<c-g>u')
-map('i', '.', '.<c-g>u')
-map('i', '!', '!<c-g>u')
-map('i', '?', '?<c-g>u')
-map('i', ';', ';<c-g>u')
-map('i', ':', ':<c-g>u')
-
 -- Change split orientation
 map('n', '<leader>tk', '<C-w>t<C-w>K') -- change vertical to horizontal
 map('n', '<leader>th', '<C-w>t<C-w>H') -- change horizontal to vertical
-
--- Make visual yanks place the cursor back where started
-map('v', 'y', 'ygv<Esc>')
 
 -- Tab to switch buffers in Normal mode
 map('n', '<Tab>', ':bnext<CR>')
@@ -79,6 +79,23 @@ map('n', '<leader>r', ':so %<CR>')
 
 -- Fast saving with <leader> and s
 map('n', '<leader>s', ':w<CR>')
+
+-----------------------------------------------------------
+-- Visual mode shortcuts
+-----------------------------------------------------------
+
+-- Make visual yanks place the cursor back where started
+map('v', 'y', 'ygv<Esc>')
+
+-- Stay in indent in visual mode
+map('v', '<', '<gv')
+map('v', '>', '>gv')
+
+-- Move blocks up and down with Alt
+-- TODO: the alt key does not work on OSX
+map('v', '<A-j>', ':m .+1<CR>==')
+map('v', '<A-k>', ':m .-2<CR>==')
+map('v', 'p', '"_dP') -- do not put replaced text on the register
 
 -----------------------------------------------------------
 -- Applications and Plugins shortcuts
