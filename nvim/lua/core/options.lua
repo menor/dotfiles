@@ -1,5 +1,4 @@
 local opt = vim.opt   -- to set options
-local cmd = vim.cmd   -- execute vim commands
 local g = vim.g       -- set global variables
 
 -----------------------------------------------------------
@@ -20,6 +19,7 @@ opt.laststatus = 3                    -- Set global status line
 opt.number = true                     -- Show line number
 opt.signcolumn = 'yes:1'              -- Always display sign column
 opt.termguicolors = true              -- Enable 24-bit RGB colors
+opt.scrolloff = 8                     -- Keep selected line away from the border
 
 -----------------------------------------------------------
 -- Tabs, indent
