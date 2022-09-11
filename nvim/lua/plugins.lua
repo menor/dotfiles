@@ -10,7 +10,7 @@ if not status_ok then
   return
 end
 
-return require('packer').startup({
+return packer.startup({
   function(use)
     -- Packer can manage itself
     use({
