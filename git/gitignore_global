@@ -9,6 +9,7 @@ Session.vim
 .tern-project
 .tern-port
 tags
+packer_compiled.lua
 
 # Compiled source #
 ###################
