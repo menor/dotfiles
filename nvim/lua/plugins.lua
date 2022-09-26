@@ -34,7 +34,7 @@ return packer.startup({
 
     -- Helpers
     use({
-      'pocco81/autosave.nvim',
+      'pocco81/auto-save.nvim',
       config = get_setup('autosave')
     })
     use({
