@@ -27,12 +27,12 @@ map('', '<right>', '<nop>')
 map('i', 'jk', '<Esc>')
 
 -- More granular undo of text
-map('i', ',', ',<c-g>u')
-map('i', '.', '.<c-g>u')
-map('i', '!', '!<c-g>u')
-map('i', '?', '?<c-g>u')
-map('i', ';', ';<c-g>u')
-map('i', ':', ':<c-g>u')
+--[[ map('i', ',', ',<c-g>u') ]]
+--[[ map('i', '.', '.<c-g>u') ]]
+--[[ map('i', '!', '!<c-g>u') ]]
+--[[ map('i', '?', '?<c-g>u') ]]
+--[[ map('i', ';', ';<c-g>u') ]]
+--[[ map('i', ':', ':<c-g>u') ]]
 
 -----------------------------------------------------------
 -- Normal mode shortcuts
