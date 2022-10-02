@@ -102,8 +102,8 @@ map('v', 'p', '"_dP') -- do not put replaced text on the register
 -----------------------------------------------------------
 
 -- Neovim tree (file explorer)
--- map('n', '<leader>e', ':NvimTreeToggle<CR>')
--- map('n', '<leader>s', ':NvimTreeFindFile<CR>')
+map('n', '<leader>e', ':NvimTreeToggle<CR>')
+map('n', '<leader>s', ':NvimTreeFindFile<CR>')
 
 -- Telescope
 map('n', '<leader>ff', '<cmd>lua require("telescope.builtin").find_files()<cr>')
