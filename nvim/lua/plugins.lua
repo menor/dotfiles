@@ -56,10 +56,13 @@ return packer.startup({
     })
 
    -- File explorer
-   -- use({
-     -- 'kyazdani42/nvim-tree.lua',
-     -- config = get_setup('nvimtree')
-   -- })
+    use({
+      'kyazdani42/nvim-tree.lua',
+       config = get_setup('nvimtree'),
+       requires = {
+         'kyazdani42/nvim-web-devicons', opt = true
+       },
+    })
 
    -- Fuzy finding
    use({
@@ -104,19 +107,24 @@ return packer.startup({
 
 
     -- Autocompletion
-    use({
-      'hrsh7th/nvim-cmp',
-      config = get_setup('cmp')
+    use({'hrsh7th/nvim-cmp',
+      config = get_setup('cmp'),
+      requires = {
+        'L3MON4D3/LuaSnip',           -- Snippets plugin
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-path',
+        'saadparwaiz1/cmp_luasnip',  -- Snippets source for nvim-cmp
+        'onsails/lspkind-nvim',      -- Adds icons to completion panel
+      }
     })
-   use('hrsh7th/cmp-buffer')
-    use('hrsh7th/cmp-path')
-    use('hrsh7th/cmp-nvim-lsp')
-    use('saadparwaiz1/cmp_luasnip')   -- Snippets source for nvim-cmp
-    use ('L3MON4D3/LuaSnip')          -- Snippets plugin
-    use ('onsails/lspkind-nvim')      -- Adds icons to completion panel
-    use({'tpope/vim-surround'})
-    use({'tpope/vim-repeat'})
-    use({'windwp/nvim-ts-autotag'})   -- For HTMLish, enabled on the treesitter config
+
+    -- Snippets
+    use 'rafamadriz/friendly-snippets'
+
+    use 'tpope/vim-surround'
+    use 'tpope/vim-repeat'
+    use 'windwp/nvim-ts-autotag'     -- For HTMLish, enabled on the treesitter config
     use({
       'windwp/nvim-autopairs',
       config = get_setup('autopairs')

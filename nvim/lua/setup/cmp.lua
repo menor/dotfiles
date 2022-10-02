@@ -13,20 +13,28 @@ if not lspkind_status_ok then
   return
 end
 
+local luasnip_status_ok, luasnip = pcall(require, 'luasnip')
+if not luasnip_status_ok then
+  return
+end
+
+-- required for rafamadriz/friendly-snippets to work
+require("luasnip.loaders.from_vscode").lazy_load()
+
 lspkind.init()
 
 cmp.setup({
   -- load snippet support
   snippet = {
     expand = function(args)
-      require('luasnip').lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
     end
   },
 
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
+    { name = 'luasnip' },
     { name = 'path' },
-    -- { name = 'luasnip' },
     { name = 'buffer', keyword_length = 4 },
   }),
 
@@ -54,5 +62,16 @@ cmp.setup({
         luasnip = '[snip]',
       },
     }
-  }
+  },
+
+  wiew = {
+    entries = 'native',
+  },
+
+  window = {
+    documentation = {
+      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    },
+  },
 })
+

@@ -96,8 +96,8 @@ end
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
 
 -- HTML/CSS/JSON --> vscode-html-languageserver
--- npm i -g vscode-langservers-extracted
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#html
+-- :MasonInstall html-lsp
+-- https://github.com/microsoft/vscode-html-languageservice
 
 -- JavaScript/TypeScript --> tsserver
 -- npm install -g typescript typescript-language-server
