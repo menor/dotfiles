@@ -44,7 +44,7 @@ local on_attach = function(client, bufnr)
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   -- Highlighting references
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.document_highlight then
     vim.api.nvim_exec([[
       augroup lsp_document_highlight
         autocmd! * <buffer>
@@ -117,7 +117,7 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 -- Add your language server to `here
-local servers = { 'cssls', 'denols', 'gopls', 'html', 'tsserver', 'rust_analyzer' }
+local servers = { 'cssls', 'gopls', 'html', 'tsserver', 'rust_analyzer' }
 
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
