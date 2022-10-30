@@ -33,14 +33,16 @@ return packer.startup({
    })
 
     -- Helpers
-    use({
-      'pocco81/auto-save.nvim',
-      config = get_setup('autosave')
-    })
+    --[[ use({ ]]
+    --[[   'pocco81/auto-save.nvim', ]]
+    --[[   config = get_setup('autosave') ]]
+    --[[ }) ]]
+
     use({
       'numToStr/Comment.nvim',
       config = get_setup('comment')
     })
+
     -- this is to get proper commenting in embeded languages (i.e. css in js)
     -- needs to be enabled in nvim-treesiter config
     use({
@@ -84,6 +86,7 @@ return packer.startup({
       config = get_setup('treesitter'),
       run = ':TSUpdate',
     })
+
     use('nvim-treesitter/nvim-treesitter-textobjects')
 
     -- Language Server
