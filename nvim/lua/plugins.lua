@@ -122,6 +122,8 @@ return packer.startup({
       }
     })
 
+    use 'github/copilot.vim'
+
     -- Snippets
     use 'rafamadriz/friendly-snippets'
 
