@@ -33,10 +33,10 @@ return packer.startup({
    })
 
     -- Helpers
-    --[[ use({ ]]
-    --[[   'pocco81/auto-save.nvim', ]]
-    --[[   config = get_setup('autosave') ]]
-    --[[ }) ]]
+    use({
+      'pocco81/auto-save.nvim',
+      config = get_setup('autosave')
+    })
 
     use({
       'numToStr/Comment.nvim',
