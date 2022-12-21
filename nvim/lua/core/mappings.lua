@@ -60,11 +60,26 @@ map('n', '<leader>c', ':nohlsearch<CR>')
 map('n', 'n', 'nzzzv')
 map('n', 'N', 'Nzzzv')
 
+-- Keep cursor in the middle of the screen when scrolling with Ctrl + d/u
+map('n', '<C-d>', '<C-d>zz')
+map('n', '<C-u>', '<C-u>zz')
+
 -- Keep cursor in position when moving lines up
 map('n', 'J', 'mzJ`z')
 
 -- Make Y yank to end of the line
 map('n', 'Y', 'y$')
+
+-- Switch between system and vim clipboard
+map('n', '<leader>y', '"+y')
+map('v', '<leader>y', '"+y')
+map('n', '<leader>Y', '"+Y')
+
+map('n', '<leader>d', '"_d')
+map('v', '<leader>d', '"_d')
+
+-- paste over selected text without putting deleted text in register
+map('x', '<leader>p', '"_dP')
 
 -- Change split orientation
 map('n', '<leader>tk', '<C-w>t<C-w>K') -- change vertical to horizontal
@@ -77,8 +92,8 @@ map('n', '<S-Tab>', ':bprevious<CR>')
 -- Reload configuration without restart nvim
 map('n', '<leader>r', ':so %<CR>')
 
--- Fast saving with <leader> and s
-map('n', '<leader>s', ':w<CR>')
+-- Fast saving
+map('n', '<leader>w', ':w<CR>')
 
 -----------------------------------------------------------
 -- Visual mode shortcuts
@@ -92,10 +107,18 @@ map('v', '<', '<gv')
 map('v', '>', '>gv')
 
 -- Move blocks up and down with Alt
--- TODO: the alt key does not work on OSX
-map('v', '<A-j>', ':m .+1<CR>==')
-map('v', '<A-k>', ':m .-2<CR>==')
+map('v', '<A-j>', ':m .+1<CR>gv=gv')
+map('v', '<A-k>', ':m .-2<CR>gv=gv')
 map('v', 'p', '"_dP') -- do not put replaced text on the register
+
+-----------------------------------------------------------
+-- Quickfix window shortcuts
+-----------------------------------------------------------
+
+map('n', '<C-k>', '<cmd>cnext<CR>zz')
+map('n', '<C-j>', '<cmd>cprev<CR>zz')
+map('n', '<leader>k', '<cmd>lnext<CR>zz')
+map('n', '<leader>j', '<cmd>lprev<CR>zz')
 
 -----------------------------------------------------------
 -- Applications and Plugins shortcuts
