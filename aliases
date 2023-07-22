@@ -20,3 +20,6 @@ alias pkg='cat package.json'
 alias dcu='docker-compose up'
 alias dcub='docker-compose up --build'
 alias dcd='docker-compose down'
+
+# Run brew sqlite instead of system
+alias sqlite='$(brew --prefix)/opt/sqlite/bin/sqlite3'

@@ -35,7 +35,6 @@ end
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 require('nvim-tree').setup {
-  open_on_setup = true,
   update_cwd = true,
   actions = {
     open_file = {
