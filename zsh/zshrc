@@ -38,7 +38,7 @@ setopt HIST_REDUCE_BLANKS
 # share history across multiple zsh sessions
 setopt SHARE_HISTORY
 
-# append to history instead of overwriting 
+# append to history instead of overwriting
 setopt APPEND_HISTORY
 
 # adds commands as they are typed, not at shell exit
@@ -86,7 +86,7 @@ export PATH=$PATH:$CMAKEPATH
 export WASMBINPATH=$HOME/code/wasm/wabt/bin
 export PATH=$PATH:$WASMBINPATH
 
-export ZIGPATH=$HOME"/.zig/zig-macos-x86_64-0.10.0-dev.2562+61844b6bd"
+export ZIGPATH=$HOME/zig
 export PATH=$PATH:$ZIGPATH
 
 export BUN_INSTALL=$HOME/.bun
