@@ -59,10 +59,10 @@ return packer.startup({
 
    -- File explorer
     use({
-      'kyazdani42/nvim-tree.lua',
+      'nvim-tree/nvim-tree.lua',
        config = get_setup('nvimtree'),
        requires = {
-         'kyazdani42/nvim-web-devicons', opt = true
+         'nvim-tree/nvim-web-devicons', opt = true
        },
     })
 
