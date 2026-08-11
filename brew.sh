@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+# SUPERSEDED BY ./Brewfile. DO NOT RUN.
+#
+# Kept as a reference for what was once installed. Two reasons it no longer
+# works: `brew cask install` was removed from Homebrew in December 2020, so
+# every cask line below errors out; and `brew upgrade` with no argument
+# upgrades every formula on the machine, which is not what a setup script
+# should do.
+#
+# Use instead:  brew bundle install --file=~/.dotfiles/Brewfile
+
 # Install command-line tools using Homebrew.
 # 'Heavily influenced' by https://github.com/mathiasbynens/dotfiles/blob/master/brew.sh
 

@@ -17,14 +17,28 @@
 # Swap to "Selenized Black" for a pure #000000 ground.
 theme = light:Selenized Light,dark:Selenized Dark
 
+# Enforced at draw time, so it also corrects programs that hardcode truecolor
+# and ignore the palette. Selenized Light's own dim grey (#909995) sits at
+# 2.64:1 on the cream background; 3 lifts it without flattening the accents
+# that already clear it. See README §2.2.
+minimum-contrast = 3
+
 #--------------------------------------------------------------------
 # Font
 #--------------------------------------------------------------------
 
-# No font-family set: Ghostty bundles JetBrains Mono plus Nerd Font symbols.
-# To use another, run `ghostty +list-fonts` and uncomment below.
-# font-family = "FiraCode Nerd Font"
+# Ghostty bundles JetBrains Mono, but only Regular and Bold. Installing the
+# cask adds the designed Medium (weight 500) face, which reads heavier than
+# Regular without synthesising anything. Requires: brew bundle (see Brewfile).
+# Run `ghostty +list-fonts` to see what else is available.
+font-family = "JetBrains Mono"
+font-style = "Medium"
 font-size = 14
+
+# font-thicken is macOS stem darkening: it fattens the stroke of whatever face
+# is loaded. A real Medium face is the better answer, so this stays off.
+# font-thicken = true
+# font-thicken-strength = 128
 
 # Uncomment to disable programming ligatures.
 # font-feature = -calt
