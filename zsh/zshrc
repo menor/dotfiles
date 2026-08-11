@@ -72,6 +72,11 @@ export DOTDIR=$HOME/.dotfiles
 export PATH=$DOTDIR/bin:$PATH
 export XDG_CONFIG_HOME=$HOME/.config
 
+# Where user-level installers drop binaries. Claude Code lives here.
+# Prepended, so a tool installed here wins over an older copy in /usr/local/bin.
+export LOCALBIN=$HOME/.local/bin
+export PATH=$LOCALBIN:$PATH
+
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
