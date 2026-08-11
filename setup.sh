@@ -37,6 +37,10 @@ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/instal
 ########## GIT
 ln -sv ${dotdir}/git ${configdir}
 
+########## GHOSTTY
+# Links the whole directory, so config and README travel together
+ln -sv ${dotdir}/ghostty ${configdir}
+
 ########## TMUX
 # We need to have tmux config on the root, seems v3.1 will remove
 # the need for this https://github.com/tmux/tmux/issues/142#issuecomment-329946562

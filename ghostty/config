@@ -1,0 +1,105 @@
+# Ghostty config
+#
+# Reference:  ghostty +show-config --default --docs
+# Validate:   ghostty +validate-config
+# Reload:     cmd+shift+,
+#
+# Rationale for every line lives in ./README.md.
+# tmux owns tabs, splits, scrollback, the window title, and process lifetime.
+# This file deliberately stays out of its way.
+
+#--------------------------------------------------------------------
+# Theme
+#--------------------------------------------------------------------
+
+# Selenized: Solarized rebuilt with per-background accents.
+# Follows the macOS system appearance. See README §2.2 and §3.1.
+# Swap to "Selenized Black" for a pure #000000 ground.
+theme = light:Selenized Light,dark:Selenized Dark
+
+#--------------------------------------------------------------------
+# Font
+#--------------------------------------------------------------------
+
+# No font-family set: Ghostty bundles JetBrains Mono plus Nerd Font symbols.
+# To use another, run `ghostty +list-fonts` and uncomment below.
+# font-family = "FiraCode Nerd Font"
+font-size = 14
+
+# Uncomment to disable programming ligatures.
+# font-feature = -calt
+# font-feature = -liga
+# font-feature = -dlig
+
+#--------------------------------------------------------------------
+# Appearance
+#--------------------------------------------------------------------
+
+window-padding-x = 8
+window-padding-y = 4
+window-padding-balance = true
+mouse-hide-while-typing = true
+
+#--------------------------------------------------------------------
+# Window chrome
+#--------------------------------------------------------------------
+
+# tmux provides tabs. A second tab bar is duplicate state.
+window-show-tab-bar = never
+
+# `hidden` reclaims the titlebar height entirely. `native` keeps the standard bar.
+macos-titlebar-style = tabs
+
+# Sends ESC+key so Meta bindings reach tmux, zsh and nvim.
+# Cost: no option-key characters. Use `left` to keep the right option key.
+macos-option-as-alt = true
+
+# tmux-resurrect and tmux-continuum already restore sessions.
+# Two restore mechanisms produce duplicate windows.
+window-save-state = never
+
+# Safe because the tmux server is detached: closing a window detaches the
+# client, it does not kill the session. Work started outside tmux dies here.
+confirm-close-surface = false
+quit-after-last-window-closed = true
+
+#--------------------------------------------------------------------
+# Shell integration
+#--------------------------------------------------------------------
+
+shell-integration = zsh
+
+# no-title  : tmux sets the title; without this they fight.
+# sudo      : preserves TERMINFO across sudo.
+# ssh-*     : installs xterm-ghostty terminfo on remote hosts, falling back to
+#             xterm-256color, so colors survive ssh. Harmless if unused.
+shell-integration-features = cursor,no-title,sudo,ssh-env,ssh-terminfo,path
+
+#--------------------------------------------------------------------
+# Agent signals
+#--------------------------------------------------------------------
+
+# Bounce the dock icon, flag the title, outline the surface.
+# Needs `set -g allow-passthrough on` in tmux.conf to fire from inside a pane.
+bell-features = attention,title,border
+
+# notify-on-command-finish needs OSC 133, which tmux consumes rather than
+# forwards. Only useful outside tmux; enable if that matches how you work.
+# notify-on-command-finish = unfocused
+# notify-on-command-finish-after = 30s
+# notify-on-command-finish-action = no-bell,notify
+
+#--------------------------------------------------------------------
+# Keybindings
+#--------------------------------------------------------------------
+
+# ctrl+h/j/k/l and ctrl+\ are intentionally unbound here.
+# vim-tmux-navigator owns them (tmux.conf:100-111).
+
+# Lock the surface so a stray keystroke cannot land in a running agent.
+keybind = cmd+shift+r=toggle_readonly
+
+# Global dropdown terminal, summoned from any application.
+# keybind = global:cmd+grave_accent=toggle_quick_terminal
+# quick-terminal-position = top
+# quick-terminal-animation-duration = 0
