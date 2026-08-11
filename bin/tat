@@ -1,31 +1,34 @@
 #!/bin/sh
 #
-# Attach or create tmux session named the same as current directory.
+# Attach to, or create, a tmux session named after the current directory.
+#
+#   tat           session named after $PWD
+#   tat review    session named "review", for a second agent in the same repo
+#
+# One session per project directory. Run it again from anywhere in that
+# project and you land back in the same session.
 
-path_name="$(basename "$PWD" | tr . -)"
-session_name=${1-$path_name}
+set -eu
 
-not_in_tmux() {
-  [ -z "$TMUX" ]
-}
+# tmux rejects "." and ":" in session names and silently rewrites both to "_".
+# Do the same rewrite here, otherwise the has-session lookup below searches for
+# a name tmux never created.
+session_name="${1:-$(basename "$PWD" | tr '.:' '__')}"
 
-session_exists() {
-  tmux list-sessions | sed -E 's/:.*$//' | grep -q "^$session_name$"
-}
+if [ -z "${TMUX:-}" ]; then
+	# Outside tmux. -A attaches to the session if it exists and creates it
+	# otherwise, so this is the whole job. -c only applies on creation.
+	exec tmux new-session -A -s "$session_name" -c "$PWD"
+fi
 
-create_detached_session() {
-  (TMUX='' tmux new-session -Ad -s "$session_name")
-}
+# Inside tmux. Attaching is not allowed from within a client, so the session
+# has to be created detached and then switched to. -A is no help here: it
+# attaches even when -d is given.
+#
+# "=" forces an exact name match. Without it, "-t api" also matches "api-docs"
+# and you get switched to the wrong session.
+if ! tmux has-session -t "=$session_name" 2>/dev/null; then
+	TMUX='' tmux new-session -d -s "$session_name" -c "$PWD"
+fi
 
-create_if_needed_and_attach() {
-  if not_in_tmux; then
-    tmux new-session -As "$session_name"
-  else
-    if ! session_exists; then
-      create_detached_session
-    fi
-    tmux switch-client -t "$session_name"
-  fi
-}
-
-create_if_needed_and_attach
+exec tmux switch-client -t "=$session_name"
