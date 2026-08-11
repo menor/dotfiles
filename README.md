@@ -13,7 +13,9 @@ done
 ```
 
 ## Tmux
-Tmux config needs _Tmux Plugin Manager_ to work, to install it you need to run `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm` (see [TPM Docs](https://github.com/tmux-plugins/tpm)
+Config lives at `~/.config/tmux/tmux.conf` (tmux 3.1+ reads XDG paths, so there is no `~/.tmux.conf`).
+
+Needs _Tmux Plugin Manager_: `git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm` (see [TPM Docs](https://github.com/tmux-plugins/tpm)). Then press `prefix + I` to install the rest.
 
 ## What's included
 - Neovim configuration

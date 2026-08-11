@@ -327,16 +327,19 @@ dumps the visible screen to a file and opens it. Inside tmux it captures one
 pane's visible area only. `tmux capture-pane -pS -100000` does strictly more.
 
 Also worth knowing: `ctrl+h`, `ctrl+j`, `ctrl+k`, `ctrl+l` and `ctrl+\` are not
-bound by Ghostty. Your vim-tmux-navigator bindings in `tmux.conf:100-111` are
-safe. Do not bind them here.
+bound by Ghostty. vim-tmux-navigator owns them. Do not bind them here.
 
 ---
 
 ## 3. Selenized across the stack
 
-Ghostty alone is not enough. Your `nord-tmux` plugin paints the status bar with
-hardcoded Nord hex values, and `nord.nvim` paints the editor. Both will clash
-until swapped.
+Ghostty alone is not enough. The status bar and the editor each paint
+themselves, and both shipped hardcoded Nord hex values.
+
+- **tmux — done.** `nord-tmux` is gone; the status bar is written against
+  palette indices. See §3.2 and `tmux/tmux.conf`.
+- **Neovim — pending.** `nord.nvim` still paints the editor and will clash. See
+  §3.3.
 
 ### 3.1 The palettes
 
@@ -394,13 +397,34 @@ Selenized Light and Selenized Dark when macOS changes appearance, and the tmux
 status bar follows for free. Hardcoded hex cannot do that — it would need a
 second config and a manual toggle.
 
-This replaces three things in `tmux.conf`:
+**Applied.** The block above was the sketch; `tmux/tmux.conf` carries the final
+version, which keeps the segmented layout and adds `message-command-style` and
+`mode-style` — two styles that were never set, so they kept tmux defaults
+(`bg=yellow,fg=black` for the copy-mode selection) that clash badly with a cream
+background.
 
-- `set -g @plugin 'arcticicestudio/nord-tmux'` (line 135) — delete
-- `setw -g message-style bg=brightcyan,fg=brightblack` (line 16) — replaced
-- `setw -g window-status-activity-style fg='#ADAE38',bg='#282828'` (line 62) — replaced
+It removed three things: the `arcticicestudio/nord-tmux` plugin, and two
+hardcoded style lines. One plugin fewer, matching the "minimal" goal.
 
-One plugin fewer, and it matches the "minimal" goal.
+Measured contrast for the final mapping, light / dark:
+
+| Element | Light | Dark |
+|---|---|---|
+| Bar text `colour7` on `colour0` | 4.65 | 5.03 |
+| Session segment `colour0` on `colour4` | 3.77 | 3.25 |
+| Active window `colour6` bold | 2.67 | 4.75 |
+| Inactive window `colour8` | 2.29 | 2.68 |
+| Activity `colour3` | 2.58 | 4.94 |
+| Active border `colour6` | 3.08 | 5.73 |
+
+Every sub-3:1 value is in light mode, and each is lifted by `minimum-contrast`
+(§2.2). The two settings compensate for each other by coincidence, not design —
+worth checking by eye.
+
+One limitation to record: Selenized has no third background shade between the
+terminal background and `colour0`. A Nord-style two-tier bar with a separate
+clock segment is not reproducible without hardcoding hex and giving up
+light/dark following.
 
 ### 3.3 Neovim
 
@@ -483,40 +507,42 @@ Two things it does **not** give you in this setup:
 
 ---
 
-## 5. Two bugs in the current tmux config
+## 5. Findings on the old tmux config — resolved
 
-Independent of Ghostty. Worth fixing either way.
+`tmux/tmux.conf` has since been rewritten. Both items below are fixed there;
+they are kept as a record of what was wrong and why.
 
-### 5.1 Truecolor is likely broken
+### 5.1 A dead `terminal-overrides` line (truecolor was never broken)
 
-`tmux/tmux.conf:10`:
+> **Corrected.** An earlier version of this section claimed truecolor was broken.
+> It is not.
+
+The old line read:
 
 ```
 set-option -g terminal-overrides "xterm-256color:RGB"
 ```
 
-Ghostty sets `TERM=xterm-ghostty`. That override never matches, so tmux does not
-learn the outer terminal supports 24-bit color. Replace with the tmux 3.2+ form
-(you run 3.6a):
+Ghostty sets `TERM=xterm-ghostty`, so this override never matched. It was dead
+code, but harmless: tmux 3.2+ reads truecolor support from the outer terminal's
+terminfo, and `xterm-ghostty` declares `Tc`. Verified on 3.6a:
 
 ```
-set -g default-terminal "tmux-256color"
-set -as terminal-features ",xterm-ghostty:RGB"
+$ tmux display -p '#{client_termfeatures}'
+bpaste,ccolour,clipboard,cstyle,focus,RGB,title
 ```
 
-### 5.2 `reattach-to-user-namespace` is dead weight
+`RGB` is present. No replacement was needed. The line is gone and nothing sets
+it, which is why the rewritten config carries a comment explaining the absence.
 
-`tmux/tmux.conf:72`:
+### 5.2 `reattach-to-user-namespace` was dead weight
 
-```
-bind v run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
-```
+The old paste binding shelled out through a wrapper unnecessary since macOS
+10.12. The rewrite drops it entirely: `set-clipboard on` routes copies through
+OSC 52 to Ghostty, which works over ssh as well as locally.
 
-That wrapper has been unnecessary since macOS 10.12. Simplify:
-
-```
-bind v run "pbpaste | tmux load-buffer - && tmux paste-buffer"
-```
+`tmux-sensible` re-injects that wrapper as `default-command` on macOS, which is
+one reason the rewrite does not use the plugin.
 
 ---
 
@@ -547,33 +573,50 @@ bell-features = attention,title,border
 keybind = cmd+shift+r=toggle_readonly
 ```
 
-Paired tmux changes:
+The file as committed is longer than this, because each line carries its
+rationale inline. The functional content matches.
+
+Paired tmux changes — **all applied**, see `tmux/tmux.conf`:
 
 ```
 set -g default-terminal "tmux-256color"
-set -as terminal-features ",xterm-ghostty:RGB"
-set -g history-limit 100000
 set -g allow-passthrough on
-set -g bell-action any
-set -g visual-bell off
+set -g history-limit 50000
 ```
 
-Plus the Selenized status line from §3.2, and the `nord-tmux` plugin removed.
+`bell-action any` and `monitor-bell on` are already defaults on tmux 3.6, so
+they are not set. `allow-passthrough` is the one that matters: without it tmux
+consumes OSC 9 and OSC 777, and `bell-features` above never fires from inside a
+pane.
+
+The status line uses the palette-index approach from §3.2, and `nord-tmux` is
+gone.
 
 ---
 
 ## 7. Open decisions
 
-**Settled:** theme is Selenized, light/dark pair.
+**Settled:**
+
+- Theme is Selenized, light/dark pair.
+- Font is JetBrains Mono **Medium** from the cask, not the bundled Regular.
+  The bundle ships Regular and Bold only, so the alternative was `font-thicken`,
+  which fattens strokes the designers drew. Fira Code is not installed and was
+  dropped from consideration.
+- `minimum-contrast = 3`, because Selenized Light's dim grey sits at 2.64:1 and
+  programs that hardcode truecolor do worse.
+
+**Open:**
 
 - [ ] Ligatures on or off
 - [ ] `macos-option-as-alt`: `true`, `left`, or drop it
 - [ ] `macos-titlebar-style`: `tabs` or `hidden`
 - [ ] ssh features: needed on this machine?
 - [ ] Quick terminal: want it or not
-- [ ] Install Fira Code Nerd Font, or use the bundled JetBrains Mono
 - [ ] `Selenized Dark` or `Selenized Black` for the dark half
-- [ ] Delete `iterm/` from the repo once Ghostty is settled
+- [ ] Confirm Nerd Font symbols survive the `font-family` override; if not,
+      switch to `font-jetbrains-mono-nerd-font`
+- [ ] Delete `iterm/` from the repo and drop the `iterm2` cask
 - [ ] Pick up dircolors and manpage ports from upstream (§3.4)
 
 ## 8. Follow-ups outside Ghostty scope
@@ -585,6 +628,13 @@ revamp.
   successor and is faster to start. Any nvim work should ride on that migration
   rather than fight it.
 - **`tmux-resurrect` + `tmux-continuum`** overlap with what a modern setup does
-  through a session manager. Revisit when tmux's turn comes.
+  through a session manager. Kept in the tmux rewrite because the
+  `@resurrect-processes` list is tuned for restoring agent sessions, which no
+  session manager does. Revisit if that stops being true.
 - **`ignore` at the repo root** duplicates the new `git/ignore`. One of them is
   dead.
+- **`~/.tmux/plugins/`** still holds `nord-tmux` and `tmux-nova`, both unused.
+  The tmux config moved to `~/.config/tmux/plugins/`, so the old directory can
+  be deleted once the new one is populated.
+- **`.DS_Store`** is committed at the repo root and untracked copies keep
+  appearing. Needs both a `.gitignore` entry and `git rm --cached`.

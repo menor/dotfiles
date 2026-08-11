@@ -42,13 +42,15 @@ ln -sv ${dotdir}/git ${configdir}
 ln -sv ${dotdir}/ghostty ${configdir}
 
 ########## TMUX
-# We need to have tmux config on the root, seems v3.1 will remove
-# the need for this https://github.com/tmux/tmux/issues/142#issuecomment-329946562
-mkdir ${configdir}/tmux
-ln -sv ${dotdir}/tmux/tmux.conf ~/.tmux.conf
+# tmux 3.1+ reads $XDG_CONFIG_HOME/tmux/tmux.conf, so no dotfile at $HOME.
+# Only the config is linked, not the directory: tpm clones plugins alongside
+# it and those do not belong in this repo.
+mkdir -p ${configdir}/tmux
+ln -sv ${dotdir}/tmux/tmux.conf ${configdir}/tmux/tmux.conf
 
-# Clone tmux plugin manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# Clone the plugin manager. Everything else installs from inside tmux with
+# `prefix + I`.
+git clone https://github.com/tmux-plugins/tpm ${configdir}/tmux/plugins/tpm
 
 ########## NEOVIM
 mkdir ${configdir}/nvim

@@ -108,7 +108,7 @@ bell-features = attention,title,border
 #--------------------------------------------------------------------
 
 # ctrl+h/j/k/l and ctrl+\ are intentionally unbound here.
-# vim-tmux-navigator owns them (tmux.conf:100-111).
+# vim-tmux-navigator owns them.
 
 # Lock the surface so a stray keystroke cannot land in a running agent.
 keybind = cmd+shift+r=toggle_readonly
