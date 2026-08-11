@@ -100,6 +100,22 @@ export PATH=$PATH:$BUN_INSTALL/bin
 # bun completions
 [ -s "/Users/menor/.bun/_bun" ] && source "/Users/menor/.bun/_bun"
 
+# Claude Code
+# -----------------------------------------------------------------------------
+# Force the classic renderer. The fullscreen renderer draws on the alternate
+# screen, like vim, so the conversation never enters tmux's scrollback and
+# `prefix + [` has nothing to page through. Classic keeps it all in the normal
+# buffer, where ctrl+b and ctrl+f work and the copy bindings in
+# tmux/tmux.conf:155-174 can select it.
+#
+# Also hands the mouse back to tmux: the fullscreen renderer captures it, which
+# is what disables the DoubleClick1Pane and TripleClick1Pane bindings.
+#
+# Costs some redraw flicker, since tmux 3.6 and earlier have no synchronised
+# output. Overrides the `tui` key in ~/.claude/settings.json, which is per
+# machine and therefore not tracked here.
+export CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1
+
 # Alias
 # -----------------------------------------------------------------------------
 source $DOTDIR/aliases
