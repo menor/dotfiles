@@ -1,104 +1,89 @@
-if [[ ! -d $HOME/.zplug ]];then
-    git clone https://github.com/b4b4r07/zplug $HOME/.zplug
-fi
-
-source $HOME/.zplug/init.zsh
-
-setopt NO_CASE_GLOB # Make globbing case insensitive
-setopt AUTO_CD # No need to type cd
-
-# Enable correction suggestions for misstyped commands
-setopt CORRECT
-setopt CORRECT_ALL
-
-# Use colors in correction prompt
-SPROMPT="Correct %F{red}%R%f to %F{green}%r%f [nyae]?"
-
-# Enable autocompletion
-autoload -Uz compinit && compinit
-
-# Case insensitive path-completion
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
-
-# History
-# -----------------------------------------------------------------------------
-# Set history file and hide it in .tmp dir
-HISTFILE=$HOME/.tmp/zsh/.zsh_history
-
-# Limit number of history items saved and size
-SAVEHIST=5000
-HISTSIZE=2000
-
-# do not store duplications
-setopt HIST_IGNORE_DUPS
-
-# removes blank lines from history
-setopt HIST_REDUCE_BLANKS
-
-# share history across multiple zsh sessions
-setopt SHARE_HISTORY
-
-# append to history instead of overwriting
-setopt APPEND_HISTORY
-
-# adds commands as they are typed, not at shell exit
-setopt INC_APPEND_HISTORY
-
-# Do not run commands from history immediately
-setopt HIST_VERIFY
-
-# Theme
-# -----------------------------------------------------------------------------
-
-zplug mafredri/zsh-async, from:github
-zplug "modules/git", from:prezto
-zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-zplug load
-
+# Interactive shell config. Symlinked to ~/.zshrc by setup.sh.
+#
+# No plugin manager. The two plugins live as git submodules under
+# zsh/plugins/ and are sourced directly, so a fresh machine needs
+# `git submodule update --init` and nothing else.
 
 # Path
 # -----------------------------------------------------------------------------
 export DOTDIR=$HOME/.dotfiles
-
-export PATH=$DOTDIR/bin:$PATH
 export XDG_CONFIG_HOME=$HOME/.config
 
+# Scripts in this repo. First on PATH so they win over anything installed.
+export PATH=$DOTDIR/bin:$PATH
+
 # Where user-level installers drop binaries. Claude Code lives here.
-# Prepended, so a tool installed here wins over an older copy in /usr/local/bin.
-export LOCALBIN=$HOME/.local/bin
-export PATH=$LOCALBIN:$PATH
+# Prepended, so a tool installed here beats an older copy in /usr/local/bin.
+export PATH=$HOME/.local/bin:$PATH
 
-export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOBIN
+export EDITOR=nvim
+export VISUAL=nvim
 
-export DENOPATH=$HOME/.deno
-export DENOBIN=$DENOPATH/bin
-export PATH=$PATH:$DENOBIN
+# Options
+# -----------------------------------------------------------------------------
+setopt NO_CASE_GLOB   # case insensitive globbing
+setopt AUTO_CD        # bare directory name means cd
 
-export CMAKEPATH="/Applications/CMake.app/Contents/bin"
-export PATH=$PATH:$CMAKEPATH
+# Correct mistyped command names. Deliberately not CORRECT_ALL, which also
+# second-guesses arguments and forces `nocorrect` aliases on anything taking a
+# path or a pattern like ./...
+setopt CORRECT
+SPROMPT="Correct %F{red}%R%f to %F{green}%r%f [nyae]?"
 
-export WASMBINPATH=$HOME/code/wasm/wabt/bin
-export PATH=$PATH:$WASMBINPATH
+# Completion
+# -----------------------------------------------------------------------------
+autoload -Uz compinit
+# Rebuild the dump once a day. -C reuses it and skips the security audit, which
+# is the slow part of compinit.
+if [[ -n ~/.zcompdump(#qN.mh-24) ]]; then
+  compinit -C
+else
+  compinit
+fi
 
-export ZIGPATH=$HOME/zig
-export PATH=$PATH:$ZIGPATH
+# Case insensitive path completion
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
 
-export BUN_INSTALL=$HOME/.bun
-export PATH=$PATH:$BUN_INSTALL/bin
+# History
+# -----------------------------------------------------------------------------
+HISTFILE=$HOME/.tmp/zsh/.zsh_history
+[[ -d ${HISTFILE:h} ]] || mkdir -p ${HISTFILE:h}
 
-# bun completions
-[ -s "/Users/menor/.bun/_bun" ] && source "/Users/menor/.bun/_bun"
+HISTSIZE=10000   # in memory
+SAVEHIST=50000   # on disk
+
+setopt HIST_IGNORE_DUPS     # drop repeats of the previous command
+setopt HIST_REDUCE_BLANKS   # strip surplus whitespace
+setopt SHARE_HISTORY        # live sync across running shells
+setopt APPEND_HISTORY       # add, never truncate
+setopt INC_APPEND_HISTORY   # write as typed, not at exit
+setopt HIST_VERIFY          # expand !! for review instead of running it
+setopt EXTENDED_HISTORY     # record timestamps
+
+# EDITOR=nvim would otherwise switch the line editor to vi mode, which breaks
+# ctrl+R and the rest of the emacs bindings.
+bindkey -e
+
+# Prompt
+# -----------------------------------------------------------------------------
+# pure bundles its own async.zsh, so this is the only dependency.
+fpath+=($DOTDIR/zsh/plugins/pure)
+autoload -Uz promptinit && promptinit
+prompt pure
+
+# Plugins
+# -----------------------------------------------------------------------------
+source $DOTDIR/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Tools
+# -----------------------------------------------------------------------------
+# z: jump to frequently used directories
+[[ -f /usr/local/etc/profile.d/z.sh ]] && source /usr/local/etc/profile.d/z.sh
+
+# fnm: node version manager. Left as the plain eval for now; the lazy-loading
+# version from the work machine can come later if startup time becomes a
+# problem.
+command -v fnm >/dev/null && eval "$(fnm env --use-on-cd)"
 
 # Claude Code
 # -----------------------------------------------------------------------------
@@ -116,21 +101,6 @@ export PATH=$PATH:$BUN_INSTALL/bin
 # machine and therefore not tracked here.
 export CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1
 
-# Alias
+# Aliases
 # -----------------------------------------------------------------------------
 source $DOTDIR/aliases
-
-# Needed by nvm https://github.com/Schniz/fnm#zsh
-eval "$(fnm env --use-on-cd)"
-
-export NVIMCONFIG=$HOME/.config/nvim
-export NVIMDATA=$HOME/.local/share/nvim
-
-# Needed by Z
-. /usr/local/etc/profile.d/z.sh
-
-# BEGIN SNIPPET: Platform.sh CLI configuration
-HOME=${HOME:-'/Users/menor'}
-export PATH="$HOME/"'.platformsh/bin':"$PATH"
-if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/shell-config.rc'; fi # END SNIPPET
-

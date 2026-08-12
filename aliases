@@ -1,11 +1,9 @@
-# Bash
+# Sourced from zsh/zshrc.
+
 alias la='ls -a'
 
 # Neovim
 alias n='nvim'
-
-# Lunarvim
-alias l='~/.local/bin/lvim'
 
 # Tmux
 alias tl='tmux ls'
@@ -13,13 +11,7 @@ alias ta='tmux attach -t'
 alias tn='tmux new-session -s'
 alias tk='tmux kill-session -t'
 
-# Javascript alias
 alias pkg='cat package.json'
 
-# Docker
-alias dcu='docker-compose up'
-alias dcub='docker-compose up --build'
-alias dcd='docker-compose down'
-
-# Run brew sqlite instead of system
+# Homebrew's sqlite, not the older system copy
 alias sqlite='$(brew --prefix)/opt/sqlite/bin/sqlite3'

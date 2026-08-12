@@ -20,3 +20,14 @@ cask "ghostty"
 # lacks. Required by ghostty/config. Swap to font-jetbrains-mono-nerd-font if
 # prompt icons break.
 cask "font-jetbrains-mono"
+
+#--------------------------------------------------------------------
+# Shell
+#--------------------------------------------------------------------
+
+# Jump to frequently used directories. Sourced by zsh/zshrc from
+# $(brew --prefix)/etc/profile.d/z.sh.
+brew "z"
+
+# Node version manager. zsh/zshrc evals `fnm env --use-on-cd`.
+brew "fnm"

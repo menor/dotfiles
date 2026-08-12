@@ -8,31 +8,16 @@
 
 dotdir=~/.dotfiles
 configdir=~/.config
-preztodir="${dotdir}/prezto"
 
 ########## ZSH
+# One file, no framework and no plugin manager. zsh reads ~/.zshrc on its own,
+# so this is the only link needed.
+ln -sv ${dotdir}/zsh/zshrc ~/.zshrc
 
-# .zshenv needs to be on the root since then we load everything from there
-ln -sv ${preztodir}/runcoms/zshenv ~/.zshenv 
-
-# move .zsh dotfiles into .config
-mkdir ${configdir}/zsh
-
-# zsh files we need to link
-zshfiles="zlogin zlogout zpreztorc zprofile zshrc"
-
-ln -sv ${preztodir}/init.zsh ${configdir}/zsh
-
-for file in $zshfiles; do
-    ln -sv ${preztodir}/runcoms/$file ${configdir}/zsh/.$file
-done
-
-# also link the modules directory
-ln -sv ${preztodir}/modules ${configdir}/zsh
-
-########## ZSH (Vanilla instalation with no prezto)
-
-curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+# The pure prompt and zsh-autosuggestions are git submodules under
+# zsh/plugins/. zshrc sources them by path, so they must exist before the
+# first interactive shell.
+git -C ${dotdir} submodule update --init --recursive
 
 ########## GIT
 ln -sv ${dotdir}/git ${configdir}
@@ -72,6 +57,6 @@ defaults write -g InitialKeyRepeat -int 15 # normal minimum is 15 (225 ms)
 defaults write -g KeyRepeat -int 2         # normal minimum is 3 (30 ms)
 
 
-########## VOLTA
-# volta.sh is a version manager for node
-curl https://get.volta.sh | bash -s -- --skip-setup
+########## NODE
+# fnm is the node version manager, installed from the Brewfile. zshrc evals
+# `fnm env --use-on-cd`, so nothing to link here.
