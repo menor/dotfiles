@@ -7,7 +7,8 @@
 # Path
 # -----------------------------------------------------------------------------
 export DOTDIR=$HOME/.dotfiles
-export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 
 # Scripts in this repo. First on PATH so they win over anything installed.
 export PATH=$DOTDIR/bin:$PATH
@@ -19,10 +20,23 @@ export PATH=$HOME/.local/bin:$PATH
 export EDITOR=nvim
 export VISUAL=nvim
 
+# https://consoledonottrack.com
+export DO_NOT_TRACK=1
+
 # Options
 # -----------------------------------------------------------------------------
-setopt NO_CASE_GLOB   # case insensitive globbing
-setopt AUTO_CD        # bare directory name means cd
+setopt NO_CASE_GLOB         # case insensitive globbing
+setopt EXTENDED_GLOB        # ^negation, (#i) flags, and the (.) style qualifiers
+setopt AUTO_CD              # bare directory name means cd
+setopt INTERACTIVE_COMMENTS # allow # comments at the prompt, so annotated
+                            # command blocks paste without a syntax error
+setopt NO_FLOW_CONTROL      # stop ctrl+S freezing the terminal, freeing the key
+
+# Every cd pushes onto the directory stack, so `cd -<Tab>` lists where you have
+# been. Silent because AUTO_CD would otherwise print the stack on every jump.
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
 
 # Correct mistyped command names. Deliberately not CORRECT_ALL, which also
 # second-guesses arguments and forces `nocorrect` aliases on anything taking a
@@ -30,19 +44,48 @@ setopt AUTO_CD        # bare directory name means cd
 setopt CORRECT
 SPROMPT="Correct %F{red}%R%f to %F{green}%r%f [nyae]?"
 
+# Drop / from the default set, so ctrl+W deletes one path segment at a time
+# instead of swallowing the whole path.
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+
 # Completion
 # -----------------------------------------------------------------------------
+_zcompdump=$XDG_CACHE_HOME/zsh/zcompdump
+[[ -d ${_zcompdump:h} ]] || mkdir -p ${_zcompdump:h}
+
 autoload -Uz compinit
 # Rebuild the dump once a day. -C reuses it and skips the security audit, which
 # is the slow part of compinit.
-if [[ -n ~/.zcompdump(#qN.mh-24) ]]; then
-  compinit -C
+if [[ -n ${~_zcompdump}(#qN.mh-24) ]]; then
+  compinit -C -d $_zcompdump
 else
-  compinit
+  compinit -d $_zcompdump
 fi
 
 # Case insensitive path completion
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
+
+# Arrow-key selection through the match list
+zstyle ':completion:*' menu select
+
+# Group matches by type and label each group
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '%F{yellow}%B%d%b%f'
+zstyle ':completion:*:warnings'     format '%F{red}no matches%f'
+
+# macOS ls uses LSCOLORS; the completion system wants the GNU LS_COLORS form.
+# Set the minimum so directories and executables are distinguishable.
+export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# Collapse foo//bar to foo/bar when completing
+zstyle ':completion:*' squeeze-slashes true
+
+# Cache the slow completions (brew, git subcommands) under XDG
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/compcache
+
+unset _zcompdump
 
 # History
 # -----------------------------------------------------------------------------
@@ -52,13 +95,20 @@ HISTFILE=$HOME/.tmp/zsh/.zsh_history
 HISTSIZE=10000   # in memory
 SAVEHIST=50000   # on disk
 
-setopt HIST_IGNORE_DUPS     # drop repeats of the previous command
-setopt HIST_REDUCE_BLANKS   # strip surplus whitespace
-setopt SHARE_HISTORY        # live sync across running shells
-setopt APPEND_HISTORY       # add, never truncate
-setopt INC_APPEND_HISTORY   # write as typed, not at exit
-setopt HIST_VERIFY          # expand !! for review instead of running it
-setopt EXTENDED_HISTORY     # record timestamps
+# A command typed with a leading space never reaches the history file. Use it
+# for anything carrying a token or an API key.
+setopt HIST_IGNORE_SPACE
+
+setopt HIST_IGNORE_DUPS       # drop repeats of the previous command
+setopt HIST_EXPIRE_DUPS_FIRST # when trimming to SAVEHIST, drop dupes first
+setopt HIST_FIND_NO_DUPS      # ctrl+R never shows the same line twice
+setopt HIST_SAVE_NO_DUPS      # do not write a duplicate to the file
+setopt HIST_REDUCE_BLANKS     # strip surplus whitespace
+setopt SHARE_HISTORY          # live sync across running shells
+setopt APPEND_HISTORY         # add, never truncate
+setopt INC_APPEND_HISTORY     # write as typed, not at exit
+setopt HIST_VERIFY            # expand !! for review instead of running it
+setopt EXTENDED_HISTORY       # record timestamps
 
 # EDITOR=nvim would otherwise switch the line editor to vi mode, which breaks
 # ctrl+R and the rest of the emacs bindings.
@@ -73,16 +123,27 @@ prompt pure
 
 # Plugins
 # -----------------------------------------------------------------------------
+# Fall back to a completion-based guess when history has nothing to offer.
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+# Skip the widget rebind on every precmd. Measurable win on both startup and
+# keystroke latency; safe unless another plugin adds widgets after this point.
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+# Stop the editor hanging when an agent pastes a 300 character command.
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=40
+
 source $DOTDIR/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Tools
 # -----------------------------------------------------------------------------
-# z: jump to frequently used directories
-[[ -f /usr/local/etc/profile.d/z.sh ]] && source /usr/local/etc/profile.d/z.sh
+# zoxide: jump to frequently used directories. Keeps the `z` command name that
+# rupa/z used, and its database was imported from ~/.z.
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
 
-# fnm: node version manager. Left as the plain eval for now; the lazy-loading
-# version from the work machine can come later if startup time becomes a
-# problem.
+# fnm: node version manager.
+# recursive walks up the tree, so .nvmrc in a monorepo root applies inside any
+# package. resolve-engines honours the package.json "engines" field.
+export FNM_VERSION_FILE_STRATEGY=recursive
+export FNM_RESOLVE_ENGINES=true
 command -v fnm >/dev/null && eval "$(fnm env --use-on-cd)"
 
 # Claude Code
@@ -104,3 +165,9 @@ export CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1
 # Aliases
 # -----------------------------------------------------------------------------
 source $DOTDIR/aliases
+
+# Secrets
+# -----------------------------------------------------------------------------
+# API keys and anything else that must not reach the repo. Gitignored, so it
+# exists only on the machine that needs it.
+[[ -f $DOTDIR/.zshrc_secrets ]] && source $DOTDIR/.zshrc_secrets

@@ -25,9 +25,9 @@ cask "font-jetbrains-mono"
 # Shell
 #--------------------------------------------------------------------
 
-# Jump to frequently used directories. Sourced by zsh/zshrc from
-# $(brew --prefix)/etc/profile.d/z.sh.
-brew "z"
+# Jump to frequently used directories. Replaced rupa/z, whose database it
+# imported; it keeps the same `z` command name. zsh/zshrc evals `zoxide init`.
+brew "zoxide"
 
 # Node version manager. zsh/zshrc evals `fnm env --use-on-cd`.
 brew "fnm"

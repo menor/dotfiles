@@ -1,0 +1,6 @@
+# macOS
+.DS_Store
+
+# Sourced by zsh/zshrc if present. API keys and anything else that must stay
+# on the machine.
+.zshrc_secrets
